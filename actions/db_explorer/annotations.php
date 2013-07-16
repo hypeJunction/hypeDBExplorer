@@ -27,7 +27,7 @@ $offset = $limit * $page - $limit;
 
 $offset = ($offset < 0) ? 0 : $offset;
 
-$row_data = get_data("SELECT *, msn.string as name_string, msv.string as value_string
+$row_data = get_data("SELECT *, md.id as id, msn.id as name_id, msn.string as name_string, msv.id as vlaue_id, msv.string as value_string
 						FROM {$dbprefix}annotations md
 						JOIN {$dbprefix}metastrings msn ON md.name_id = msn.id
 						JOIN {$dbprefix}metastrings msv ON md.value_id = msv.id
