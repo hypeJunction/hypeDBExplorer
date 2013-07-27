@@ -24,3 +24,8 @@ hypeDBExplorer collects Elgg entity information spread across multiple tables, a
 
 hypeFramework is not required
 
+
+## Screenshots ##
+
+![alt text](https://raw.github.com/hypeJunction/hypeDBExplorer/master/screenshots/explorer.png "Database Explorer")
+

@@ -4,7 +4,7 @@
     <author>Ismayil Khayredinov (ismayil.khayredinov@gmail.com)</author>
 	<category>hypeJunction</category>
 	<category>discussions</category>
-	<version>1.9.0.0</version>
+	<version>1.9.0.1</version>
     <description>Database explorer for Elgg</description>
     <website>http://hypeJunction.com</website>
     <copyright>See lisence.txt</copyright>
@@ -13,4 +13,8 @@
         <type>elgg_version</type>
         <version>2013051700</version>
     </requires>
+	<screenshot>
+		<description>Database Explorer</description>
+		<path>screenshots/explorer.png</path>
+	</screenshot>
 </plugin_manifest>
