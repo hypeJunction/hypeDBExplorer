@@ -7,6 +7,12 @@ Database viewer tool for Elgg
 
 hypeDBExplorer collects Elgg entity information spread across multiple tables, and presents it in a human-readable format.
 
+
+## Credits / Acknolwedgements ##
+
+* Uses the URL sniffer class by Steve Clay (ufcoe) - https://github.com/mrclay
+
+
 ## Features ##
 
 * jqGrid integration with real-time pagination and search
@@ -19,6 +25,7 @@ hypeDBExplorer collects Elgg entity information spread across multiple tables, a
 * Subgrid: private settings
 * Subgrid: entity relationships
 * Popup grid view on any entity guid
+
 
 ## Notes ##
 

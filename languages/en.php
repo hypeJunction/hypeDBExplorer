@@ -28,6 +28,10 @@ $english = array(
 
 	'hj:db_explorer:loading' => 'Loading entity ...',
 	'hj:db_explorer:guid' => 'GUID: %s',
+
+	'hj:db_explorer:inspect' => 'Inspect',
+	'hj:db_explorer:url_sniffer_no_guid' => 'The provided URL (%s) could not be traced back to an existing entity',
+	
 	
 );
 
