@@ -1,13 +1,14 @@
 <?php
 
-/* hypeDBExplorer
- *
+/**
  * Elgg Database Explorer
+ *
  * @package hypeJunction
- * @subpackage hypeDBExploere
+ * @subpackage hypeDBExplorer
  *
  * @author Ismayil Khayredinov <ismayil.khayredinov@gmail.com>
  * @copyright Copyright (c) 2013, Ismayil Khayredinov
+ * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License v2
  */
 
 define('HYPEDBEXPLORER_RELEASE', 1372771756);
