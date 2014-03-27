@@ -410,36 +410,10 @@
 
 				case 'metadata' :
 				case 'metadata_ownership' :
-					jQuery('#' + subgrid_table_id).jqGrid({
-						url: elgg.security.addToken(elgg.get_site_url() + 'action/db_explorer/' + subgrid_table_name + '?guid=' + row_id),
-						datatype: 'json',
-						colNames: ['id', 'entity_guid', 'name_id', 'value_id', 'name_string', 'value_string', 'value_type', 'owner_guid', 'access_id', 'time_created', 'enabled'],
-						colModel: [
-							{name: 'md.id', width: 40},
-							{name: 'md.entity_guid', width: 90, sortable: false},
-							{name: 'md.name_id', width: 60},
-							{name: 'md.value_id', width: 60},
-							{name: 'msn.string', width: 200},
-							{name: 'msv.string', width: 200},
-							{name: 'md.value_type', width: 50},
-							{name: 'md.owner_guid', width: 40},
-							{name: 'md.access_id', width: 90},
-							{name: 'md.time_created', width: 120},
-							{name: 'md.enabled', width: 30},
-						],
-						rowNum: 10,
-						pager: pager_id,
-						sortname: 'md.id',
-						sortorder: 'asc',
-						width: '100%',
-						height: '100%'
-					});
-					break;
-
 				case 'annotations' :
 				case 'annotations_ownership' :
 					jQuery('#' + subgrid_table_id).jqGrid({
-						url: elgg.security.addToken(elgg.get_site_url() + 'action/db_explorer/annotations' + subgrid_table_name + '?guid=' + row_id),
+						url: elgg.security.addToken(elgg.get_site_url() + 'action/db_explorer/' + subgrid_table_name + '?guid=' + row_id),
 						datatype: 'json',
 						colNames: ['id', 'entity_guid', 'name_id', 'value_id', 'name_string', 'value_string', 'value_type', 'owner_guid', 'access_id', 'time_created', 'enabled'],
 						colModel: [
