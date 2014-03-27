@@ -13,6 +13,10 @@ $english = array(
 	'hj:db_explorer:tables:groups_entity' => 'Group Entity',
 	'hj:db_explorer:tables:sites_entity' => 'Site Entity',
 
+	'hj:db_explorer:tables:owned_entities' => 'Owned Entities',
+	'hj:db_explorer:tables:contained_entities' => 'Contained Entities',
+	'hj:db_explorer:tables:river_items' => 'River Items',
+
 	'hj:db_explorer:tables:access_collections_ownership' => 'Access Collection Ownership',
 	'hj:db_explorer:tables:access_collections_membership' => 'Access Collection Membership',
 

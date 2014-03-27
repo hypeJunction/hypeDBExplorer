@@ -18,6 +18,9 @@ hypeDBExplorer collects Elgg entity information spread across multiple tables, a
 * jqGrid integration with real-time pagination and search
 * elgg_entities table joined with object, user, group, site attributes
 * elgg_metadata table joined with metastring values
+* Subgrid: owned entities
+* Subgrid: contained entities
+* Subgrid: river items
 * Subgrid: entity attributes table
 * Subgrid: access collections ownership and membership
 * Subgrid: entity metadata and metadata ownership
@@ -25,6 +28,7 @@ hypeDBExplorer collects Elgg entity information spread across multiple tables, a
 * Subgrid: private settings
 * Subgrid: entity relationships
 * Popup grid view on any entity guid
+* Multiple popups with highlighting
 
 
 ## Notes ##

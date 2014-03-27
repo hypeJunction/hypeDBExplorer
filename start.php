@@ -31,6 +31,11 @@ function hj_db_explorer_init() {
 	elgg_register_action('db_explorer/groups_entity', $actions_path . 'groups_entity.php', 'admin');
 	elgg_register_action('db_explorer/sites_entity', $actions_path . 'sites_entity.php', 'admin');
 
+	elgg_register_action('db_explorer/owned_entities', $actions_path . 'owned_entities.php', 'admin');
+	elgg_register_action('db_explorer/contained_entities', $actions_path . 'contained_entities.php', 'admin');
+
+	elgg_register_action('db_explorer/river_items', $actions_path . 'river_items.php', 'admin');
+
 	elgg_register_action('db_explorer/metadata', $actions_path . 'metadata.php', 'admin');
 	elgg_register_action('db_explorer/metadata_ownership', $actions_path . 'metadata_ownership.php', 'admin');
 

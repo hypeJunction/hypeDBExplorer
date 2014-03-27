@@ -2,6 +2,6 @@
 
 $value = elgg_extract('value', $vars);
 
-echo date("j M, y", $value);
-echo '<br />';
-echo date("@ H:i:s", $value);
+echo elgg_view_friendly_time($value);
+//echo date("j M, y", $value);
+//echo date("@ H:i:s", $value);
