@@ -1,17 +1,8 @@
 hypeDBExplorer
 ==============
 
-Database viewer tool for Elgg
-
-## Introduction ##
-
+Database explorer tool for Elgg.
 hypeDBExplorer collects Elgg entity information spread across multiple tables, and presents it in a human-readable format.
-
-
-## Credits / Acknolwedgements ##
-
-* Uses the URL sniffer class by Steve Clay (ufcoe) - https://github.com/mrclay
-
 
 ## Features ##
 
@@ -29,14 +20,13 @@ hypeDBExplorer collects Elgg entity information spread across multiple tables, a
 * Subgrid: entity relationships
 * Popup grid view on any entity guid
 * Multiple popups with highlighting
-
-
-## Notes ##
-
-hypeFramework is not required
-
+* Multi-column filtering
 
 ## Screenshots ##
 
-![alt text](https://raw.github.com/hypeJunction/hypeDBExplorer/master/screenshots/explorer.png "Database Explorer")
+![alt text](https://raw.github.com/hypeJunction/hypeDBExplorer/master/screenshots/db_explorer.png "Database Explorer")
 
+
+## Credits / Acknolwedgements ##
+
+* Uses the URL sniffer class by Steve Clay (ufcoe) - https://github.com/mrclay
