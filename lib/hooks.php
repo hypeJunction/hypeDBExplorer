@@ -19,7 +19,7 @@ function user_hover_menu_setup($hook, $type, $menu, $params) {
 		return $menu;
 	}
 
-	$menu['db_explorer'] = ElggMenuItem::factory(array(
+	$menu['db_explorer'] = \ElggMenuItem::factory(array(
 				'name' => 'db_explorer',
 				'text' => elgg_echo('db_explorer:inspect'),
 				'href' => 'admin/developers/db_explorer?guid=' . $entity->guid,
@@ -47,7 +47,7 @@ function entity_menu_setup($hook, $type, $menu, $params) {
 		return $menu;
 	}
 
-	$menu['db_explorer'] = ElggMenuItem::factory(array(
+	$menu['db_explorer'] = \ElggMenuItem::factory(array(
 				'name' => 'db_explorer',
 				'text' => elgg_echo('db_explorer:inspect'),
 				'href' => 'admin/developers/db_explorer?guid=' . $entity->guid,
