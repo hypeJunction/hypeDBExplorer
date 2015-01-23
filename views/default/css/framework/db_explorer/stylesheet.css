@@ -59,7 +59,7 @@
 .ui-jqgrid .ui-pg-button:hover { padding: 0; }
 .ui-jqgrid .ui-state-disabled:hover {padding:1px;}
 .ui-jqgrid .ui-pg-input { height:auto;font-size:11px; padding:3px;margin: 0;text-align:center;}
-.ui-jqgrid .ui-pg-selbox {font-size:.8em; line-height:18px; display:block; height:18px; margin: 0;}
+.ui-jqgrid .ui-pg-selbox {font-size:11px; line-height:11px; display:block; height:22px; margin: 0;}
 .ui-jqgrid .ui-separator {height: 18px; border-left: 1px solid #ccc ; border-right: 1px solid #ccc ; margin: 1px; float: right;}
 .ui-jqgrid .ui-paging-info {font-weight: normal;height:19px; margin-top:3px;margin-right:4px;}
 .ui-jqgrid .ui-jqgrid-pager .ui-pg-div {padding:1px 0;float:left;position:relative;}
