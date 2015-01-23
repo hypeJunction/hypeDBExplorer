@@ -3,23 +3,28 @@
 /**
  * Elgg Database Explorer
  *
- * @package hypeJunction
- * @subpackage hypeDBExplorer
+ * @package Elgg
+ * @subpackage hypeJunction\DBExplorer
  *
  * @author Ismayil Khayredinov <ismayil.khayredinov@gmail.com>
- * @copyright Copyright (c) 2013, Ismayil Khayredinov
+ * @copyright Copyright (c) 2013-2015, Ismayil Khayredinov
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License v2
  */
-define('HYPEDBEXPLORER_RELEASE', 1372771756);
 
-elgg_register_event_handler('init', 'system', 'hj_db_explorer_init');
+namespace hypeJunction\DBExplorer;
+
+require_once __DIR__ . '/vendors/autoload.php';
+require_once __DIR__ . '/lib/deprecated.php';
+require_once __DIR__ . '/lib/functions.php';
+require_once __DIR__ . '/lib/hooks.php';
+
+elgg_register_event_handler('init', 'system', __NAMESPACE__ . '\\init');
 
 /**
  * Initialize the plugin
+ * @return void
  */
-function hj_db_explorer_init() {
-
-	elgg_register_library('db_explorer', dirname(__FILE__) . '/lib/db_explorer.php');
+function init() {
 
 	// Register actions
 	$actions_path = dirname(__FILE__) . "/actions/db_explorer/";
@@ -51,26 +56,28 @@ function hj_db_explorer_init() {
 
 
 	// Register javascripts
-	elgg_register_js('jquery.jqgrid.js', '/mod/hypeDBExplorer/vendors/jqgrid/js/jquery.jqGrid.min.js');
-	$locale = get_language();
-	elgg_register_js('jquery.jqgrid.locale.js', "/mod/hypeDBExplorer/vendors/jqgrid/js/i18n/grid.locale-$locale.js");
-
-	elgg_register_simplecache_view('js/framework/db_explorer/jqgrid');
-	elgg_register_js('dbexplorer.jqgrid.js', elgg_get_simplecache_url('js', 'framework/db_explorer/jqgrid'));
+	elgg_define_js('jqgrid', array(
+		'src' => '/mod/hypeDBExplorer/vendors/jqgrid/js/minified/jquery.jqGrid.min.js',
+		'deps' => array('jquery', 'jqgrid.locale'),
+	));
+	
+	$locale = get_current_language();
+	elgg_define_js('jqgrid.locale', array(
+		'src' => "/mod/hypeDBExplorer/vendors/jqgrid/js/i18n/grid.locale-$locale.js",
+		'deps' => array('jquery')
+	));
 
 	// Register stylesheets
-	elgg_register_css('jquery.ui.css', '/mod/hypeDBExplorer/vendors/jquery.ui/css/jquery-ui.custom.css');
-	elgg_register_css('jquery.jqgrid.css', '/mod/hypeDBExplorer/vendors/jqgrid/css/ui.jqgrid.css');
-
-	elgg_register_simplecache_view('css/framework/db_explorer/jqgrid');
-	elgg_register_css('dbexplorer.jqgrid.css', elgg_get_simplecache_url('css', 'framework/db_explorer/jqgrid'));
+	//elgg_register_css('jquery.jqgrid', '/mod/hypeDBExplorer/vendors/jqgrid/css/ui.jqgrid.css');
+	elgg_register_css('db_explorer.jquery-ui', '/mod/hypeDBExplorer/vendors/jquery-ui/jquery-ui.min.css');
+	elgg_register_css('db_explorer.stylesheet', elgg_get_simplecache_url('css', 'framework/db_explorer/stylesheet.css'));
 
 
 	if (elgg_is_admin_logged_in()) {
 
 		// Register menu items to quickly navigate to the DB explorer for the given user/entity
-		elgg_register_plugin_hook_handler('register', 'menu:user_hover', 'hj_db_explorer_user_hover_menu_setup');
-		elgg_register_plugin_hook_handler('register', 'menu:entity', 'hj_db_explorer_entity_menu_setup');
+		elgg_register_plugin_hook_handler('register', 'menu:user_hover', __NAMESPACE__ . '\\user_hover_menu_setup');
+		elgg_register_plugin_hook_handler('register', 'menu:entity', __NAMESPACE__ . '\\entity_menu_setup');
 
 		// Register ajax views
 		elgg_register_ajax_view('admin/developers/db_explorer');
@@ -88,66 +95,9 @@ function hj_db_explorer_init() {
 		elgg_register_menu_item('footer', array(
 			'name' => 'db_explorer',
 			'href' => 'admin/developers/db_explorer?referrer_url=' . urlencode(current_page_url()),
-			'text' => elgg_echo('hj:db_explorer:inspect'),
+			'text' => elgg_echo('db_explorer:inspect'),
 			'section' => 'alt',
 			'priority' => 900
 		));
 	}
 }
-
-/**
- * Add a menu item to quickly inspect the user via the DB explorer
- *
- * @param string $hook Equals 'register'
- * @param string $type Equals 'menu:user_hover'
- * @param array $menu Current menu items
- * @param array $params Additional Params
- * @return array Updated menu
- */
-function hj_db_explorer_user_hover_menu_setup($hook, $type, $menu, $params) {
-
-	$entity = elgg_extract('entity', $params);
-
-	if (!elgg_instanceof($entity)) {
-		return $menu;
-	}
-
-	$menu['db_explorer'] = ElggMenuItem::factory(array(
-				'name' => 'db_explorer',
-				'text' => elgg_echo('hj:db_explorer:inspect'),
-				'href' => 'admin/developers/db_explorer?guid=' . $entity->guid,
-				'section' => 'admin',
-	));
-
-	return $menu;
-
-}
-
-/**
- * Add a menu item to quickly inspect the entity via the DB explorer
- *
- * @param string $hook Equals 'register'
- * @param string $type Equals 'menu:entity'
- * @param array $menu Current menu items
- * @param array $params Additional Params
- * @return array Updated menu
- */
-function hj_db_explorer_entity_menu_setup($hook, $type, $menu, $params) {
-
-	$entity = elgg_extract('entity', $params);
-
-	if (!elgg_instanceof($entity)) {
-		return $menu;
-	}
-
-	$menu['db_explorer'] = ElggMenuItem::factory(array(
-				'name' => 'db_explorer',
-				'text' => elgg_echo('hj:db_explorer:inspect'),
-				'href' => 'admin/developers/db_explorer?guid=' . $entity->guid,
-	));
-
-	return $menu;
-
-}
-
-

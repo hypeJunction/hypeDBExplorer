@@ -1,0 +1,7 @@
+{
+	"name": "hypeDBExplorer",
+	"version": "3.0.0",
+	"dependencies": {
+		"jqgrid": "4.7.*"
+	}
+}

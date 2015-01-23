@@ -10,7 +10,7 @@ $tabs = array(
 		'priority' => 100,
 	),
 	'object' => array(
-		'text' => elgg_echo('hj:db_explorer:objects'),
+		'text' => elgg_echo('db_explorer:objects'),
 		'href' => 'admin/developers/db_explorer?type=object',
 		'selected' => ($filter_context == 'object'),
 		'priority' => 200,
@@ -31,7 +31,7 @@ $tabs = array(
 
 if ($filter_context == 'entity') {
 	$tabs['entity'] = array(
-		'text' => elgg_echo('hj:db_explorer:entity'),
+		'text' => elgg_echo('db_explorer:entity'),
 		'href' => '#',
 		'selected' => true,
 		'priority' => 50

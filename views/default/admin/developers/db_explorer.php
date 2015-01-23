@@ -7,13 +7,11 @@
  * @uses $_GET['guid'] Optional. GUID of an entity to be explored
  * @uses $_GET['referrer_url'] Optional. URL to sniff for an entity GUID to be explored
  */
-elgg_load_js('jquery.jqgrid.js');
-elgg_load_js('jquery.jqgrid.locale.js');
-elgg_load_js('dbexplorer.jqgrid.js');
+elgg_require_js('framework/db_explorer');
 
-elgg_load_css('jquery.ui.css');
-elgg_load_css('jquery.jqgrid.css');
-elgg_load_css('dbexplorer.jqgrid.css');
+//elgg_load_css('jquery.jqgrid');
+elgg_load_css('db_explorer.jquery-ui');
+elgg_load_css('db_explorer.stylesheet');
 
 $type = get_input('type', 'user');
 $guid = get_input('guid', null);
@@ -25,7 +23,7 @@ if (!$guid && filter_var($url, FILTER_VALIDATE_URL)) {
 	$guid = hj_db_explorer_get_guid_from_url($url);
 
 	if (!$guid) {
-		register_error(elgg_echo('hj:db_explorer:url_sniffer_no_guid', array($url)));
+		register_error(elgg_echo('db_explorer:url_sniffer_no_guid', array($url)));
 	}
 }
 
