@@ -9,70 +9,105 @@ $limit = get_input('rows', 50);
 $sidx = get_input('sidx', 'e.guid');
 $sord = get_input('sord', 'asc');
 
+$type = sanitize_string(get_input('type', 'user'));
+
+$filters = json_decode(get_input('filters', '[]'), true);
+if (!is_array($filters)) {
+	$filters = array();
+}
+
 $searchField = get_input('searchField');
 $searchString = get_input('searchString');
 $searchOper = get_input('searchOper');
-
 if ($searchField && $searchString && $searchOper) {
-
-	$searchString = sanitise_string($searchString);
-	$searchField = sanitise_string($searchField);
-
-	switch ($searchOper) {
-
-		case 'eq' :
-			$search_query = " AND $searchField = '$searchString'";
-			break;
-
-		case 'ne' :
-			$search_query = " AND $searchField != '$searchString'";
-			break;
-
-		case 'bw' :
-			$search_query = " AND $searchField LIKE '$searchString%'";
-			break;
-
-		case 'bn' :
-			$search_query = " AND $searchField NOT LIKE '$searchString%'";
-			break;
-
-		case 'ew' :
-			$search_query = " AND $searchField LIKE '%$searchString'";
-			break;
-
-		case 'en' :
-			$search_query = " AND $searchField NOT LIKE '%$searchString'";
-			break;
-
-		case 'cn' :
-			$search_query = " AND $searchField LIKE '%$searchString%'";
-			break;
-
-		case 'nc' :
-			$search_query = " AND $searchField NOT LIKE '%$searchString%'";
-			break;
-
-		case 'in' :
-			$in = explode(',', $searchString);
-			foreach ($in as $in_l) {
-				$in_str[] = "'" . trim($in_l) . "'";
-			}
-			$in_str = implode(',', $in_str);
-			$search_query = " AND $searchField IN ($in_str)";
-			break;
-
-		case 'ni' :
-			$in = explode(',', $searchString);
-			foreach ($in as $in_l) {
-				$in_str[] = "'" . trim($in_l) . "'";
-			}
-			$in_str = implode(',', $in_str);
-			$search_query = " AND $searchField NOT IN ($in_str)";
-			break;
-	}
+	$filters['rules'][] = array(
+		'field' => $searchField,
+		'op' => $searchOper,
+		'data' => $searchString,
+	);
 }
 
-$type = sanitize_string(get_input('type', 'user'));
+$search_query = '';
+
+if (is_array($filters['rules'])) {
+	
+	$search_queries = array();
+	$groupOp = elgg_extract('groupOp', $filters, 'AND');
+
+	foreach ($filters['rules'] as $rule) {
+		
+		$searchString = sanitise_string($rule['data']);
+		$searchField = sanitise_string($rule['field']);
+
+		list($searchFieldTable, $searchFieldName) = explode('.', $searchField);
+		if ($searchFieldName == 'subtype') {
+			$searchString = sanitize_string(get_subtype_id($type, $searchString));
+		}
+		
+		$searchOper = $rule['op'];
+
+		if (!$searchString || !$searchField || !$searchOper) {
+			continue;
+		}
+		
+		switch ($searchOper) {
+
+			case 'eq' :
+				$search_queries[] = "$searchField = '$searchString'";
+				break;
+
+			case 'ne' :
+				$search_queries[] = "$searchField != '$searchString'";
+				break;
+
+			case 'bw' :
+				$search_queries[] = "$searchField LIKE '$searchString%'";
+				break;
+
+			case 'bn' :
+				$search_queries[] = "$searchField NOT LIKE '$searchString%'";
+				break;
+
+			case 'ew' :
+				$search_queries[] = "$searchField LIKE '%$searchString'";
+				break;
+
+			case 'en' :
+				$search_queries[] = "$searchField NOT LIKE '%$searchString'";
+				break;
+
+			case 'cn' :
+				$search_queries[] = "$searchField LIKE '%$searchString%'";
+				break;
+
+			case 'nc' :
+				$search_queries[] = "$searchField NOT LIKE '%$searchString%'";
+				break;
+
+			case 'in' :
+				$in = explode(',', $searchString);
+				foreach ($in as $in_l) {
+					$in_str[] = "'" . trim($in_l) . "'";
+				}
+				$in_str = implode(',', $in_str);
+				$search_queries[] = "$searchField IN ($in_str)";
+				break;
+
+			case 'ni' :
+				$in = explode(',', $searchString);
+				foreach ($in as $in_l) {
+					$in_str[] = "'" . trim($in_l) . "'";
+				}
+				$in_str = implode(',', $in_str);
+				$search_queries[] = "$searchField NOT IN ($in_str)";
+				break;
+		}
+	}
+
+	if (count($search_queries)) {
+		$search_query = ' AND ' . implode(" $groupOp ", $search_queries);
+	}
+}
 
 switch ($type) {
 	case 'user' :
@@ -225,7 +260,7 @@ if (!empty($row_data)) {
 			if (elgg_view_exists("framework/db_explorer/db_column/$col")) {
 				$results['rows'][$i]['cell'][] = elgg_view("framework/db_explorer/db_column/$col", array(
 					'data' => $r
-						));
+				));
 			} else {
 				$results['rows'][$i]['cell'][] = $value;
 			}
