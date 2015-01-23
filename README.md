@@ -7,6 +7,9 @@ hypeDBExplorer collects Elgg entity information spread across multiple tables, a
 ## Features ##
 
 * jqGrid integration with real-time pagination and search
+* Multi-column filtering
+* Bulk user management (validate, ban, unban, disable, enable, delete)
+* Bulk content management (disable, enable, delete)
 * elgg_entities table joined with object, user, group, site attributes
 * elgg_metadata table joined with metastring values
 * Subgrid: owned entities
@@ -20,7 +23,6 @@ hypeDBExplorer collects Elgg entity information spread across multiple tables, a
 * Subgrid: entity relationships
 * Popup grid view on any entity guid
 * Multiple popups with highlighting
-* Multi-column filtering
 
 ## Screenshots ##
 
