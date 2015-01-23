@@ -4,6 +4,11 @@ hypeDBExplorer
 Database explorer tool for Elgg.
 hypeDBExplorer collects Elgg entity information spread across multiple tables, and presents it in a human-readable format.
 
+## Screenshots ##
+
+![alt text](https://raw.github.com/hypeJunction/hypeDBExplorer/master/screenshots/db_explorer_entities.png "Database Explorer")
+![alt text](https://raw.github.com/hypeJunction/hypeDBExplorer/master/screenshots/db_explorer_subgrids.png "Database Explorer")
+
 ## Features ##
 
 * jqGrid integration with real-time pagination and search
@@ -23,10 +28,6 @@ hypeDBExplorer collects Elgg entity information spread across multiple tables, a
 * Subgrid: entity relationships
 * Popup grid view on any entity guid
 * Multiple popups with highlighting
-
-## Screenshots ##
-
-![alt text](https://raw.github.com/hypeJunction/hypeDBExplorer/master/screenshots/db_explorer.png "Database Explorer")
 
 
 ## Credits / Acknolwedgements ##
