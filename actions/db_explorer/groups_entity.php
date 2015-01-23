@@ -21,6 +21,7 @@ if (!empty($row_data)) {
 	$i = 0;
 
 	$ordered_cols = array(
+		'checkbox',
 		'guid',
 		'name',
 		'description',

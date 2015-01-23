@@ -13,9 +13,13 @@ $attr = elgg_format_attributes(array(
 	'class' => 'dbexplorer-grid',
 	'data-type' => $type,
 	'data-pager-id' => "pager-$type"
-));
+		));
 
 echo '<div class="jqgrid-wrapper">';
 echo "<table $attr><tr><td></td></tr></table>";
 echo "<div id=\"pager-$type\"></div>";
 echo '</div>';
+
+echo elgg_view_form('db_explorer/batch', array(
+	'class' => 'js-dbexplorer-batch-form',
+));

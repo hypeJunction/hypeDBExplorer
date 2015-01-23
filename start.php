@@ -54,6 +54,18 @@ function init() {
 
 	elgg_register_action('db_explorer/entity_relationships', $actions_path . 'entity_relationships.php', 'admin');
 
+	elgg_register_action('db_explorer/batch', $actions_path . 'batch.php');
+	
+	elgg_register_action('db_explorer/user/validate', $actions_path . 'user/validate.php');
+	elgg_register_action('db_explorer/user/ban', $actions_path . 'user/ban.php');
+	elgg_register_action('db_explorer/user/unban', $actions_path . 'user/unban.php');
+	elgg_register_action('db_explorer/user/enable', $actions_path . 'user/enable.php');
+	elgg_register_action('db_explorer/user/disable', $actions_path . 'user/disable.php');
+	elgg_register_action('db_explorer/user/delete', $actions_path . 'user/delete.php');
+
+	elgg_register_action('db_explorer/content/enable', $actions_path . 'content/enable.php');
+	elgg_register_action('db_explorer/content/disable', $actions_path . 'content/disable.php');
+	elgg_register_action('db_explorer/content/delete', $actions_path . 'content/delete.php');
 
 	// Register javascripts
 	elgg_define_js('jqgrid', array(

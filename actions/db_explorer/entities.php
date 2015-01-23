@@ -249,6 +249,9 @@ if (!empty($row_data)) {
 			);
 			break;
 	}
+
+	array_unshift($ordered_cols, 'checkbox');
+	
 	foreach ($row_data as $r) {
 
 		$results['rows'][$i]['id'] = $r->guid;

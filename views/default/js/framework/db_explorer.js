@@ -18,6 +18,37 @@ define(['jquery', 'elgg', 'jqgrid', 'jqgrid.locale'], function ($, jqgrid) {
 			elgg.db_explorer.jqGrid($('#' + id));
 		});
 
+		// Toggle all checkboxes
+		$(document).on('change', '.js-dbexplorer-toggle', function () {
+			var checked = $(this).prop('checked');
+			$('.jqgrid-wrapper').find('.js-dbexplorer-checkbox').prop('checked', false);
+			$('.jqgrid-wrapper').find('.js-dbexplorer-checkbox:visible').prop('checked', checked);
+		});
+
+		$(document).on('submit', '.js-dbexplorer-batch-form', function (e) {
+			e.preventDefault();
+
+			var $form = $(this);
+			var data = $('.jqgrid-wrapper').find('.js-dbexplorer-checkbox:checked:visible').serialize();
+
+			elgg.action($form.attr('action') + '?' + data, {
+				data: $form.serialize(),
+				beforeSend: function () {
+					$('body').addClass('elgg-state-loading');
+					$form.find('[type="submit"]').prop('disabled', true).addClass('elgg-state-disabled');
+				},
+				complete: function () {
+					$('body').removeClass('elgg-state-loading');
+					$form.find('[type="submit"]').prop('disabled', false).removeClass('elgg-state-disabled');
+				},
+				success: function (response) {
+					$('.dbexplorer-grid').each(function () {
+						$(this).trigger('reloadGrid');
+					});
+				}
+			});
+		});
+
 		// Links that trigger popups
 		$('.dbexplorer-popup').live('click', function (e) {
 			e.preventDefault();
@@ -64,14 +95,19 @@ define(['jquery', 'elgg', 'jqgrid', 'jqgrid.locale'], function ($, jqgrid) {
 		var type = $grid.data('type'),
 				guid = $grid.data('guid'),
 				pagerId = $grid.data('pagerId'),
-				colNames = ['guid'],
+				colNames = ['checkbox', 'guid'],
 				colModel = [{
+						name: 'checkbbox',
+						width: 30,
+						search: false
+					},
+					{
 						name: 'e.guid',
 						width: 90,
 						searchrules: {
 							integer: true
 						},
-						searchoptions:{sopt:['eq','ne','le','lt','gt','ge']}
+						searchoptions: {sopt: ['eq', 'ne', 'le', 'lt', 'gt', 'ge']}
 					}],
 				sortName = 'e.guid';
 
@@ -80,36 +116,36 @@ define(['jquery', 'elgg', 'jqgrid', 'jqgrid.locale'], function ($, jqgrid) {
 			case 'user' :
 				colNames.push('username', 'name', 'email', 'admin', 'banned');
 				colModel.push(
-						{name: 'ue.username', width: 200, searchoptions:{sopt:['eq','bw','bn','cn','nc','ew','en']}},
-				{name: 'ue.name', width: 200, searchoptions:{sopt:['eq','bw','bn','cn','nc','ew','en']}},
-				{name: 'ue.email', width: 200, searchoptions:{sopt:['eq','bw','bn','cn','nc','ew','en']}},
-				{name: 'ue.admin', width: 40, searchoptions:{sopt:['eq','ne']}},
-				{name: 'ue.banned', width: 40, searchoptions:{sopt:['eq','ne']}}
+						{name: 'ue.username', width: 200, searchoptions: {sopt: ['eq', 'bw', 'bn', 'cn', 'nc', 'ew', 'en']}},
+				{name: 'ue.name', width: 200, searchoptions: {sopt: ['eq', 'bw', 'bn', 'cn', 'nc', 'ew', 'en']}},
+				{name: 'ue.email', width: 200, searchoptions: {sopt: ['eq', 'bw', 'bn', 'cn', 'nc', 'ew', 'en']}},
+				{name: 'ue.admin', width: 40, searchoptions: {sopt: ['eq', 'ne']}},
+				{name: 'ue.banned', width: 40, searchoptions: {sopt: ['eq', 'ne']}}
 				);
 				break;
 
 			case 'group' :
 				colNames.push('name', 'description');
 				colModel.push(
-						{name: 'ge.name', width: 100, searchoptions:{sopt:['eq','bw','bn','cn','nc','ew','en']}},
-				{name: 'ge.description', width: 300, searchoptions:{sopt:['eq','bw','bn','cn','nc','ew','en']}}
+						{name: 'ge.name', width: 100, searchoptions: {sopt: ['eq', 'bw', 'bn', 'cn', 'nc', 'ew', 'en']}},
+				{name: 'ge.description', width: 300, searchoptions: {sopt: ['eq', 'bw', 'bn', 'cn', 'nc', 'ew', 'en']}}
 				);
 				break;
 
 			case 'object' :
 				colNames.push('title', 'description');
 				colModel.push(
-						{name: 'oe.title', width: 100, searchoptions:{sopt:['eq','bw','bn','cn','nc','ew','en']}},
-				{name: 'oe.description', width: 300, searchoptions:{sopt:['eq','bw','bn','cn','nc','ew','en']}}
+						{name: 'oe.title', width: 100, searchoptions: {sopt: ['eq', 'bw', 'bn', 'cn', 'nc', 'ew', 'en']}},
+				{name: 'oe.description', width: 300, searchoptions: {sopt: ['eq', 'bw', 'bn', 'cn', 'nc', 'ew', 'en']}}
 				);
 				break;
 
 			case 'site' :
 				colNames.push('name', 'description', 'url');
 				colModel.push(
-						{name: 'se.name', width: 100, searchoptions:{sopt:['eq','bw','bn','cn','nc','ew','en']}},
-				{name: 'se.description', width: 300, searchoptions:{sopt:['eq','bw','bn','cn','nc','ew','en']}},
-				{name: 'se.url', width: 100, searchoptions:{sopt:['eq','bw','bn','cn','nc','ew','en']}}
+						{name: 'se.name', width: 100, searchoptions: {sopt: ['eq', 'bw', 'bn', 'cn', 'nc', 'ew', 'en']}},
+				{name: 'se.description', width: 300, searchoptions: {sopt: ['eq', 'bw', 'bn', 'cn', 'nc', 'ew', 'en']}},
+				{name: 'se.url', width: 100, searchoptions: {sopt: ['eq', 'bw', 'bn', 'cn', 'nc', 'ew', 'en']}}
 				);
 				break;
 		}
@@ -128,16 +164,16 @@ define(['jquery', 'elgg', 'jqgrid', 'jqgrid.locale'], function ($, jqgrid) {
 				);
 
 		colModel.push(
-				{name: 'e.type', width: 90, searchoptions:{sopt:['eq','ne']}},
-		{name: 'e.subtype', width: 90, searchoptions:{sopt:['eq','ne']}},
-		{name: 'e.owner_guid', width: 100, searchrules: {integer: true}, searchoptions:{sopt:['eq','ne','le','lt','gt','ge']}},
-		{name: 'e.site_guid', width: 50, searchrules: {integer: true}, searchoptions:{sopt:['eq','ne','le','lt','gt','ge']}},
-		{name: 'e.container_guid', width: 100, searchrules: {integer: true}, searchoptions:{sopt:['eq','ne','le','lt','gt','ge']}},
-		{name: 'e.access_id', width: 90, searchrules: {integer: true}, searchoptions:{sopt:['eq','ne','le','lt','gt','ge']}},
+				{name: 'e.type', width: 90, searchoptions: {sopt: ['eq', 'ne']}},
+		{name: 'e.subtype', width: 90, searchoptions: {sopt: ['eq', 'ne']}},
+		{name: 'e.owner_guid', width: 100, searchrules: {integer: true}, searchoptions: {sopt: ['eq', 'ne', 'le', 'lt', 'gt', 'ge']}},
+		{name: 'e.site_guid', width: 50, searchrules: {integer: true}, searchoptions: {sopt: ['eq', 'ne', 'le', 'lt', 'gt', 'ge']}},
+		{name: 'e.container_guid', width: 100, searchrules: {integer: true}, searchoptions: {sopt: ['eq', 'ne', 'le', 'lt', 'gt', 'ge']}},
+		{name: 'e.access_id', width: 90, searchrules: {integer: true}, searchoptions: {sopt: ['eq', 'ne', 'le', 'lt', 'gt', 'ge']}},
 		{name: 'e.time_created', width: 80, search: false},
 		{name: 'e.time_updated', width: 80, search: false},
 		{name: 'e.last_action', width: 80, search: false},
-		{name: 'e.enabled', width: 90}
+		{name: 'e.enabled', width: 90, searchoptions: {sopt: ['eq', 'ne']}}
 		);
 
 		$grid.jqGrid({
@@ -164,7 +200,7 @@ define(['jquery', 'elgg', 'jqgrid', 'jqgrid.locale'], function ($, jqgrid) {
 
 		if (!guid) {
 			$grid.jqGrid('navGrid', '#' + pagerId, {edit: false, add: false, del: false});
-			$grid.jqGrid('filterToolbar', {searchOperators : true});
+			$grid.jqGrid('filterToolbar', {searchOperators: true});
 		}
 	};
 
@@ -229,8 +265,13 @@ define(['jquery', 'elgg', 'jqgrid', 'jqgrid.locale'], function ($, jqgrid) {
 					jQuery('#' + subgrid_table_id).jqGrid({
 						url: elgg.security.addToken(elgg.get_site_url() + 'action/db_explorer/users_entity?guid=' + row_id),
 						datatype: 'json',
-						colNames: ['guid', 'name', 'username', 'email', 'language', 'banned', 'admin', 'last_action', 'prev_last_action', 'last_login', 'prev_last_login'],
+						colNames: ['checkbox', 'guid', 'name', 'username', 'email', 'language', 'banned', 'admin', 'last_action', 'prev_last_action', 'last_login', 'prev_last_login'],
 						colModel: [
+							{
+								name: 'checkbbox',
+								width: 30,
+								search: false
+							},
 							{name: 'ue.guid', width: 90},
 							{name: 'ue.name', width: 100},
 							{name: 'ue.username', width: 100},
@@ -257,8 +298,13 @@ define(['jquery', 'elgg', 'jqgrid', 'jqgrid.locale'], function ($, jqgrid) {
 					jQuery('#' + subgrid_table_id).jqGrid({
 						url: elgg.security.addToken(elgg.get_site_url() + 'action/db_explorer/objects_entity?guid=' + row_id),
 						datatype: 'json',
-						colNames: ['guid', 'title', 'description'],
+						colNames: ['checkbox', 'guid', 'title', 'description'],
 						colModel: [
+							{
+								name: 'checkbbox',
+								width: 30,
+								search: false
+							},
 							{name: 'oe.guid'},
 							{name: 'oe.title'},
 							{name: 'oe.description'},
@@ -277,8 +323,13 @@ define(['jquery', 'elgg', 'jqgrid', 'jqgrid.locale'], function ($, jqgrid) {
 					jQuery('#' + subgrid_table_id).jqGrid({
 						url: elgg.security.addToken(elgg.get_site_url() + 'action/db_explorer/groups_entity?guid=' + row_id),
 						datatype: 'json',
-						colNames: ['guid', 'name', 'description'],
+						colNames: ['checkbox', 'guid', 'name', 'description'],
 						colModel: [
+							{
+								name: 'checkbbox',
+								width: 30,
+								search: false
+							},
 							{name: 'ge.guid'},
 							{name: 'ge.name'},
 							{name: 'ge.description'},
@@ -319,7 +370,9 @@ define(['jquery', 'elgg', 'jqgrid', 'jqgrid.locale'], function ($, jqgrid) {
 					jQuery('#' + subgrid_table_id).jqGrid({
 						url: elgg.security.addToken(elgg.get_site_url() + 'action/db_explorer/' + subgrid_table_name + '?guid=' + row_id),
 						datatype: 'json',
-						colNames: ['guid',
+						colNames: [
+							'checkbox',
+							'guid',
 							'type',
 							'subtype',
 							'owner_guid',
@@ -331,6 +384,11 @@ define(['jquery', 'elgg', 'jqgrid', 'jqgrid.locale'], function ($, jqgrid) {
 							'last_action',
 							'enabled'],
 						colModel: [
+							{
+								name: 'checkbbox',
+								width: 30,
+								search: false
+							},
 							{name: 'e.guid', width: 90},
 							{name: 'e.type', width: 90},
 							{name: 'e.subtype', width: 90},

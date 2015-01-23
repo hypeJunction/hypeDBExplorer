@@ -177,7 +177,6 @@ a.g-menu-item, a.soptclass, a.clearsearchclass { cursor: pointer; }
     font-size: 13px
 }
 
-
 .jqgrid-wrapper {
 	height:auto;
 	overflow:auto;
@@ -221,4 +220,13 @@ a.g-menu-item, a.soptclass, a.clearsearchclass { cursor: pointer; }
 
 [role="gridcell"].highlighted {
 	background: #fce19e;
+}
+
+.elgg-form-db-explorer-batch {
+	margin: 20px 0;
+}
+
+.elgg-form-db-explorer-batch fieldset fieldset {
+	border: 1px solid #ccc;
+	padding: 15px;
 }
