@@ -87,9 +87,11 @@ function init() {
 
 	if (elgg_is_admin_logged_in()) {
 
-		// Register menu items to quickly navigate to the DB explorer for the given user/entity
-		elgg_register_plugin_hook_handler('register', 'menu:user_hover', __NAMESPACE__ . '\\user_hover_menu_setup');
-		elgg_register_plugin_hook_handler('register', 'menu:entity', __NAMESPACE__ . '\\entity_menu_setup');
+		if (elgg_get_config('debug')) {
+			// Register menu items to quickly navigate to the DB explorer for the given user/entity
+			elgg_register_plugin_hook_handler('register', 'menu:user_hover', __NAMESPACE__ . '\\user_hover_menu_setup');
+			elgg_register_plugin_hook_handler('register', 'menu:entity', __NAMESPACE__ . '\\entity_menu_setup');
+		}
 
 		// Register ajax views
 		elgg_register_ajax_view('admin/developers/db_explorer');
