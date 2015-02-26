@@ -14,8 +14,8 @@
 namespace hypeJunction\DBExplorer;
 
 require_once __DIR__ . '/vendor/autoload.php';
-require_once __DIR__ . '/lib/deprecated.php';
-require_once __DIR__ . '/lib/functions.php';
+//require_once __DIR__ . '/lib/deprecated.php';
+//require_once __DIR__ . '/lib/functions.php';
 require_once __DIR__ . '/lib/hooks.php';
 
 elgg_register_event_handler('init', 'system', __NAMESPACE__ . '\\init');
