@@ -55,7 +55,7 @@ function init() {
 	elgg_register_action('db_explorer/entity_relationships', $actions_path . 'entity_relationships.php', 'admin');
 
 	elgg_register_action('db_explorer/batch', $actions_path . 'batch.php');
-	
+
 	elgg_register_action('db_explorer/user/validate', $actions_path . 'user/validate.php');
 	elgg_register_action('db_explorer/user/ban', $actions_path . 'user/ban.php');
 	elgg_register_action('db_explorer/user/unban', $actions_path . 'user/unban.php');
@@ -72,7 +72,7 @@ function init() {
 		'src' => '/mod/hypeDBExplorer/vendor/jqgrid/js/minified/jquery.jqGrid.min.js',
 		'deps' => array('jquery', 'jqgrid.locale'),
 	));
-	
+
 	$locale = get_current_language();
 	elgg_define_js('jqgrid.locale', array(
 		'src' => "/mod/hypeDBExplorer/vendor/jqgrid/js/i18n/grid.locale-$locale.js",
@@ -101,15 +101,6 @@ function init() {
 			'text' => elgg_echo('admin:developers:db_explorer'),
 			'context' => 'admin',
 			'section' => 'develop'
-		));
-
-		// Add a footer menu item
-		elgg_register_menu_item('footer', array(
-			'name' => 'db_explorer',
-			'href' => 'admin/developers/db_explorer?referrer_url=' . urlencode(current_page_url()),
-			'text' => elgg_echo('db_explorer:inspect'),
-			'section' => 'alt',
-			'priority' => 900
 		));
 	}
 }
