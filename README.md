@@ -18,6 +18,7 @@ Install with composer:
 		"hypejunction/hypedbexplorer": "3.*"
 	}
 }
+```
 
 or run:
 ```sh
