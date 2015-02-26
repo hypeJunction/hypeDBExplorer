@@ -2,6 +2,7 @@
 	"name": "hypeDBExplorer",
 	"version": "3.0.0",
 	"dependencies": {
-		"jqgrid": "4.7.*"
+		"jqgrid": "4.7.*",
+		"jquery-ui": "1.10.4"
 	}
 }

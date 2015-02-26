@@ -9,6 +9,26 @@ hypeDBExplorer collects Elgg entity information spread across multiple tables, a
 ![alt text](https://raw.github.com/hypeJunction/hypeDBExplorer/master/screenshots/db_explorer_entities.png "Database Explorer")
 ![alt text](https://raw.github.com/hypeJunction/hypeDBExplorer/master/screenshots/db_explorer_subgrids.png "Database Explorer")
 
+## Dependencies ##
+
+Install with composer:
+```json
+{
+	"require": {
+		"hypejunction/hypedbexplorer": "3.*"
+	}
+}
+
+or run:
+```sh
+	composer install
+```
+
+Install bower dependencies:
+```sh
+	bower install
+```
+
 ## Features ##
 
 * jqGrid integration with real-time pagination and search

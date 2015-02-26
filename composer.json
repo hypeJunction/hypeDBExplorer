@@ -1,34 +1,28 @@
 {
 	"name": "hypejunction/hypedbexplorer",
 	"type": "elgg-plugin",
-	"description": "DB explorer for Elgg",
+	"description": "DB explorer tool for Elgg",
 	"homepage": "http://hypejunction.com",
 	"keywords": [
-		"elgg", "plugin", "database"
+		"elgg", "plugin", "database", "developers", "bulk actions"
 	],
 	"license": "GPL-2.0",
 	"authors": [
 		{
 			"name": "Ismayil Khayredinov",
-			"email": "ismayil.khayredinov@gmail.com"
+			"email": "ismayil@hypejunction.com"
 		}
 	],
 	"extra": {
 		"installer-name": "hypeDBExplorer"
 	},
-	"config": {
-		"vendor-dir": "vendors",
-		"preferred-install": "dist"
-	},
 	"require": {
-		"php": ">=5.3.3",
+		"php": ">=5.4",
 		"composer/installers": "1.0.*"
 	},
 	"autoload": {
-		"psr-4": {
-			"hypeJunction\\": ["classes/hypeJunction/", "tests/phpunit/classes/hypeJunction"],
-			"UFCOE\\": ["classes/UFCOE/"]
-
+		"psr-0": {
+			"": "classes/"
 		}
 	}
 }
