@@ -15,14 +15,9 @@ Install with composer:
 ```json
 {
 	"require": {
-		"hypejunction/hypedbexplorer": "3.*"
+		"hypejunction/hypedbexplorer": "3.1.*"
 	}
 }
-```
-
-or run:
-```sh
-	composer install
 ```
 
 Install bower dependencies:
