@@ -16,9 +16,12 @@
 	"extra": {
 		"installer-name": "hypeDBExplorer"
 	},
+	"config": {
+		"vendor-dir": "/vendor/"
+	},
 	"require": {
 		"php": ">=5.4",
-		"composer/installers": "1.0.*"
+		"composer/installers": ">=1.0.8"
 	}
 }
 

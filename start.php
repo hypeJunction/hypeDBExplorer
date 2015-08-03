@@ -13,7 +13,7 @@
 
 namespace hypeJunction\DBExplorer;
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once dirname(dirname(dirname(__FILE__))) . '/vendor/autoload.php';
 //require_once __DIR__ . '/lib/deprecated.php';
 //require_once __DIR__ . '/lib/functions.php';
 require_once __DIR__ . '/lib/hooks.php';
@@ -69,19 +69,19 @@ function init() {
 
 	// Register javascripts
 	elgg_define_js('jqgrid', array(
-		'src' => '/mod/hypeDBExplorer/vendor/jqgrid/js/minified/jquery.jqGrid.min.js',
+		'src' => '/mod/hypeDBExplorer/vendors/jqgrid/js/minified/jquery.jqGrid.min.js',
 		'deps' => array('jquery', 'jqgrid.locale'),
 	));
 
 	$locale = get_current_language();
 	elgg_define_js('jqgrid.locale', array(
-		'src' => "/mod/hypeDBExplorer/vendor/jqgrid/js/i18n/grid.locale-$locale.js",
+		'src' => "/mod/hypeDBExplorer/vendors/jqgrid/js/i18n/grid.locale-$locale.js",
 		'deps' => array('jquery')
 	));
 
 	// Register stylesheets
 	//elgg_register_css('jquery.jqgrid', '/mod/hypeDBExplorer/vendor/jqgrid/css/ui.jqgrid.css');
-	elgg_register_css('db_explorer.jquery-ui', '/mod/hypeDBExplorer/vendor/jquery-ui/themes/smoothness/jquery-ui.min.css');
+	elgg_register_css('db_explorer.jquery-ui', '/mod/hypeDBExplorer/vendors/jquery-ui/themes/smoothness/jquery-ui.min.css');
 	elgg_register_css('db_explorer.stylesheet', elgg_get_simplecache_url('css', 'framework/db_explorer/stylesheet.css'));
 
 
