@@ -70,7 +70,7 @@ function init() {
 
 	// Register javascripts
 	elgg_define_js('jqgrid', array(
-		'src' => '/mod/hypeDBExplorer/vendors/jqgrid/js/minified/jquery.jqGrid.min.js',
+		'src' => '/mod/hypeDBExplorer/vendors/jqgrid/js/jquery.jqGrid.min.js',
 		'deps' => array('jquery', 'jqgrid.locale'),
 	));
 
