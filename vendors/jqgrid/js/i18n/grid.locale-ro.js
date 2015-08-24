@@ -1,3 +1,4 @@
+;(function($){
 /**
  * jqGrid Romanian Translation
  * Alexandru Emil Lupu contact@alecslupu.ro
@@ -6,46 +7,19 @@
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html
 **/
-/*global jQuery, define */
-(function( factory ) {
-	"use strict";
-	if ( typeof define === "function" && define.amd ) {
-		// AMD. Register as an anonymous module.
-		define([
-			"jquery",
-			"../grid.base"
-		], factory );
-	} else {
-		// Browser globals
-		factory( jQuery );
-	}
-}(function( $ ) {
-
 $.jgrid = $.jgrid || {};
-if(!$.jgrid.hasOwnProperty("regional")) {
-	$.jgrid.regional = [];
-}
-$.jgrid.regional["ro"] = {
+$.extend($.jgrid,{
 	defaults : {
 		recordtext: "Vizualizare {0} - {1} din {2}",
 		emptyrecords: "Nu există înregistrări de vizualizat",
 		loadtext: "Încărcare...",
 		pgtext : "Pagina {0} din {1}",
-		savetext: "Saving...",
 		pgfirst : "First Page",
 		pglast : "Last Page",
 		pgnext : "Next Page",
 		pgprev : "Previous Page",
 		pgrecs : "Records per Page",
-		showhide: "Toggle Expand Collapse Grid",
-		// mobile
-		pagerCaption : "Grid::Page Settings",
-		pageText : "Page:",
-		recordPage : "Records per Page",
-		nomorerecs : "No more records...",
-		scrollPullup: "Pull up to load more...",
-		scrollPulldown : "Pull down to refresh...",
-		scrollRefresh : "Release to refresh..."
+		showhide: "Toggle Expand Collapse Grid"
 	},
 	search : {
 		caption: "Caută...",
@@ -105,12 +79,7 @@ $.jgrid.regional["ro"] = {
 		alertcap: "Avertisment",
 		alerttext: "Vă rugăm să selectați un rând",
 		viewtext: "",
-		viewtitle: "Vizualizează rândul selectat",
-		savetext: "",
-		savetitle: "Save row",
-		canceltext: "",
-		canceltitle : "Cancel row editing",
-		selectcaption : "Actions..."
+		viewtitle: "Vizualizează rândul selectat"
 	},
 	col : {
 		caption: "Arată/Ascunde coloanele",
@@ -175,5 +144,5 @@ $.jgrid.regional["ro"] = {
 		checkbox : {disabled:true},
 		idName : 'id'
 	}
-};
-}));
+});
+})(jQuery);
