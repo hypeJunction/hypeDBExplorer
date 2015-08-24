@@ -1,6 +1,6 @@
 {
 	"name": "hypejunction/hypedbexplorer",
-	"version": "3.2.0",
+	"version": "4.3.0",
 	"type": "elgg-plugin",
 	"description": "DB explorer tool for Elgg",
 	"homepage": "http://hypejunction.com",
