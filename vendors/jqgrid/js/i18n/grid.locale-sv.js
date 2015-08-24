@@ -1,3 +1,4 @@
+;(function($){
 /**
  * jqGrid Swedish Translation
  * Harald Normann harald.normann@wts.se, harald.normann@gmail.com
@@ -6,46 +7,19 @@
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html
 **/
-/*global jQuery, define */
-(function( factory ) {
-	"use strict";
-	if ( typeof define === "function" && define.amd ) {
-		// AMD. Register as an anonymous module.
-		define([
-			"jquery",
-			"../grid.base"
-		], factory );
-	} else {
-		// Browser globals
-		factory( jQuery );
-	}
-}(function( $ ) {
-
 $.jgrid = $.jgrid || {};
-if(!$.jgrid.hasOwnProperty("regional")) {
-	$.jgrid.regional = [];
-}
-$.jgrid.regional["sv"] = {
+$.extend($.jgrid,{
 	defaults : {
 		recordtext: "Visar {0} - {1} av {2}",
 		emptyrecords: "Det finns inga poster att visa",
 		loadtext: "Laddar...",
 		pgtext : "Sida {0} av {1}",
-		savetext: "Saving...",
 		pgfirst : "First Page",
 		pglast : "Last Page",
 		pgnext : "Next Page",
 		pgprev : "Previous Page",
 		pgrecs : "Records per Page",
-		showhide: "Toggle Expand Collapse Grid",
-		// mobile
-		pagerCaption : "Grid::Page Settings",
-		pageText : "Page:",
-		recordPage : "Records per Page",
-		nomorerecs : "No more records...",
-		scrollPullup: "Pull up to load more...",
-		scrollPulldown : "Pull down to refresh...",
-		scrollRefresh : "Release to refresh..."
+		showhide: "Toggle Expand Collapse Grid"
 	},
 	search : {
 		caption: "Sök Poster - Ange sökvillkor",
@@ -105,12 +79,7 @@ $.jgrid.regional["sv"] = {
 		alertcap: "Varning",
 		alerttext: "Ingen rad är markerad",
 		viewtext: "",
-		viewtitle: "Visa markerad rad",
-		savetext: "",
-		savetitle: "Save row",
-		canceltext: "",
-		canceltitle : "Cancel row editing",
-		selectcaption : "Actions..."
+		viewtitle: "Visa markerad rad"
 	},
 	col : {
 		caption: "Välj Kolumner",
@@ -163,5 +132,5 @@ $.jgrid.regional["sv"] = {
 		checkbox : {disabled:true},
 		idName : 'id'
 	}
-};
-}));
+});
+})(jQuery);

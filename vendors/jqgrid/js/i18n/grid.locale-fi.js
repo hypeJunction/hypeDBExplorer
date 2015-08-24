@@ -1,3 +1,4 @@
+;(function($){
 /**
  * jqGrid (fi) Finnish Translation
  * Jukka Inkeri  awot.fi  2010-05-19
@@ -7,46 +8,19 @@
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html
 **/
-/*global jQuery, define */
-(function( factory ) {
-	"use strict";
-	if ( typeof define === "function" && define.amd ) {
-		// AMD. Register as an anonymous module.
-		define([
-			"jquery",
-			"../grid.base"
-		], factory );
-	} else {
-		// Browser globals
-		factory( jQuery );
-	}
-}(function( $ ) {
-
 $.jgrid = $.jgrid || {};
-if(!$.jgrid.hasOwnProperty("regional")) {
-	$.jgrid.regional = [];
-}
-$.jgrid.regional["fi"] = {
+$.extend($.jgrid,{
 	defaults: {
 		recordtext: "Rivit {0} - {1} / {2}",
 	    emptyrecords: "Ei n&auml;ytett&auml;vi&auml;",
 		loadtext: "Haetaan...",
-		savetext: "Saving...",
 		pgtext: "Sivu {0} / {1}",		
 		pgfirst : "First Page",
 		pglast : "Last Page",
 		pgnext : "Next Page",
 		pgprev : "Previous Page",
 		pgrecs : "Records per Page",
-		showhide: "Toggle Expand Collapse Grid",
-		// mobile
-		pagerCaption : "Grid::Page Settings",
-		pageText : "Page:",
-		recordPage : "Records per Page",
-		nomorerecs : "No more records...",
-		scrollPullup: "Pull up to load more...",
-		scrollPulldown : "Pull down to refresh...",
-		scrollRefresh : "Release to refresh..."
+		showhide: "Toggle Expand Collapse Grid"
 	},
 	search: {
 	    caption: "Etsi...",
@@ -106,12 +80,7 @@ $.jgrid.regional["fi"] = {
 	    alertcap: "Varoitus",
 	    alerttext: "Valitse rivi",
 		viewtext: "",
-		viewtitle: "N&auml;yta valitut rivit",
-		savetext: "",
-		savetitle: "Save row",
-		canceltext: "",
-		canceltitle : "Cancel row editing",
-		selectcaption : "Actions..."
+		viewtitle: "N&auml;yta valitut rivit"
 	},
 	col: {
 	    caption: "Valitse sarakkeet",
@@ -164,6 +133,6 @@ $.jgrid.regional["fi"] = {
 	    checkbox: {disabled:true},
 		idName: 'id'
 	}
-};
+});
 // FI
-}));
+})(jQuery);

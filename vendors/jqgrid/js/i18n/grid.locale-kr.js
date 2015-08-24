@@ -1,3 +1,4 @@
+;(function($){
 /**
  * jqGrid English Translation
  * Tony Tomov tony@trirand.com
@@ -6,46 +7,19 @@
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html
 **/
-/*global jQuery, define */
-(function( factory ) {
-	"use strict";
-	if ( typeof define === "function" && define.amd ) {
-		// AMD. Register as an anonymous module.
-		define([
-			"jquery",
-			"../grid.base"
-		], factory );
-	} else {
-		// Browser globals
-		factory( jQuery );
-	}
-}(function( $ ) {
-
 $.jgrid = $.jgrid || {};
-if(!$.jgrid.hasOwnProperty("regional")) {
-	$.jgrid.regional = [];
-}
-$.jgrid.regional["kr"] = {
+$.extend($.jgrid,{
 	defaults : {
 		recordtext: "보기 {0} - {1} / {2}",
 		emptyrecords: "표시할 행이 없습니다",
 		loadtext: "조회중...",
 		pgtext : "페이지 {0} / {1}",
-		savetext: "Saving...",
 		pgfirst : "First Page",
 		pglast : "Last Page",
 		pgnext : "Next Page",
 		pgprev : "Previous Page",
 		pgrecs : "Records per Page",
-		showhide: "Toggle Expand Collapse Grid",
-		// mobile
-		pagerCaption : "Grid::Page Settings",
-		pageText : "Page:",
-		recordPage : "Records per Page",
-		nomorerecs : "No more records...",
-		scrollPullup: "Pull up to load more...",
-		scrollPulldown : "Pull down to refresh...",
-		scrollRefresh : "Release to refresh..."
+		showhide: "Toggle Expand Collapse Grid"
 	},
 	search : {
 		caption: "검색...",
@@ -106,12 +80,7 @@ $.jgrid.regional["kr"] = {
 		alertcap: "경고",
 		alerttext: "행을 선택하세요",
 		viewtext: "",
-		viewtitle: "선택된 행 조회",
-		savetext: "",
-		savetitle: "Save row",
-		canceltext: "",
-		canceltitle : "Cancel row editing",
-		selectcaption : "Actions..."
+		viewtitle: "선택된 행 조회"
 	},
 	col : {
 		caption: "열을 선택하세요",
@@ -164,5 +133,5 @@ $.jgrid.regional["kr"] = {
 		checkbox : {disabled:true},
 		idName : 'id'
 	}
-};
-}));
+});
+})(jQuery);

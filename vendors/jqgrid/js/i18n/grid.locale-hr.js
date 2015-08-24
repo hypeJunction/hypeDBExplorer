@@ -1,3 +1,4 @@
+;(function($){
 /**
  * jqGrid Croatian Translation
  * Version 1.0.1 (developed for jQuery Grid 4.4)
@@ -7,46 +8,19 @@
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html
 **/
-/*global jQuery, define */
-(function( factory ) {
-	"use strict";
-	if ( typeof define === "function" && define.amd ) {
-		// AMD. Register as an anonymous module.
-		define([
-			"jquery",
-			"../grid.base"
-		], factory );
-	} else {
-		// Browser globals
-		factory( jQuery );
-	}
-}(function( $ ) {
-
 $.jgrid = $.jgrid || {};
-if(!$.jgrid.hasOwnProperty("regional")) {
-	$.jgrid.regional = [];
-}
-$.jgrid.regional["hr"] = {
+$.extend($.jgrid,{
 	defaults : {
 		recordtext: "Pregled {0} - {1} od {2}",
 		emptyrecords: "Nema zapisa",
 		loadtext: "Učitavam...",
 		pgtext : "Stranica {0} od {1}",
-		savetext: "Saving...",
 		pgfirst : "First Page",
 		pglast : "Last Page",
 		pgnext : "Next Page",
 		pgprev : "Previous Page",
 		pgrecs : "Records per Page",
-		showhide: "Toggle Expand Collapse Grid",
-		// mobile
-		pagerCaption : "Grid::Page Settings",
-		pageText : "Page:",
-		recordPage : "Records per Page",
-		nomorerecs : "No more records...",
-		scrollPullup: "Pull up to load more...",
-		scrollPulldown : "Pull down to refresh...",
-		scrollRefresh : "Release to refresh..."
+		showhide: "Toggle Expand Collapse Grid"
 	},
 	search : {
 		caption: "Traži...",
@@ -107,12 +81,7 @@ $.jgrid.regional["hr"] = {
 		alertcap: "Upozorenje",
 		alerttext: "Molim, odaberi red",
 		viewtext: "",
-		viewtitle: "Pregled obilježenog reda",
-		savetext: "",
-		savetitle: "Save row",
-		canceltext: "",
-		canceltitle : "Cancel row editing",
-		selectcaption : "Actions..."
+		viewtitle: "Pregled obilježenog reda"
 	},
 	col : {
 		caption: "Obilježi kolonu",
@@ -198,5 +167,5 @@ $.jgrid.regional["hr"] = {
 		checkbox : {disabled:true},
 		idName : 'id'
 	}
-};
-}));
+});
+})(jQuery);

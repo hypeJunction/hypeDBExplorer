@@ -1,51 +1,25 @@
+;(function($){
 /**
- * jqGrid Indonesian Translation
+ * jqGrid English Translation
  * Tony Tomov tony@trirand.com
  * http://trirand.com/blog/ 
  * Dual licensed under the MIT and GPL licenses:
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html
 **/
-/*global jQuery, define */
-(function( factory ) {
-	"use strict";
-	if ( typeof define === "function" && define.amd ) {
-		// AMD. Register as an anonymous module.
-		define([
-			"jquery",
-			"../grid.base"
-		], factory );
-	} else {
-		// Browser globals
-		factory( jQuery );
-	}
-}(function( $ ) {
-
 $.jgrid = $.jgrid || {};
-if(!$.jgrid.hasOwnProperty("regional")) {
-	$.jgrid.regional = [];
-}
-$.jgrid.regional["id"] = {
+$.extend($.jgrid,{
 	defaults : {
 		recordtext: "Data {0} - {1} dari {2}",
 		emptyrecords: "Tidak ada data",
 		loadtext: "Memuat...",
 		pgtext : "Halaman {0} dari {1}",
-		savetext: "Saving...",
 		pgfirst : "First Page",
 		pglast : "Last Page",
 		pgnext : "Next Page",
 		pgprev : "Previous Page",
 		pgrecs : "Records per Page",
-		showhide: "Toggle Expand Collapse Grid",
-		// mobile
-		pagerCaption : "Grid::Page Settings",
-		pageText : "Page:",
-		recordPage : "Records per Page",
-		nomorerecs : "No more records...",
-		scrollPullup: "Pull up to load more...",
-		scrollPulldown : "Pull down to refresh...",
-		scrollRefresh : "Release to refresh..."
+		showhide: "Toggle Expand Collapse Grid"
 	},
 	search : {
 		caption: "Pencarian",
@@ -106,12 +80,7 @@ $.jgrid.regional["id"] = {
 		alertcap: "Warning",
 		alerttext: "Harap pilih baris",
 		viewtext: "",
-		viewtitle: "Tampilkan baris terpilih",
-		savetext: "",
-		savetitle: "Save row",
-		canceltext: "",
-		canceltitle : "Cancel row editing",
-		selectcaption : "Actions..."
+		viewtitle: "Tampilkan baris terpilih"
 	},
 	col : {
 		caption: "Pilih Kolom",
@@ -204,5 +173,5 @@ $.jgrid.regional["id"] = {
 		checkbox : {disabled:true},
 		idName : 'id'
 	}
-};
-}));
+});
+})(jQuery);

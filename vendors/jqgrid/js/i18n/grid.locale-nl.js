@@ -1,45 +1,18 @@
-//NETHERLANDS
-/*global jQuery, define */
-(function( factory ) {
-	"use strict";
-	if ( typeof define === "function" && define.amd ) {
-		// AMD. Register as an anonymous module.
-		define([
-			"jquery",
-			"../grid.base"
-		], factory );
-	} else {
-		// Browser globals
-		factory( jQuery );
-	}
-}(function( $ ) {
-
-$.jgrid = $.jgrid || {};
-if(!$.jgrid.hasOwnProperty("regional")) {
-	$.jgrid.regional = [];
-}
-$.jgrid.regional["nl"] = {
+(function(a) {
+a.jgrid = a.jgrid || {};
+a.extend(a.jgrid,{
         defaults:
         {
             recordtext: "regels {0} - {1} van {2}",
             emptyrecords: "Geen data gevonden.",
             loadtext: "Laden...",
             pgtext: "pagina  {0}  van {1}",
-			savetext: "Saving...",
 			pgfirst : "Eerste Pagina",
 			pglast : "Laatste Pagina",
 			pgnext : "Volgende Pagina",
 			pgprev : "Vorige Pagina",
 			pgrecs : "Records per Pagina",
-			showhide: "Schakelen Uitklappen Inklappen Grid",
-			// mobile
-			pagerCaption : "Grid::Page Settings",
-			pageText : "Page:",
-			recordPage : "Records per Page",
-			nomorerecs : "No more records...",
-			scrollPullup: "Pull up to load more...",
-			scrollPulldown : "Pull down to refresh...",
-			scrollRefresh : "Release to refresh..."
+			showhide: "Schakelen Uitklappen Inklappen Grid"
         },
         search:
         {
@@ -105,12 +78,7 @@ $.jgrid.regional["nl"] = {
             alertcap: "Waarschuwing",
             alerttext: "Selecteer a.u.b. een regel",
             viewtext: "",
-            viewtitle: "Openen",
-			savetext: "",
-			savetitle: "Save row",
-			canceltext: "",
-			canceltitle : "Cancel row editing",
-			selectcaption : "Actions..."
+            viewtitle: "Openen"
         },
         col:
         {
@@ -185,5 +153,5 @@ $.jgrid.regional["nl"] = {
             },
             idName: "id"
         }
-    };
-}));
+    });
+})(jQuery);

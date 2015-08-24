@@ -1,3 +1,4 @@
+;(function($){
 /**
  * jqGrid Arabic Translation
  * 
@@ -6,46 +7,19 @@
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html
 **/
-/*global jQuery, define */
-(function( factory ) {
-	"use strict";
-	if ( typeof define === "function" && define.amd ) {
-		// AMD. Register as an anonymous module.
-		define([
-			"jquery",
-			"../grid.base"
-		], factory );
-	} else {
-		// Browser globals
-		factory( jQuery );
-	}
-}(function( $ ) {
-
 $.jgrid = $.jgrid || {};
-if(!$.jgrid.hasOwnProperty("regional")) {
-	$.jgrid.regional = [];
-}
-$.jgrid.regional["ar"] = {
+$.extend($.jgrid,{
 	defaults : {
 		recordtext: "تسجيل {0} - {1} على {2}",
 		emptyrecords: "لا يوجد تسجيل",
 		loadtext: "تحميل...",
-		savetext: "Saving...",
 		pgtext : "صفحة {0} على {1}",
 		pgfirst : "First Page",
 		pglast : "Last Page",
 		pgnext : "Next Page",
 		pgprev : "Previous Page",
 		pgrecs : "Records per Page",
-		showhide: "Toggle Expand Collapse Grid",
-		// mobile
-		pagerCaption : "Grid::Page Settings",
-		pageText : "Page:",
-		recordPage : "Records per Page",
-		nomorerecs : "No more records...",
-		scrollPullup: "Pull up to load more...",
-		scrollPulldown : "Pull down to refresh...",
-		scrollRefresh : "Release to refresh..."
+		showhide: "Toggle Expand Collapse Grid"
 	},
 	search : {
 		caption: "بحث...",
@@ -104,12 +78,7 @@ $.jgrid.regional["ar"] = {
 		alertcap: "تحذير",
 		alerttext: "يرجى إختيار السطر",
 		viewtext: "",
-		viewtitle: "إظهار السطر المختار",
-		savetext: "",
-		savetitle: "Save row",
-		canceltext: "",
-		canceltitle : "Cancel row editing",
-		selectcaption : "Actions..."
+		viewtitle: "إظهار السطر المختار"
 	},
 	col : {
 		caption: "إظهار/إخفاء الأعمدة",
@@ -162,5 +131,5 @@ $.jgrid.regional["ar"] = {
 		checkbox : {disabled:true},
 		idName : 'id'
 	}
-};
-}));
+});
+})(jQuery);
