@@ -1,5 +1,6 @@
 {
 	"name": "hypejunction/hypedbexplorer",
+	"version": "3.2.0",
 	"type": "elgg-plugin",
 	"description": "DB explorer tool for Elgg",
 	"homepage": "http://hypejunction.com",
@@ -16,11 +17,7 @@
 	"extra": {
 		"installer-name": "hypeDBExplorer"
 	},
-	"config": {
-		"vendor-dir": "/vendor/"
-	},
-	"require": {
-		"php": ">=5.4",
+	"require-dev": {
 		"composer/installers": ">=1.0.8"
 	}
 }
