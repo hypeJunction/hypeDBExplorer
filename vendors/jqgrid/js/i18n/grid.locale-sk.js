@@ -1,3 +1,4 @@
+;(function($){
 /**
  * jqGrid Slovak Translation
  * Milan Cibulka
@@ -6,46 +7,19 @@
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html
 **/
-/*global jQuery, define */
-(function( factory ) {
-	"use strict";
-	if ( typeof define === "function" && define.amd ) {
-		// AMD. Register as an anonymous module.
-		define([
-			"jquery",
-			"../grid.base"
-		], factory );
-	} else {
-		// Browser globals
-		factory( jQuery );
-	}
-}(function( $ ) {
-
 $.jgrid = $.jgrid || {};
-if(!$.jgrid.hasOwnProperty("regional")) {
-	$.jgrid.regional = [];
-}
-$.jgrid.regional["sk"] = {
+$.extend($.jgrid,{
 	defaults : {
 		recordtext: "Zobrazených {0} - {1} z {2} záznamov",
 	    emptyrecords: "Neboli nájdené žiadne záznamy",
 		loadtext: "Načítám...",
 		pgtext : "Strana {0} z {1}",
-		savetext: "Saving...",
 		pgfirst : "First Page",
 		pglast : "Last Page",
 		pgnext : "Next Page",
 		pgprev : "Previous Page",
 		pgrecs : "Records per Page",
-		showhide: "Toggle Expand Collapse Grid",
-		// mobile
-		pagerCaption : "Grid::Page Settings",
-		pageText : "Page:",
-		recordPage : "Records per Page",
-		nomorerecs : "No more records...",
-		scrollPullup: "Pull up to load more...",
-		scrollPulldown : "Pull down to refresh...",
-		scrollRefresh : "Release to refresh..."
+		showhide: "Toggle Expand Collapse Grid"
 	},
 	search : {
 		caption: "Vyhľadávam...",
@@ -105,12 +79,7 @@ $.jgrid.regional["sk"] = {
 		alertcap: "Varovanie",
 		alerttext: "Prosím, vyberte riadok",
 		viewtext: "",
-		viewtitle: "Zobraziť vybraný riadok",
-		savetext: "",
-		savetitle: "Save row",
-		canceltext: "",
-		canceltitle : "Cancel row editing",
-		selectcaption : "Actions..."
+		viewtitle: "Zobraziť vybraný riadok"
 	},
 	col : {
 		caption: "Zobrazit/Skrýť stĺpce",
@@ -163,5 +132,5 @@ $.jgrid.regional["sk"] = {
 	    checkbox : {disabled:true},
 		idName : 'id'
 	}
-};
-}));
+});
+})(jQuery);

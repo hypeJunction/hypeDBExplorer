@@ -6,16 +6,17 @@
  * @package Elgg
  * @subpackage hypeJunction\DBExplorer
  *
- * @author Ismayil Khayredinov <ismayil.khayredinov@gmail.com>
+ * @author Ismayil Khayredinov <info@hypejunction.com>
  * @copyright Copyright (c) 2013-2015, Ismayil Khayredinov
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License v2
  */
 
 namespace hypeJunction\DBExplorer;
 
-require_once dirname(dirname(dirname(__FILE__))) . '/vendor/autoload.php';
-//require_once __DIR__ . '/lib/deprecated.php';
-//require_once __DIR__ . '/lib/functions.php';
+$path = __DIR__;
+if (file_exists("{$path}/vendor/autoload.php")) {
+	require_once "{$path}/vendor/autoload.php";
+}
 require_once __DIR__ . '/lib/hooks.php';
 
 elgg_register_event_handler('init', 'system', __NAMESPACE__ . '\\init');
