@@ -111,18 +111,22 @@ if (is_array($filters['rules'])) {
 
 switch ($type) {
 	case 'user' :
+		// WARNING: users_entity subtable removed in Elgg 3.0 — rewrite this SQL
 		$join_query = " JOIN {$dbprefix}users_entity ue ON e.guid = ue.guid";
 		break;
 
 	case 'group' :
+		// WARNING: groups_entity subtable removed in Elgg 3.0 — rewrite this SQL
 		$join_query = " JOIN {$dbprefix}groups_entity ge ON e.guid = ge.guid";
 		break;
 
 	case 'object' :
+		// WARNING: objects_entity subtable removed in Elgg 3.0 — rewrite this SQL
 		$join_query = " JOIN {$dbprefix}objects_entity oe ON e.guid = oe.guid";
 		break;
 
 	case 'site' :
+		// WARNING: sites_entity subtable removed in Elgg 3.0 — rewrite this SQL
 		$join_query = " JOIN {$dbprefix}sites_entity se ON e.guid = se.guid";
 		break;
 }

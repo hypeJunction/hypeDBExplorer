@@ -27,9 +27,13 @@ function init()
     // Register actions
     $actions_path = dirname(__FILE__) . "/actions/db_explorer/";
     elgg_register_action('db_explorer/entities', $actions_path . 'entities.php', 'admin');
+    // WARNING: users_entity subtable removed in Elgg 3.0 — rewrite this SQL
     elgg_register_action('db_explorer/users_entity', $actions_path . 'users_entity.php', 'admin');
+    // WARNING: objects_entity subtable removed in Elgg 3.0 — rewrite this SQL
     elgg_register_action('db_explorer/objects_entity', $actions_path . 'objects_entity.php', 'admin');
+    // WARNING: groups_entity subtable removed in Elgg 3.0 — rewrite this SQL
     elgg_register_action('db_explorer/groups_entity', $actions_path . 'groups_entity.php', 'admin');
+    // WARNING: sites_entity subtable removed in Elgg 3.0 — rewrite this SQL
     elgg_register_action('db_explorer/sites_entity', $actions_path . 'sites_entity.php', 'admin');
     elgg_register_action('db_explorer/owned_entities', $actions_path . 'owned_entities.php', 'admin');
     elgg_register_action('db_explorer/contained_entities', $actions_path . 'contained_entities.php', 'admin');

@@ -14,6 +14,7 @@ $count = 1;
 $total_pages = 1;
 $offset = 0;
 
+// WARNING: objects_entity subtable removed in Elgg 3.0 — rewrite this SQL
 $row_data = get_data("SELECT * FROM {$dbprefix}objects_entity oe WHERE oe.guid = $guid ORDER BY $sidx $sord LIMIT $limit OFFSET $offset");
 
 if (!empty($row_data)) {
