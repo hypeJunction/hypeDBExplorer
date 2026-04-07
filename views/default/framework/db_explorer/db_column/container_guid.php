@@ -3,6 +3,6 @@
 $data = elgg_extract('data', $vars);
 $value = $data->container_guid;
 
-echo elgg_view('framework/db_explorer/template/guid', array(
+echo elgg_view('framework/db_explorer/template/guid', [
 	'value' => $value
-));
+]);

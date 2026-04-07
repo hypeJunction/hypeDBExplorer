@@ -62,9 +62,9 @@ if (!empty($row_data)) {
 			$value = $r_vars[$col];
 
 			if (elgg_view_exists("framework/db_explorer/db_column/$col")) {
-				$results['rows'][$i]['cell'][] = elgg_view("framework/db_explorer/db_column/$col", array(
+				$results['rows'][$i]['cell'][] = elgg_view("framework/db_explorer/db_column/$col", [
 					'data' => $r
-				));
+				]);
 			} else {
 				$results['rows'][$i]['cell'][] = $value;
 			}

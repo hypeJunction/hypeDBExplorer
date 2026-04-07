@@ -1,6 +1,6 @@
 <?php
 
-$english = array(
+$english = [
 
 	'admin:developers:db_explorer' => 'Database Explorer',
 
@@ -8,13 +8,10 @@ $english = array(
 	'db_explorer:entity' => 'Entity',
 	'db_explorer:metadata' => 'Metadata',
 
-	// WARNING: users_entity subtable removed in Elgg 3.0 — rewrite this SQL
+	// Subtable views removed in Elgg 3.0 — kept for backward compatibility
 	'db_explorer:tables:users_entity' => 'User Entity',
-	// WARNING: objects_entity subtable removed in Elgg 3.0 — rewrite this SQL
 	'db_explorer:tables:objects_entity' => 'Object Entity',
-	// WARNING: groups_entity subtable removed in Elgg 3.0 — rewrite this SQL
 	'db_explorer:tables:groups_entity' => 'Group Entity',
-	// WARNING: sites_entity subtable removed in Elgg 3.0 — rewrite this SQL
 	'db_explorer:tables:sites_entity' => 'Site Entity',
 
 	'db_explorer:tables:owned_entities' => 'Owned Entities',
@@ -122,6 +119,6 @@ $english = array(
 	'db_explorer:batch:notify_owners' => 'Notify owners',
 	'db_explorer:batch:message' => 'Add a note to the notifications',
 	'db_explorer:batch:approval_message' => 'Annotate this operation for internal use (add a reason, a note etc)',
-);
+];
 
 add_translation('en', $english);

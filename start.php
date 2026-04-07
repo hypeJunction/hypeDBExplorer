@@ -3,6 +3,7 @@
 namespace hypeJunction\DBExplorer;
 
 require_once __DIR__ . '/lib/hooks.php';
+require_once __DIR__ . '/lib/deprecated.php';
 
 elgg_register_event_handler('init', 'system', __NAMESPACE__ . '\init');
 

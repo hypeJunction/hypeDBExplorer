@@ -2,10 +2,10 @@
 
 $value = elgg_extract('value', $vars);
 
-echo elgg_view('output/url', array(
+echo elgg_view('output/url', [
 	'text' => $value,
 	'href' => "admin/developers/db_explorer?guid=$value",
 	'data-href' => "ajax/view/admin/developers/db_explorer?guid=$value",
 	'data-guid' => $value,
 	'class' => 'dbexplorer-popup',
-));
+]);

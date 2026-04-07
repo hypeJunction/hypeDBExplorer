@@ -32,18 +32,18 @@ if ($guids) {
 		}
 	}
 
-	$msg[] = elgg_echo('db_explorer:success:validate', array((int) $success, $count));
+	$msg[] = elgg_echo('db_explorer:success:validate', [(int) $success, $count]);
 	if ($validated > 0) {
-		$msg[] = elgg_echo('db_explorer:error:already_validated', array($validated));
+		$msg[] = elgg_echo('db_explorer:error:already_validated', [$validated]);
 	}
 	if ($error_nouser > 0) {
-		$msg[] = elgg_echo('db_explorer:error:nouser', array($error_nouser));
+		$msg[] = elgg_echo('db_explorer:error:nouser', [$error_nouser]);
 	}
 	if ($error_canedit > 0) {
-		$msg[] = elgg_echo('db_explorer:error:canedit', array($error_canedit));
+		$msg[] = elgg_echo('db_explorer:error:canedit', [$error_canedit]);
 	}
 	if ($error > 0) {
-		$msg[] = elgg_echo('db_explorer:error:unknown', array($error));
+		$msg[] = elgg_echo('db_explorer:error:unknown', [$error]);
 	}
 
 	elgg_register_success_message(implode('<br />', $msg));

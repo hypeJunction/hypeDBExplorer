@@ -35,11 +35,11 @@ if ($guids) {
 				}
 				$subject = elgg_echo("db_explorer:enable:email:subject");
 				if (get_input('notify_users', false)) {
-					$body = elgg_view('framework/db_explorer/notifications/enable', array(
+					$body = elgg_view('framework/db_explorer/notifications/enable', [
 						'entity' => $user,
 						'setter' => elgg_get_logged_in_user_entity(),
 						'note' => get_input('notify_users_message')
-					));
+					]);
 
 					try {
 						elgg_send_email(elgg_get_site_entity()->email, $user->email, $subject, $body);
@@ -54,18 +54,18 @@ if ($guids) {
 		}
 	}
 
-	$msg[] = elgg_echo('db_explorer:success:enable', array((int) $success, $count));
+	$msg[] = elgg_echo('db_explorer:success:enable', [(int) $success, $count]);
 	if ($enabled > 0) {
-		$msg[] = elgg_echo('db_explorer:error:notdisabled', array($enabled));
+		$msg[] = elgg_echo('db_explorer:error:notdisabled', [$enabled]);
 	}
 	if ($error_nouser > 0) {
-		$msg[] = elgg_echo('db_explorer:error:nouser', array($error_nouser));
+		$msg[] = elgg_echo('db_explorer:error:nouser', [$error_nouser]);
 	}
 	if ($error_canedit > 0) {
-		$msg[] = elgg_echo('db_explorer:error:canedit', array($error_canedit));
+		$msg[] = elgg_echo('db_explorer:error:canedit', [$error_canedit]);
 	}
 	if ($error > 0) {
-		$msg[] = elgg_echo('db_explorer:error:unknown', array($error));
+		$msg[] = elgg_echo('db_explorer:error:unknown', [$error]);
 	}
 
 

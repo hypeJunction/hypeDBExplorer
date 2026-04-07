@@ -11,8 +11,10 @@ if (!elgg_is_xhr()) {
 	$id = "dbexplorer-popup-entity-$guid";
 }
 
-$dbprefix = elgg_get_config('dbprefix');
-$data = get_data("SELECT type FROM {$dbprefix}entities WHERE guid = $guid");
+$qb = \Elgg\Database\Select::fromTable('entities');
+$qb->select('type')
+	->where($qb->compare('guid', '=', (int) $guid, ELGG_VALUE_INTEGER));
+$data = elgg()->db->getData($qb);
 
 $attr = elgg_format_attributes([
 	'id' => $id,

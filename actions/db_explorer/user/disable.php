@@ -34,11 +34,11 @@ if ($guids) {
 				$user->annotate('disable', get_input('approval_message', true), ACCESS_PUBLIC, elgg_get_logged_in_user_guid());
 				$subject = elgg_echo("db_explorer:disable:email:subject");
 				if (get_input('notify_users', false)) {
-					$body = elgg_view('framework/db_explorer/notifications/disable', array(
+					$body = elgg_view('framework/db_explorer/notifications/disable', [
 						'entity' => $user,
 						'setter' => elgg_get_logged_in_user_entity(),
 						'note' => get_input('notify_users_message')
-					));
+					]);
 
 					try {
 						elgg_send_email(elgg_get_site_entity()->email, $user->email, $subject, $body);
@@ -53,18 +53,18 @@ if ($guids) {
 		}
 	}
 
-	$msg[] = elgg_echo('db_explorer:success:disable', array((int) $success, $count));
+	$msg[] = elgg_echo('db_explorer:success:disable', [(int) $success, $count]);
 	if ($disabled > 0) {
-		$msg[] = elgg_echo('db_explorer:error:already_disabled', array($disabled));
+		$msg[] = elgg_echo('db_explorer:error:already_disabled', [$disabled]);
 	}
 	if ($error_nouser > 0) {
-		$msg[] = elgg_echo('db_explorer:error:nouser', array($error_nouser));
+		$msg[] = elgg_echo('db_explorer:error:nouser', [$error_nouser]);
 	}
 	if ($error_canedit > 0) {
-		$msg[] = elgg_echo('db_explorer:error:canedit', array($error_canedit));
+		$msg[] = elgg_echo('db_explorer:error:canedit', [$error_canedit]);
 	}
 	if ($error > 0) {
-		$msg[] = elgg_echo('db_explorer:error:unknown', array($error));
+		$msg[] = elgg_echo('db_explorer:error:unknown', [$error]);
 	}
 
 	elgg_register_success_message(implode('<br />', $msg));

@@ -10,6 +10,10 @@ $sidx = get_input('sidx', 'e.guid');
 $sord = get_input('sord', 'asc');
 
 $type = get_input('type', 'user');
+// Whitelist valid entity types for SQL safety
+if (!in_array($type, ['user', 'object', 'group', 'site'])) {
+	$type = 'user';
+}
 
 $filters = json_decode(get_input('filters', '[]'), true);
 if (!is_array($filters)) {
@@ -29,8 +33,6 @@ if ($searchField && $searchString && $searchOper) {
 
 $search_query = '';
 
-$db = elgg()->db;
-
 if (is_array($filters['rules'])) {
 
 	$search_queries = [];
@@ -38,8 +40,13 @@ if (is_array($filters['rules'])) {
 
 	foreach ($filters['rules'] as $rule) {
 
-		$searchString = $db->sanitizeString($rule['data']);
-		$searchField = $db->sanitizeString($rule['field']);
+		// Validate field name against whitelist of known entity columns
+		$valid_fields = ['e.guid', 'e.type', 'e.subtype', 'e.owner_guid', 'e.container_guid', 'e.access_id', 'e.time_created', 'e.time_updated', 'e.last_action', 'e.enabled'];
+		$searchField = $rule['field'];
+		if (!in_array($searchField, $valid_fields)) {
+			continue;
+		}
+		$searchString = addslashes($rule['data']);
 
 		list($searchFieldTable, $searchFieldName) = explode('.', $searchField);
 

@@ -6,11 +6,11 @@ namespace hypeJunction\DBExplorer;
 <div class="dbexplorer-form-row">
 	<label>
 		<?php
-		echo elgg_view('input/checkbox', array(
+		echo elgg_view('input/checkbox', [
 			'default' => false,
 			'value' => false,
 			'class' => 'js-dbexplorer-toggle',
-		));
+		]);
 		echo elgg_echo('db_explorer:toggle_all');
 		?>
 	</label>
@@ -22,9 +22,9 @@ namespace hypeJunction\DBExplorer;
 		<div class="dbexplorer-form-row">
 			<label>
 				<?php
-				echo elgg_view('input/dropdown', array(
+				echo elgg_view('input/dropdown', [
 					'name' => 'user_action',
-					'options_values' => array(
+					'options_values' => [
 						'' => elgg_echo('db_explorer:batch:select:action'),
 						'db_explorer/user/validate' => elgg_echo('db_explorer:batch:user:validate'),
 						'db_explorer/user/ban' => elgg_echo('db_explorer:batch:user:ban'),
@@ -32,19 +32,20 @@ namespace hypeJunction\DBExplorer;
 						'db_explorer/user/disable' => elgg_echo('db_explorer:batch:user:disable'),
 						'db_explorer/user/enable' => elgg_echo('db_explorer:batch:user:enable'),
 						'db_explorer/user/delete' => elgg_echo('db_explorer:batch:user:delete'),
-				)));
+					],
+				]);
 				?>
 			</label>
 		</div>
 		<div class="dbexplorer-form-row">
 			<label>
 				<?php
-				echo elgg_view('input/checkbox', array(
+				echo elgg_view('input/checkbox', [
 					'name' => 'notify_users',
 					'value' => 1,
 					'checked' => false,
 					'default' => false
-				));
+				]);
 				echo elgg_echo('db_explorer:batch:notify_users');
 				?>
 			</label>
@@ -53,9 +54,9 @@ namespace hypeJunction\DBExplorer;
 			<label>
 				<?php
 				echo elgg_echo('db_explorer:batch:message');
-				echo elgg_view('input/text', array(
+				echo elgg_view('input/text', [
 					'name' => 'notify_users_message',
-				));
+				]);
 				?>
 			</label>
 		</div>
@@ -63,9 +64,9 @@ namespace hypeJunction\DBExplorer;
 			<label>
 				<?php
 				echo elgg_echo('db_explorer:batch:approval_message');
-				echo elgg_view('input/text', array(
+				echo elgg_view('input/text', [
 					'name' => 'approval_message',
-				));
+				]);
 				?>
 			</label>
 		</div>
@@ -78,26 +79,27 @@ namespace hypeJunction\DBExplorer;
 		<div class="dbexplorer-form-row">
 			<label>
 				<?php
-				echo elgg_view('input/dropdown', array(
+				echo elgg_view('input/dropdown', [
 					'name' => 'content_action',
-					'options_values' => array(
+					'options_values' => [
 						'' => elgg_echo('db_explorer:batch:select:action'),
 						'db_explorer/content/disable' => elgg_echo('db_explorer:batch:content:disable'),
 						'db_explorer/content/enable' => elgg_echo('db_explorer:batch:content:enable'),
-						'db_explorer/content/delete' => elgg_echo('db_explorer:batch:content:delete')
-				)));
+						'db_explorer/content/delete' => elgg_echo('db_explorer:batch:content:delete'),
+					],
+				]);
 				?>
 			</label>
 		</div>
 		<div class="dbexplorer-form-row">
 			<label>
 				<?php
-				echo elgg_view('input/checkbox', array(
+				echo elgg_view('input/checkbox', [
 					'name' => 'notify_owners',
 					'value' => 1,
 					'checked' => false,
 					'default' => false
-				));
+				]);
 				echo elgg_echo('db_explorer:batch:notify_owners');
 				?>
 			</label>
@@ -106,9 +108,9 @@ namespace hypeJunction\DBExplorer;
 			<label>
 				<?php
 				echo elgg_echo('db_explorer:batch:message');
-				echo elgg_view('input/text', array(
+				echo elgg_view('input/text', [
 					'name' => 'notify_owners_message',
-				));
+				]);
 				?>
 			</label>
 		</div>
@@ -116,9 +118,9 @@ namespace hypeJunction\DBExplorer;
 			<label>
 				<?php
 				echo elgg_echo('db_explorer:batch:approval_message');
-				echo elgg_view('input/text', array(
+				echo elgg_view('input/text', [
 					'name' => 'content_approval_message',
-				));
+				]);
 				?>
 			</label>
 		</div>
@@ -127,8 +129,8 @@ namespace hypeJunction\DBExplorer;
 
 <div class="elgg-foot text-right">
 	<?php
-	echo elgg_view('input/submit', array(
+	echo elgg_view('input/submit', [
 		'value' => elgg_echo('save')
-	));
+	]);
 	?>
 </div>

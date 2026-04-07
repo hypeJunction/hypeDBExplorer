@@ -21,11 +21,11 @@ if ($guids) {
 		}
 		
 		$subject = elgg_echo("db_explorer:content:delete:email:subject");
-		$body = elgg_view('framework/db_explorer/notifications/contentdelete', array(
+		$body = elgg_view('framework/db_explorer/notifications/contentdelete', [
 			'entity' => $entity,
 			'setter' => elgg_get_logged_in_user_entity(),
 			'note' => get_input('notify_owners_message')
-		));
+		]);
 
 		if ($entity->delete(true)) {
 			if (get_input('notify_owners', false)) {
@@ -38,15 +38,15 @@ if ($guids) {
 	}
 }
 
-$msg[] = elgg_echo('db_explorer:success:content:delete', array((int) $success, $count));
+$msg[] = elgg_echo('db_explorer:success:content:delete', [(int) $success, $count]);
 if ($error_noentity > 0) {
-	$msg[] = elgg_echo('db_explorer:error:noentity', array($error_noentity));
+	$msg[] = elgg_echo('db_explorer:error:noentity', [$error_noentity]);
 }
 if ($error_canedit > 0) {
-	$msg[] = elgg_echo('db_explorer:error:canedit', array($error_canedit));
+	$msg[] = elgg_echo('db_explorer:error:canedit', [$error_canedit]);
 }
 if ($error > 0) {
-	$msg[] = elgg_echo('db_explorer:error:unknown', array($error));
+	$msg[] = elgg_echo('db_explorer:error:unknown', [$error]);
 }
 
 elgg_register_success_message(implode('<br />', $msg));
