@@ -2,40 +2,40 @@
 
 $filter_context = elgg_extract('filter_context', $vars);
 
-$tabs = array(
-	'user' => array(
+$tabs = [
+	'user' => [
 		'text' => elgg_echo('item:user'),
 		'href' => 'admin/developers/db_explorer?type=user',
 		'selected' => ($filter_context == 'user'),
 		'priority' => 100,
-	),
-	'object' => array(
+	],
+	'object' => [
 		'text' => elgg_echo('db_explorer:objects'),
 		'href' => 'admin/developers/db_explorer?type=object',
 		'selected' => ($filter_context == 'object'),
 		'priority' => 200,
-	),
-	'group' => array(
+	],
+	'group' => [
 		'text' => elgg_echo('item:group'),
 		'href' => 'admin/developers/db_explorer?type=group',
 		'selected' => ($filter_context == 'group'),
 		'priority' => 300,
-	),
-	'site' => array(
+	],
+	'site' => [
 		'text' => elgg_echo('item:site'),
 		'href' => 'admin/developers/db_explorer?type=site',
 		'selected' => ($filter_context == 'site'),
 		'priority' => 400,
-	),
-);
+	],
+];
 
 if ($filter_context == 'entity') {
-	$tabs['entity'] = array(
+	$tabs['entity'] = [
 		'text' => elgg_echo('db_explorer:entity'),
 		'href' => '#',
 		'selected' => true,
-		'priority' => 50
-	);
+		'priority' => 50,
+	];
 }
 
 foreach ($tabs as $name => $tab) {
@@ -45,4 +45,4 @@ foreach ($tabs as $name => $tab) {
 	}
 }
 
-echo elgg_view_menu('filter', array('sort_by' => 'priority', 'class' => 'elgg-menu-hz elgg-tabs'));
+echo elgg_view_menu('filter', ['sort_by' => 'priority', 'class' => 'elgg-menu-hz elgg-tabs']);

@@ -10,7 +10,7 @@ if ($guids) {
 
 	foreach ($guids as $guid) {
 		$entity = get_entity($guid);
-		if (!elgg_instanceof($entity, 'object') && !elgg_instanceof($entity, 'group')) {
+		if (!$entity instanceof \ElggObject && !$entity instanceof \ElggGroup) {
 			$error_noentity++;
 			continue;
 		}
@@ -24,9 +24,9 @@ if ($guids) {
 			$enabled++;
 		} else {
 			if ($entity->enable()) {
-				create_annotation($entity->guid, 'disable', false, '', elgg_get_logged_in_user_guid(), ACCESS_PUBLIC);
+				$entity->annotate('disable', false, ACCESS_PUBLIC, elgg_get_logged_in_user_guid());
 				if (get_input('content_approval_message')) {
-					create_annotation($entity->guid, 'approval_message', get_input('content_approval_message'), '', elgg_get_logged_in_user_guid(), ACCESS_PUBLIC);
+					$entity->annotate('approval_message', get_input('content_approval_message'), ACCESS_PUBLIC, elgg_get_logged_in_user_guid());
 				}
 				$subject = elgg_echo("db_explorer:content:enable:email:subject");
 				if (get_input('notify_owners', false)) {
@@ -60,4 +60,4 @@ if ($error > 0) {
 	$msg[] = elgg_echo('db_explorer:error:unknown', array($error));
 }
 
-system_message(implode('<br />', $msg));
+elgg_register_success_message(implode('<br />', $msg));

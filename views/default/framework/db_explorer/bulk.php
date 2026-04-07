@@ -3,23 +3,23 @@
 $type = elgg_extract('type', $vars);
 
 if (!elgg_is_xhr()) {
-	echo elgg_view('framework/db_explorer/filter', array(
-		'filter_context' => $type
-	));
+	echo elgg_view('framework/db_explorer/filter', [
+		'filter_context' => $type,
+	]);
 }
 
-$attr = elgg_format_attributes(array(
+$attr = elgg_format_attributes([
 	'id' => "dbexplorer-$type",
 	'class' => 'dbexplorer-grid',
 	'data-type' => $type,
-	'data-pager-id' => "pager-$type"
-		));
+	'data-pager-id' => "pager-$type",
+]);
 
 echo '<div class="jqgrid-wrapper">';
 echo "<table $attr><tr><td></td></tr></table>";
 echo "<div id=\"pager-$type\"></div>";
 echo '</div>';
 
-echo elgg_view_form('db_explorer/batch', array(
+echo elgg_view_form('db_explorer/batch', [
 	'class' => 'js-dbexplorer-batch-form',
-));
+]);

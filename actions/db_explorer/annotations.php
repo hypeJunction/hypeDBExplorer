@@ -27,13 +27,12 @@ $offset = $limit * $page - $limit;
 
 $offset = ($offset < 0) ? 0 : $offset;
 
-$row_data = get_data("SELECT *, md.id as id, msn.id as name_id, msn.string as name_string, msv.id as value_id, msv.string as value_string
+// In Elgg 3.x, annotations table has name/value columns directly (no metastrings)
+$row_data = get_data("SELECT md.id, md.entity_guid, md.name, md.value, md.value_type, md.owner_guid, md.access_id, md.time_created
 						FROM {$dbprefix}annotations md
-						JOIN {$dbprefix}metastrings msn ON md.name_id = msn.id
-						JOIN {$dbprefix}metastrings msv ON md.value_id = msv.id
 						WHERE md.entity_guid = $guid
 						ORDER BY $sidx $sord
-						LIMIT $limit 
+						LIMIT $limit
 						OFFSET $offset"
 );
 
@@ -41,19 +40,17 @@ if (!empty($row_data)) {
 
 	$i = 0;
 
-	$ordered_cols = array(
+	// In Elgg 3.x, annotations no longer use metastrings or have enabled column
+	$ordered_cols = [
 		'id',
 		'entity_guid',
-		'name_id',
-		'value_id',
-		'name_string',
-		'value_string',
+		'name',
+		'value',
 		'value_type',
 		'owner_guid',
 		'access_id',
 		'time_created',
-		'enabled'
-	);
+	];
 
 	foreach ($row_data as $r) {
 

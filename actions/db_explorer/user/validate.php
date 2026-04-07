@@ -10,7 +10,7 @@ if ($guids) {
 
 	foreach ($guids as $guid) {
 		$user = get_entity($guid);
-		if (!elgg_instanceof($user, 'user')) {
+		if (!$user instanceof \ElggUser) {
 			$error_nouser++;
 			continue;
 		}
@@ -20,11 +20,11 @@ if ($guids) {
 			continue;
 		}
 
-		if (elgg_get_user_validation_status($user->guid)) {
+		if ($user->isValidated()) {
 			$validated++;
 		} else {
-			if (elgg_set_user_validation_status($user->guid, true, 'manual')) {
-				create_annotation($user->guid, 'validate', true, '', elgg_get_logged_in_user_guid(), ACCESS_PUBLIC);
+			if ($user->setValidationStatus(true, 'manual')) {
+				$user->annotate('validate', true, ACCESS_PUBLIC, elgg_get_logged_in_user_guid());
 				$success++;
 			} else {
 				$error++;
@@ -46,5 +46,5 @@ if ($guids) {
 		$msg[] = elgg_echo('db_explorer:error:unknown', array($error));
 	}
 
-	system_message(implode('<br />', $msg));
+	elgg_register_success_message(implode('<br />', $msg));
 }

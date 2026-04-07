@@ -12,7 +12,7 @@ if ($guids) {
 
 	foreach ($guids as $guid) {
 		$user = get_entity($guid);
-		if (!elgg_instanceof($user, 'user')) {
+		if (!$user instanceof \ElggUser) {
 			$error_nouser++;
 			continue;
 		}
@@ -39,7 +39,7 @@ if ($guids) {
 				try {
 					elgg_send_email(elgg_get_site_entity()->email, $email, $subject, $body);
 				} catch (Exception $e) {
-					register_error($e->getMessage());
+					elgg_register_error_message($e->getMessage());
 				}
 			}
 			$success++;
@@ -59,5 +59,5 @@ if ($guids) {
 		$msg[] = elgg_echo('db_explorer:error:unknown', array($error));
 	}
 
-	system_message(implode('<br />', $msg));
+	elgg_register_success_message(implode('<br />', $msg));
 }

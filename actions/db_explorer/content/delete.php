@@ -10,7 +10,7 @@ if ($guids) {
 
 	foreach ($guids as $guid) {
 		$entity = get_entity($guid);
-		if (!elgg_instanceof($entity, 'object') && !elgg_instanceof($entity, 'group')) {
+		if (!$entity instanceof \ElggObject && !$entity instanceof \ElggGroup) {
 			$error_noentity++;
 			continue;
 		}
@@ -49,5 +49,5 @@ if ($error > 0) {
 	$msg[] = elgg_echo('db_explorer:error:unknown', array($error));
 }
 
-system_message(implode('<br />', $msg));
+elgg_register_success_message(implode('<br />', $msg));
 

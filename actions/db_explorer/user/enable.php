@@ -10,7 +10,7 @@ if ($guids) {
 
 	foreach ($guids as $guid) {
 		$user = get_entity($guid);
-		if (!elgg_instanceof($user, 'user')) {
+		if (!$user instanceof \ElggUser) {
 			$error_nouser++;
 			continue;
 		}
@@ -29,9 +29,9 @@ if ($guids) {
 			$enabled++;
 		} else {
 			if ($user->enable()) {
-				create_annotation($user->guid, 'disable', false, '', elgg_get_logged_in_user_guid(), ACCESS_PUBLIC);
+				$user->annotate('disable', false, ACCESS_PUBLIC, elgg_get_logged_in_user_guid());
 				if (get_input('approval_message')) {
-					create_annotation($user->guid, 'approval_message', get_input('approval_message'), '', elgg_get_logged_in_user_guid(), ACCESS_PUBLIC);
+					$user->annotate('approval_message', get_input('approval_message'), ACCESS_PUBLIC, elgg_get_logged_in_user_guid());
 				}
 				$subject = elgg_echo("db_explorer:enable:email:subject");
 				if (get_input('notify_users', false)) {
@@ -44,7 +44,7 @@ if ($guids) {
 					try {
 						elgg_send_email(elgg_get_site_entity()->email, $user->email, $subject, $body);
 					} catch (Exception $e) {
-						register_error($e->getMessage());
+						elgg_register_error_message($e->getMessage());
 					}
 				}
 				$success++;
@@ -69,5 +69,5 @@ if ($guids) {
 	}
 
 
-	system_message(implode('<br />', $msg));
+	elgg_register_success_message(implode('<br />', $msg));
 }

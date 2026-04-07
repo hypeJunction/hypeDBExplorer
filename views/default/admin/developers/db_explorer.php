@@ -1,27 +1,22 @@
 <?php
 
-/**
- * Displays a grid of DB entries
- *
- * @uses $_GET['type'] Optional. Type of entities to be inspected
- * @uses $_GET['guid'] Optional. GUID of an entity to be explored
- * @uses $_GET['referrer_url'] Optional. URL to sniff for an entity GUID to be explored
- */
 elgg_require_js('framework/db_explorer');
-//elgg_load_css('jquery.jqgrid');
 elgg_load_css('db_explorer.jquery-ui');
 elgg_load_css('db_explorer.stylesheet');
+
 $type = get_input('type', 'user');
 $guid = get_input('guid', null);
 $url = urldecode(get_input('referrer_url', ''));
+
 if (!$guid && filter_var($url, FILTER_VALIDATE_URL)) {
-    $guid = hj_db_explorer_get_guid_from_url($url);
-    if (!$guid) {
-        register_error(elgg_echo('db_explorer:url_sniffer_no_guid', array($url)));
-    }
+	$guid = \hypeJunction\DBExplorer\get_guid_from_url($url);
+	if (!$guid) {
+		elgg_register_error_message(elgg_echo('db_explorer:url_sniffer_no_guid', [$url]));
+	}
 }
+
 if ($guid) {
-    echo elgg_view('framework/db_explorer/entity', array('guid' => $guid));
+	echo elgg_view('framework/db_explorer/entity', ['guid' => $guid]);
 } else {
-    echo elgg_view('framework/db_explorer/bulk', array('type' => $type));
+	echo elgg_view('framework/db_explorer/bulk', ['type' => $type]);
 }

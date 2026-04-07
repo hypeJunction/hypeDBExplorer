@@ -9,47 +9,46 @@ $limit = get_input('rows', 50);
 $sidx = get_input('sidx', 'e.guid');
 $sord = get_input('sord', 'asc');
 
-$type = sanitize_string(get_input('type', 'user'));
+$type = get_input('type', 'user');
 
 $filters = json_decode(get_input('filters', '[]'), true);
 if (!is_array($filters)) {
-	$filters = array();
+	$filters = [];
 }
 
 $searchField = get_input('searchField');
 $searchString = get_input('searchString');
 $searchOper = get_input('searchOper');
 if ($searchField && $searchString && $searchOper) {
-	$filters['rules'][] = array(
+	$filters['rules'][] = [
 		'field' => $searchField,
 		'op' => $searchOper,
 		'data' => $searchString,
-	);
+	];
 }
 
 $search_query = '';
 
+$db = elgg()->db;
+
 if (is_array($filters['rules'])) {
-	
-	$search_queries = array();
+
+	$search_queries = [];
 	$groupOp = elgg_extract('groupOp', $filters, 'AND');
 
 	foreach ($filters['rules'] as $rule) {
-		
-		$searchString = sanitise_string($rule['data']);
-		$searchField = sanitise_string($rule['field']);
+
+		$searchString = $db->sanitizeString($rule['data']);
+		$searchField = $db->sanitizeString($rule['field']);
 
 		list($searchFieldTable, $searchFieldName) = explode('.', $searchField);
-		if ($searchFieldName == 'subtype') {
-			$searchString = sanitize_string(get_subtype_id($type, $searchString));
-		}
-		
+
 		$searchOper = $rule['op'];
 
 		if (!$searchString || !$searchField || !$searchOper) {
 			continue;
 		}
-		
+
 		switch ($searchOper) {
 
 			case 'eq' :
@@ -86,19 +85,21 @@ if (is_array($filters['rules'])) {
 
 			case 'in' :
 				$in = explode(',', $searchString);
+				$in_str_parts = [];
 				foreach ($in as $in_l) {
-					$in_str[] = "'" . trim($in_l) . "'";
+					$in_str_parts[] = "'" . trim($in_l) . "'";
 				}
-				$in_str = implode(',', $in_str);
+				$in_str = implode(',', $in_str_parts);
 				$search_queries[] = "$searchField IN ($in_str)";
 				break;
 
 			case 'ni' :
 				$in = explode(',', $searchString);
+				$in_str_parts = [];
 				foreach ($in as $in_l) {
-					$in_str[] = "'" . trim($in_l) . "'";
+					$in_str_parts[] = "'" . trim($in_l) . "'";
 				}
-				$in_str = implode(',', $in_str);
+				$in_str = implode(',', $in_str_parts);
 				$search_queries[] = "$searchField NOT IN ($in_str)";
 				break;
 		}
@@ -109,35 +110,17 @@ if (is_array($filters['rules'])) {
 	}
 }
 
-switch ($type) {
-	case 'user' :
-		// WARNING: users_entity subtable removed in Elgg 3.0 — rewrite this SQL
-		$join_query = " JOIN {$dbprefix}users_entity ue ON e.guid = ue.guid";
-		break;
-
-	case 'group' :
-		// WARNING: groups_entity subtable removed in Elgg 3.0 — rewrite this SQL
-		$join_query = " JOIN {$dbprefix}groups_entity ge ON e.guid = ge.guid";
-		break;
-
-	case 'object' :
-		// WARNING: objects_entity subtable removed in Elgg 3.0 — rewrite this SQL
-		$join_query = " JOIN {$dbprefix}objects_entity oe ON e.guid = oe.guid";
-		break;
-
-	case 'site' :
-		// WARNING: sites_entity subtable removed in Elgg 3.0 — rewrite this SQL
-		$join_query = " JOIN {$dbprefix}sites_entity se ON e.guid = se.guid";
-		break;
-}
+// In Elgg 3.x, entity subtables (users_entity, groups_entity, etc.) have been removed.
+// All entity data is now in the entities table only.
+$join_query = '';
 
 $guid = get_input('guid', false);
 
 if ($guid) {
-	$guid = sanitize_int($guid);
+	$guid = (int) $guid;
 	$count = 1;
 } else {
-	$row_count = get_data("SELECT COUNT(*) AS count FROM {$dbprefix}entities e $join_query WHERE e.type = '$type' $search_query");
+	$row_count = get_data("SELECT COUNT(*) AS count FROM {$dbprefix}entities e WHERE e.type = '$type' $search_query");
 	$count = $row_count[0]->count;
 }
 
@@ -157,8 +140,6 @@ $offset = ($offset < 0) ? 0 : $offset;
 
 $query = "SELECT * FROM {$dbprefix}entities e";
 
-$query .= $join_query;
-
 if ($guid) {
 	$query .= " WHERE e.guid = $guid";
 } else {
@@ -175,87 +156,22 @@ if (!empty($row_data)) {
 
 	$i = 0;
 
-	switch ($type) {
+	// In Elgg 3.x, all entity types share the same columns in the entities table.
+	// Type-specific columns (username, email, title, etc.) are now stored as metadata.
+	$ordered_cols = [
+		'checkbox',
+		'guid',
+		'type',
+		'subtype',
+		'owner_guid',
+		'container_guid',
+		'access_id',
+		'time_created',
+		'time_updated',
+		'last_action',
+		'enabled',
+	];
 
-		case 'user' :
-			$ordered_cols = array(
-				'guid',
-				'username',
-				'name',
-				'email',
-				'admin',
-				'banned',
-				'type',
-				'subtype',
-				'owner_guid',
-				'site_guid',
-				'container_guid',
-				'access_id',
-				'time_created',
-				'time_updated',
-				'last_action',
-				'enabled'
-			);
-			break;
-
-		case 'group' :
-			$ordered_cols = array(
-				'guid',
-				'name',
-				'description',
-				'type',
-				'subtype',
-				'owner_guid',
-				'site_guid',
-				'container_guid',
-				'access_id',
-				'time_created',
-				'time_updated',
-				'last_action',
-				'enabled'
-			);
-			break;
-
-		case 'object' :
-			$ordered_cols = array(
-				'guid',
-				'title',
-				'description',
-				'type',
-				'subtype',
-				'owner_guid',
-				'site_guid',
-				'container_guid',
-				'access_id',
-				'time_created',
-				'time_updated',
-				'last_action',
-				'enabled'
-			);
-			break;
-
-		case 'site' :
-			$ordered_cols = array(
-				'guid',
-				'name',
-				'description',
-				'url',
-				'type',
-				'subtype',
-				'owner_guid',
-				'site_guid',
-				'container_guid',
-				'access_id',
-				'time_created',
-				'time_updated',
-				'last_action',
-				'enabled'
-			);
-			break;
-	}
-
-	array_unshift($ordered_cols, 'checkbox');
-	
 	foreach ($row_data as $r) {
 
 		$results['rows'][$i]['id'] = $r->guid;
@@ -265,9 +181,9 @@ if (!empty($row_data)) {
 			$value = $r_vars[$col];
 
 			if (elgg_view_exists("framework/db_explorer/db_column/$col")) {
-				$results['rows'][$i]['cell'][] = elgg_view("framework/db_explorer/db_column/$col", array(
-					'data' => $r
-				));
+				$results['rows'][$i]['cell'][] = elgg_view("framework/db_explorer/db_column/$col", [
+					'data' => $r,
+				]);
 			} else {
 				$results['rows'][$i]['cell'][] = $value;
 			}
@@ -280,7 +196,6 @@ if (!empty($row_data)) {
 $results['page'] = $page;
 $results['total'] = $total_pages;
 $results['records'] = $count;
-
 
 header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
 header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");

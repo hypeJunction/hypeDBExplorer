@@ -12,7 +12,7 @@ if ($guids) {
 
 	foreach ($guids as $guid) {
 		$user = get_entity($guid);
-		if (!elgg_instanceof($user, 'user')) {
+		if (!$user instanceof \ElggUser) {
 			$error_nouser++;
 			continue;
 		}
@@ -31,7 +31,7 @@ if ($guids) {
 			$banned++;
 		} else {
 			if ($user->ban(get_input('approval_message', 'admin decision'))) {
-				create_annotation($user->guid, 'ban', get_input('approval_message', true), '', elgg_get_logged_in_user_guid(), ACCESS_PUBLIC);
+				$user->annotate('ban', get_input('approval_message', true), ACCESS_PUBLIC, elgg_get_logged_in_user_guid());
 				$subject = elgg_echo("db_explorer:ban:email:subject");
 				if (get_input('notify_users', false)) {
 					$body = elgg_view('framework/db_explorer/notifications/ban', array(
@@ -43,7 +43,7 @@ if ($guids) {
 					try {
 						elgg_send_email(elgg_get_site_entity()->email, $user->email, $subject, $body);
 					} catch (Exception $e) {
-						register_error($e->getMessage());
+						elgg_register_error_message($e->getMessage());
 					}
 				}
 				$success++;
@@ -67,5 +67,5 @@ if ($guids) {
 		$msg[] = elgg_echo('db_explorer:error:unknown', array($error));
 	}
 
-	system_message(implode('<br />', $msg));
+	elgg_register_success_message(implode('<br />', $msg));
 }

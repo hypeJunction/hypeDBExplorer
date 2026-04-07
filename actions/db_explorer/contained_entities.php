@@ -38,20 +38,20 @@ if (!empty($row_data)) {
 
 	$i = 0;
 
-	$ordered_cols = array(
+	// site_guid removed in Elgg 3.x
+	$ordered_cols = [
 		'checkbox',
 		'guid',
 		'type',
 		'subtype',
 		'owner_guid',
-		'site_guid',
 		'container_guid',
 		'access_id',
 		'time_created',
 		'time_updated',
 		'last_action',
-		'enabled'
-	);
+		'enabled',
+	];
 
 	foreach ($row_data as $r) {
 

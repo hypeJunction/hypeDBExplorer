@@ -38,12 +38,12 @@ if (!empty($row_data)) {
 
 	$i = 0;
 
-	$ordered_cols = array(
+	$ordered_cols = [
 		'id',
 		'guid_one',
 		'relationship',
-		'guid_two'
-	);
+		'guid_two',
+	];
 
 	foreach ($row_data as $r) {
 

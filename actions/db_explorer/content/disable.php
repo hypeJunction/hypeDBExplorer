@@ -11,7 +11,7 @@ if ($guids) {
 	foreach ($guids as $guid) {
 
 		$entity = get_entity($guid);
-		if (!elgg_instanceof($entity, 'object') && !elgg_instanceof($entity, 'group')) {
+		if (!$entity instanceof \ElggObject && !$entity instanceof \ElggGroup) {
 			$error_noentity++;
 			continue;
 		}
@@ -25,7 +25,7 @@ if ($guids) {
 			$disabled++;
 		} else {
 			if ($entity->disable(get_input('content_approval_message', 'admin decision'))) {
-				create_annotation($entity->guid, 'disable', get_input('content_approval_message', true), '', elgg_get_logged_in_user_guid(), ACCESS_PUBLIC);
+				$entity->annotate('disable', get_input('content_approval_message', true), ACCESS_PUBLIC, elgg_get_logged_in_user_guid());
 				$subject = elgg_echo("db_explorer:content:disable:email:subject");
 				if (get_input('notify_owners', false)) {
 					$body = elgg_view('framework/db_explorer/notifications/contentdisable', array(
@@ -58,4 +58,4 @@ if ($error > 0) {
 	$msg[] = elgg_echo('db_explorer:error:unknown', array($error));
 }
 
-system_message(implode('<br />', $msg));
+elgg_register_success_message(implode('<br />', $msg));

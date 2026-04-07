@@ -38,12 +38,12 @@ if (!empty($row_data)) {
 
 	$i = 0;
 
-	$ordered_cols = array(
+	// site_guid removed in Elgg 3.x
+	$ordered_cols = [
 		'id',
 		'name',
 		'owner_guid',
-		'site_guid',
-	);
+	];
 
 	foreach ($row_data as $r) {
 
