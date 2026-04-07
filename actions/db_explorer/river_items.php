@@ -38,9 +38,9 @@ if (!empty($row_data)) {
 
 	$i = 0;
 
-	$ordered_cols = array(
-		'id', 'type', 'subtype', 'action_type', 'subject_guid', 'object_guid', 'annotation_id', 'access_id', 'view', 'posted'
-	);
+	$ordered_cols = [
+		'id', 'type', 'subtype', 'action_type', 'subject_guid', 'object_guid', 'annotation_id', 'access_id', 'view', 'posted',
+	];
 
 	foreach ($row_data as $r) {
 
@@ -51,9 +51,9 @@ if (!empty($row_data)) {
 			$value = $r_vars[$col];
 
 			if (elgg_view_exists("framework/db_explorer/db_column/$col")) {
-				$results['rows'][$i]['cell'][] = elgg_view("framework/db_explorer/db_column/$col", array(
-					'data' => $r
-						));
+				$results['rows'][$i]['cell'][] = elgg_view("framework/db_explorer/db_column/$col", [
+					'data' => $r,
+				]);
 			} else {
 				$results['rows'][$i]['cell'][] = $value;
 			}
