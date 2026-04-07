@@ -36,7 +36,7 @@ function init() {
 		'src' => elgg_get_simplecache_url('framework/db_explorer/jqgrid.js'),
 		'deps' => ['jquery', 'jqgrid.locale'],
 	]);
-	$locale = elgg_get_current_language();
+	$locale = get_current_language();
 	elgg_define_js('jqgrid.locale', [
 		'src' => elgg_get_simplecache_url("framework/db_explorer/jqgrid.locale.{$locale}.js"),
 		'deps' => ['jquery'],
