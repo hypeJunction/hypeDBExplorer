@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "scripts": {
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "mysql2": "^3.6.0"
+  }
+}
