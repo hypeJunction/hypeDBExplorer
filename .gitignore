@@ -8,4 +8,4 @@ robots.txt
 /build/
 /releases/
 /vendor/
-composer.lock
+composer.lockdocker/.env
