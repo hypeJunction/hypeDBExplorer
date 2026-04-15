@@ -8,16 +8,11 @@ if (!elgg_is_xhr()) {
 	]);
 }
 
-$attr = elgg_format_attributes([
-	'id' => "dbexplorer-$type",
-	'class' => 'dbexplorer-grid',
-	'data-type' => $type,
-	'data-pager-id' => "pager-$type",
-]);
+$type_escaped = htmlspecialchars($type, ENT_QUOTES, 'UTF-8');
 
 echo '<div class="jqgrid-wrapper">';
-echo "<table $attr><tr><td></td></tr></table>";
-echo "<div id=\"pager-$type\"></div>";
+echo "<table id=\"dbexplorer-{$type_escaped}\" class=\"dbexplorer-grid\" data-type=\"{$type_escaped}\" data-pager-id=\"pager-{$type_escaped}\"><tr><td></td></tr></table>";
+echo "<div id=\"pager-{$type_escaped}\"></div>";
 echo '</div>';
 
 echo elgg_view_form('db_explorer/batch', [

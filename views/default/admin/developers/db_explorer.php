@@ -1,8 +1,8 @@
 <?php
 
 elgg_require_js('framework/db_explorer');
-elgg_load_css('db_explorer.jquery-ui');
-elgg_load_css('db_explorer.stylesheet');
+elgg_load_external_file('css', 'db_explorer.jquery-ui');
+elgg_load_external_file('css', 'db_explorer.stylesheet');
 
 $type = get_input('type', 'user');
 $guid = get_input('guid', null);

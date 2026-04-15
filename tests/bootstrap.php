@@ -1,7 +1,7 @@
 <?php
 /**
- * PHPUnit bootstrap for hypeDBExplorer plugin tests.
- * Plugin must be installed at {elgg_root}/mod/hypeDBExplorer/
+ * PHPUnit bootstrap for hypeDBExplorer plugin tests (Elgg 4.x).
+ * Plugin must be installed at {elgg_root}/mod/hypedbexplorer/
  */
 
 // tests/ -> mod/plugin/ -> mod/ -> elgg_root/
@@ -12,16 +12,16 @@ require_once $elggRoot . '/vendor/autoload.php';
 // Load Elgg test classes (UnitTestCase, IntegrationTestCase, etc.)
 $testClassesDir = $elggRoot . '/vendor/elgg/elgg/engine/tests/classes';
 spl_autoload_register(function ($class) use ($testClassesDir) {
-    $file = $testClassesDir . '/' . str_replace('\\', '/', $class) . '.php';
-    if (file_exists($file)) {
-        require_once $file;
-    }
+	$file = $testClassesDir . '/' . str_replace('\\', '/', $class) . '.php';
+	if (file_exists($file)) {
+		require_once $file;
+	}
 });
 
 // Load plugin autoloader if present
 $pluginRoot = dirname(__DIR__);
 if (file_exists($pluginRoot . '/vendor/autoload.php')) {
-    require_once $pluginRoot . '/vendor/autoload.php';
+	require_once $pluginRoot . '/vendor/autoload.php';
 }
 
 \Elgg\Application::loadCore();

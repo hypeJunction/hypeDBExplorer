@@ -14,74 +14,88 @@ use Elgg\IntegrationTestCase;
  */
 class UserMutationBehaviorTest extends IntegrationTestCase {
 
-    public function getPluginID(): string {
-        return 'hypeDBExplorer';
-    }
+	public function getPluginID(): string {
+		return 'hypedbexplorer';
+	}
 
-    public function up() {}
-    public function down() {}
+	public function up() {}
+	public function down() {}
 
-    public function testBanUnbanLifecycle(): void {
-        $user = $this->createUser();
-        $this->assertFalse($user->isBanned());
+	public function testBanUnbanLifecycle(): void {
+		$admin = $this->createUser();
+		$admin->makeAdmin();
+		$user = $this->createUser();
+		$this->assertFalse($user->isBanned());
 
-        $user->ban('test reason');
-        $this->assertTrue($user->isBanned());
+		elgg_get_session()->setLoggedInUser($admin);
+		try {
+			$user->ban('test reason');
+			$this->assertTrue($user->isBanned());
 
-        $user->unban();
-        $this->assertFalse($user->isBanned());
-    }
+			$user->unban();
+			$this->assertFalse($user->isBanned());
+		} finally {
+			elgg_get_session()->removeLoggedInUser();
+		}
+	}
 
-    public function testDisableEnableLifecycle(): void {
-        $user = $this->createUser();
-        $this->assertTrue($user->isEnabled());
+	public function testDisableEnableLifecycle(): void {
+		$admin = $this->createUser();
+		$admin->makeAdmin();
+		$user = $this->createUser();
+		$this->assertTrue($user->isEnabled());
 
-        $user->disable('test reason');
-        $this->assertFalse($user->isEnabled());
+		elgg_get_session()->setLoggedInUser($admin);
+		try {
+			$user->disable('test reason');
+			$this->assertFalse($user->isEnabled());
 
-        // Re-enable requires SHOW_DISABLED context, matching the batch.php action
-        elgg_call(ELGG_SHOW_DISABLED_ENTITIES, function () use ($user) {
-            $reloaded = get_entity($user->guid);
-            $this->assertInstanceOf(\ElggUser::class, $reloaded);
-            $reloaded->enable();
-        });
+			// Re-enable requires SHOW_DISABLED context, matching the batch.php action
+			elgg_call(ELGG_SHOW_DISABLED_ENTITIES, function () use ($user) {
+				$reloaded = get_entity($user->guid);
+				$this->assertInstanceOf(\ElggUser::class, $reloaded);
+				$reloaded->enable();
+			});
 
-        elgg_call(ELGG_SHOW_DISABLED_ENTITIES, function () use ($user) {
-            $reloaded = get_entity($user->guid);
-            $this->assertTrue($reloaded->isEnabled());
-        });
-    }
+			elgg_call(ELGG_SHOW_DISABLED_ENTITIES, function () use ($user) {
+				$reloaded = get_entity($user->guid);
+				$this->assertTrue($reloaded->isEnabled());
+			});
+		} finally {
+			elgg_get_session()->removeLoggedInUser();
+		}
+	}
 
-    public function testAdminCanEditNonAdminUser(): void {
-        $admin = $this->createUser();
-        $admin->makeAdmin();
-        $target = $this->createUser();
+	public function testAdminCanEditNonAdminUser(): void {
+		$admin = $this->createUser();
+		$admin->makeAdmin();
+		$target = $this->createUser();
 
-        elgg_get_session()->setLoggedInUser($admin);
-        try {
-            $this->assertTrue($target->canEdit());
-        } finally {
-            elgg_get_session()->removeLoggedInUser();
-        }
-    }
+		elgg_get_session()->setLoggedInUser($admin);
+		try {
+			$this->assertTrue($target->canEdit());
+		} finally {
+			elgg_get_session()->removeLoggedInUser();
+		}
+	}
 
-    public function testNonAdminCannotEditOtherUser(): void {
-        $attacker = $this->createUser();
-        $victim = $this->createUser();
+	public function testNonAdminCannotEditOtherUser(): void {
+		$attacker = $this->createUser();
+		$victim = $this->createUser();
 
-        elgg_get_session()->setLoggedInUser($attacker);
-        try {
-            $this->assertFalse($victim->canEdit());
-        } finally {
-            elgg_get_session()->removeLoggedInUser();
-        }
-    }
+		elgg_get_session()->setLoggedInUser($attacker);
+		try {
+			$this->assertFalse($victim->canEdit());
+		} finally {
+			elgg_get_session()->removeLoggedInUser();
+		}
+	}
 
-    public function testValidationStatusToggle(): void {
-        $user = $this->createUser();
-        $user->setValidationStatus(true, 'test');
-        $this->assertTrue($user->isValidated());
-        $user->setValidationStatus(false, 'test');
-        $this->assertFalse($user->isValidated());
-    }
+	public function testValidationStatusToggle(): void {
+		$user = $this->createUser();
+		$user->setValidationStatus(true, 'test');
+		$this->assertTrue($user->isValidated());
+		$user->setValidationStatus(false, 'test');
+		$this->assertFalse($user->isValidated());
+	}
 }
