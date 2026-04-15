@@ -8,4 +8,6 @@ robots.txt
 /build/
 /releases/
 /vendor/
-composer.lockdocker/.env
+composer.lock
+docker/.env
+tests/.phpunit.result.cache
