@@ -1,6 +1,6 @@
 <?php
 
-$english = [
+return [
 
 	'admin:developers:db_explorer' => 'Database Explorer',
 
@@ -120,5 +120,3 @@ $english = [
 	'db_explorer:batch:message' => 'Add a note to the notifications',
 	'db_explorer:batch:approval_message' => 'Annotate this operation for internal use (add a reason, a note etc)',
 ];
-
-add_translation('en', $english);

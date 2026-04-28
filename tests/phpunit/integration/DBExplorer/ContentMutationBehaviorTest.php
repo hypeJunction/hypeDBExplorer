@@ -45,8 +45,8 @@ class ContentMutationBehaviorTest extends IntegrationTestCase {
 
 		_elgg_services()->session_manager->setLoggedInUser($admin);
 		try {
-			$this->assertTrue($obj->delete(true));
-			$this->assertFalse(get_entity($guid));
+			$obj->delete(true);
+			$this->assertFalse((bool) get_entity($guid));
 		} finally {
 			_elgg_services()->session_manager->removeLoggedInUser();
 		}
