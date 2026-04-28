@@ -27,7 +27,7 @@ class UserMutationBehaviorTest extends IntegrationTestCase {
 		$user = $this->createUser();
 		$this->assertFalse($user->isBanned());
 
-		elgg_get_session()->setLoggedInUser($admin);
+		_elgg_services()->session_manager->setLoggedInUser($admin);
 		try {
 			$user->ban('test reason');
 			$this->assertTrue($user->isBanned());
@@ -35,7 +35,7 @@ class UserMutationBehaviorTest extends IntegrationTestCase {
 			$user->unban();
 			$this->assertFalse($user->isBanned());
 		} finally {
-			elgg_get_session()->removeLoggedInUser();
+			_elgg_services()->session_manager->removeLoggedInUser();
 		}
 	}
 
@@ -45,7 +45,7 @@ class UserMutationBehaviorTest extends IntegrationTestCase {
 		$user = $this->createUser();
 		$this->assertTrue($user->isEnabled());
 
-		elgg_get_session()->setLoggedInUser($admin);
+		_elgg_services()->session_manager->setLoggedInUser($admin);
 		try {
 			$user->disable('test reason');
 			$this->assertFalse($user->isEnabled());
@@ -62,7 +62,7 @@ class UserMutationBehaviorTest extends IntegrationTestCase {
 				$this->assertTrue($reloaded->isEnabled());
 			});
 		} finally {
-			elgg_get_session()->removeLoggedInUser();
+			_elgg_services()->session_manager->removeLoggedInUser();
 		}
 	}
 
@@ -71,11 +71,11 @@ class UserMutationBehaviorTest extends IntegrationTestCase {
 		$admin->makeAdmin();
 		$target = $this->createUser();
 
-		elgg_get_session()->setLoggedInUser($admin);
+		_elgg_services()->session_manager->setLoggedInUser($admin);
 		try {
 			$this->assertTrue($target->canEdit());
 		} finally {
-			elgg_get_session()->removeLoggedInUser();
+			_elgg_services()->session_manager->removeLoggedInUser();
 		}
 	}
 
@@ -83,11 +83,11 @@ class UserMutationBehaviorTest extends IntegrationTestCase {
 		$attacker = $this->createUser();
 		$victim = $this->createUser();
 
-		elgg_get_session()->setLoggedInUser($attacker);
+		_elgg_services()->session_manager->setLoggedInUser($attacker);
 		try {
 			$this->assertFalse($victim->canEdit());
 		} finally {
-			elgg_get_session()->removeLoggedInUser();
+			_elgg_services()->session_manager->removeLoggedInUser();
 		}
 	}
 

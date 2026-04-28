@@ -2,18 +2,18 @@
 
 namespace hypeJunction\DBExplorer;
 
-use Elgg\Hook;
+use Elgg\Event;
 
 class UserHoverMenuSetup {
 
-	public function __invoke(Hook $hook) {
-		$entity = $hook->getParam('entity');
+	public function __invoke(Event $event) {
+		$entity = $event->getParam('entity');
 
 		if (!$entity instanceof \ElggEntity) {
 			return;
 		}
 
-		$items = $hook->getValue();
+		$items = $event->getValue();
 		$items[] = \ElggMenuItem::factory([
 			'name' => 'db_explorer',
 			'text' => elgg_echo('db_explorer:inspect'),

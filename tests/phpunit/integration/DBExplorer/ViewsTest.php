@@ -50,14 +50,14 @@ class ViewsTest extends IntegrationTestCase {
 	public function testAdminPageRenders(): void {
 		$admin = $this->createUser();
 		$admin->makeAdmin();
-		elgg_get_session()->setLoggedInUser($admin);
+		_elgg_services()->session_manager->setLoggedInUser($admin);
 
 		try {
 			$output = elgg_view('admin/developers/db_explorer', []);
 			$this->assertIsString($output);
 			$this->assertNotEmpty($output);
 		} finally {
-			elgg_get_session()->removeLoggedInUser();
+			_elgg_services()->session_manager->removeLoggedInUser();
 		}
 	}
 

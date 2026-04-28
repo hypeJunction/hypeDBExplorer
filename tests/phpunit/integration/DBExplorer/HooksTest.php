@@ -4,7 +4,7 @@ namespace hypeJunction\DBExplorer;
 
 use Elgg\IntegrationTestCase;
 use ElggMenuItem;
-use Elgg\HooksRegistrationService\Hook;
+use Elgg\Event;
 
 /**
  * Locks in the behavior of the two hover/entity menu hook handlers.
@@ -26,9 +26,9 @@ class HooksTest extends IntegrationTestCase {
 	public function testUserHoverMenuAppendsDbExplorerItemForEntity(): void {
 		$user = $this->createUser();
 
-		$hook = new Hook(elgg(), 'register', 'menu:user_hover', [], ['entity' => $user]);
+		$event = new Event(elgg(),'register', 'menu:user_hover', [], ['entity' => $user]);
 		$handler = new UserHoverMenuSetup();
-		$result = $handler($hook);
+		$result = $handler($event);
 
 		$this->assertIsArray($result);
 		$this->assertCount(1, $result);
@@ -41,18 +41,18 @@ class HooksTest extends IntegrationTestCase {
 	}
 
 	public function testUserHoverMenuIgnoresNonEntity(): void {
-		$hook = new Hook(elgg(), 'register', 'menu:user_hover', [], ['entity' => null]);
+		$event = new Event(elgg(),'register', 'menu:user_hover', [], ['entity' => null]);
 		$handler = new UserHoverMenuSetup();
-		$result = $handler($hook);
+		$result = $handler($event);
 		$this->assertNull($result);
 	}
 
 	public function testEntityMenuAppendsDbExplorerItemForEntity(): void {
 		$obj = $this->createObject(['subtype' => 'test_db_explorer_obj']);
 
-		$hook = new Hook(elgg(), 'register', 'menu:entity', [], ['entity' => $obj]);
+		$event = new Event(elgg(),'register', 'menu:entity', [], ['entity' => $obj]);
 		$handler = new EntityMenuSetup();
-		$result = $handler($hook);
+		$result = $handler($event);
 
 		$this->assertIsArray($result);
 		$this->assertCount(1, $result);
@@ -65,9 +65,9 @@ class HooksTest extends IntegrationTestCase {
 	}
 
 	public function testEntityMenuIgnoresNonEntity(): void {
-		$hook = new Hook(elgg(), 'register', 'menu:entity', [], ['entity' => 'not an entity']);
+		$event = new Event(elgg(),'register', 'menu:entity', [], ['entity' => 'not an entity']);
 		$handler = new EntityMenuSetup();
-		$result = $handler($hook);
+		$result = $handler($event);
 		$this->assertNull($result);
 	}
 }

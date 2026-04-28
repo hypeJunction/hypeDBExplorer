@@ -47,8 +47,8 @@ class Bootstrap extends DefaultPluginBootstrap {
 
 		if (elgg_is_admin_logged_in()) {
 			if (elgg_get_config('debug')) {
-				elgg_register_plugin_hook_handler('register', 'menu:user_hover', UserHoverMenuSetup::class);
-				elgg_register_plugin_hook_handler('register', 'menu:entity', EntityMenuSetup::class);
+				elgg_register_event_handler('register', 'menu:user_hover', UserHoverMenuSetup::class);
+				elgg_register_event_handler('register', 'menu:entity', EntityMenuSetup::class);
 			}
 
 			elgg_register_menu_item('page', [
