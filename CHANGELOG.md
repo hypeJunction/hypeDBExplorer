@@ -1,5 +1,20 @@
 # Changelog
 
+## [5.0.0] — Elgg 5.x migration
+
+### Breaking changes
+- Minimum Elgg version is now 5.0; minimum PHP is 8.2
+- Hook system merged into events: `elgg_register_plugin_hook_handler()` → `elgg_register_event_handler()`
+- Handler classes now type-hint `\Elgg\Event` instead of `\Elgg\Hook`
+
+### Changed
+- `elgg-plugin.php` version bumped to 5.0.0
+- `UserHoverMenuSetup`, `EntityMenuSetup`: `use Elgg\Hook` → `use Elgg\Event`
+- `Bootstrap::init()`: `elgg_register_plugin_hook_handler()` → `elgg_register_event_handler()`
+- `languages/en.php`: `add_translation('en', $array)` removed; file returns array directly
+- Docker stack updated: PHP 7.4→8.2, MySQL 5.7→8.0, Elgg ~5.1.x, Playwright 1.49→1.59
+- Tests adapted for Elgg 5.x API changes (session_manager, void delete, null get_entity)
+
 ## [4.0.0] — Elgg 4.x migration
 
 ### Breaking changes

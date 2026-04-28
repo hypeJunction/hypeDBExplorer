@@ -1,4 +1,4 @@
-# hypeDBExplorer — Architecture (Elgg 4.x)
+# hypeDBExplorer — Architecture (Elgg 5.x)
 
 ## What it does
 
@@ -53,7 +53,7 @@ hypedbexplorer/
 | `UserHoverMenuSetup` | `register` | `menu:user_hover` | Appends "DB Explorer" link to user hover menu |
 | `EntityMenuSetup` | `register` | `menu:entity` | Appends "DB Explorer" link to entity action menu |
 
-Both handlers use the Elgg 4.x single-arg `\Elgg\Hook $hook` signature.
+Both handlers use the Elgg 5.x single-arg `\Elgg\Event $event` signature.
 
 ## Actions
 
@@ -87,15 +87,14 @@ None. This plugin has no custom database tables and requires no data migration.
 
 ## Dependencies
 
-No Elgg plugin dependencies. Requires Elgg ≥ 4.0.
+No Elgg plugin dependencies. Requires Elgg ≥ 5.0, PHP ≥ 8.2.
 
-## Migration notes (2.x → 4.x)
+## Migration notes (4.x → 5.x)
 
-- `start.php` removed; Bootstrap class and `elgg-plugin.php` introduced
-- `manifest.xml` removed; `composer.json` is sole metadata source
-- Hook handlers converted from 4-arg functions to invokable classes using `\Elgg\Hook`
-- `elgg_register_css()` → `elgg_register_external_file('css', ...)`
-- `elgg_load_css()` → `elgg_load_external_file('css', ...)`
-- `elgg_format_attributes()` → inline `htmlspecialchars()` attribute building
-- `get_current_language()` → `elgg_get_current_language()`
-- Plugin ID lowercased to `hypedbexplorer` in all callsites
+- Hook system merged into events: `elgg_register_plugin_hook_handler()` → `elgg_register_event_handler()`
+- Handler classes: `use Elgg\Hook` → `use Elgg\Event`; parameter type `Hook $hook` → `Event $event`
+- `languages/en.php`: `add_translation()` removed; language files must return the array directly
+- `ElggEntity::delete()` is `void` in 5.x (was `bool`); test assertions adapted accordingly
+- `get_entity()` returns `null` (not `false`) for missing entities in 5.x
+- `elgg_get_session()->setLoggedInUser()` moved to `_elgg_services()->session_manager->setLoggedInUser()`
+- Docker stack: PHP 7.4→8.2, MySQL 5.7→8.0, Elgg ~5.1.x
