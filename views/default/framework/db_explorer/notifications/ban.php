@@ -15,7 +15,7 @@ $head = elgg_echo('db_explorer:ban:email:head', [
 
 if ($note) {
 	$body = elgg_echo('db_explorer:ban:email:note');
-	$body .= "<blockquote>" . $note . "</blockquote>";
+	$body .= '<blockquote>' . $note . '</blockquote>';
 }
 
 $footer = elgg_echo('db_explorer:ban:email:footer', [

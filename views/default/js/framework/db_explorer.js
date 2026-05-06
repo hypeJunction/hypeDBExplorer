@@ -97,10 +97,10 @@ define(['jquery', 'elgg', 'jqgrid', 'jqgrid.locale'], function ($, jqgrid) {
 				pagerId = $grid.data('pagerId'),
 				colNames = ['checkbox', 'guid'],
 				colModel = [{
-						name: 'checkbbox',
-						width: 30,
-						search: false
-					},
+					name: 'checkbbox',
+					width: 30,
+					search: false
+		},
 					{
 						name: 'e.guid',
 						width: 90,
@@ -108,11 +108,10 @@ define(['jquery', 'elgg', 'jqgrid', 'jqgrid.locale'], function ($, jqgrid) {
 							integer: true
 						},
 						searchoptions: {sopt: ['eq', 'ne', 'le', 'lt', 'gt', 'ge']}
-					}],
+		}],
 				sortName = 'e.guid';
 
 		switch (type) {
-
 			case 'user' :
 				colNames.push('username', 'name', 'email', 'admin', 'banned');
 				colModel.push(
@@ -254,13 +253,9 @@ define(['jquery', 'elgg', 'jqgrid', 'jqgrid.locale'], function ($, jqgrid) {
 			subgrid_table_id = subgrid_id + subgrid_table_name;
 			pager_id = 'pager-' + subgrid_table_id;
 			$('#' + subgrid_accordion_id).append('<h3>' + elgg.echo('db_explorer:tables:' + subgrid_table_name) + '</h3>');
-			$('#' + subgrid_accordion_id).append('<div>' +
-					'<table id="' + subgrid_table_id + '" class="scroll"></table>' +
-					'<div id="' + pager_id + '" class="scroll"></div>' +
-					'</div>');
+			$('#' + subgrid_accordion_id).append('<div><table id="' + subgrid_table_id + '" class="scroll"></table><div id="' + pager_id + '" class="scroll"></div></div>');
 
 			switch (subgrid_table_name) {
-
 				case 'users_entity' :
 					jQuery('#' + subgrid_table_id).jqGrid({
 						url: elgg.security.addToken(elgg.get_site_url() + 'action/db_explorer/users_entity?guid=' + row_id),
@@ -271,7 +266,7 @@ define(['jquery', 'elgg', 'jqgrid', 'jqgrid.locale'], function ($, jqgrid) {
 								name: 'checkbbox',
 								width: 30,
 								search: false
-							},
+						},
 							{name: 'ue.guid', width: 90},
 							{name: 'ue.name', width: 100},
 							{name: 'ue.username', width: 100},
@@ -304,7 +299,7 @@ define(['jquery', 'elgg', 'jqgrid', 'jqgrid.locale'], function ($, jqgrid) {
 								name: 'checkbbox',
 								width: 30,
 								search: false
-							},
+						},
 							{name: 'oe.guid'},
 							{name: 'oe.title'},
 							{name: 'oe.description'},
@@ -329,7 +324,7 @@ define(['jquery', 'elgg', 'jqgrid', 'jqgrid.locale'], function ($, jqgrid) {
 								name: 'checkbbox',
 								width: 30,
 								search: false
-							},
+						},
 							{name: 'ge.guid'},
 							{name: 'ge.name'},
 							{name: 'ge.description'},
@@ -388,7 +383,7 @@ define(['jquery', 'elgg', 'jqgrid', 'jqgrid.locale'], function ($, jqgrid) {
 								name: 'checkbbox',
 								width: 30,
 								search: false
-							},
+						},
 							{name: 'e.guid', width: 90},
 							{name: 'e.type', width: 90},
 							{name: 'e.subtype', width: 90},
@@ -564,4 +559,3 @@ define(['jquery', 'elgg', 'jqgrid', 'jqgrid.locale'], function ($, jqgrid) {
 
 	elgg.db_explorer.init();
 });
-

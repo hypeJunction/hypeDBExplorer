@@ -4,8 +4,14 @@ namespace hypeJunction\DBExplorer;
 
 use Elgg\DefaultPluginBootstrap;
 
+/**
+ * Plugin bootstrap.
+ */
 class Bootstrap extends DefaultPluginBootstrap {
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function init() {
 		$actions_path = $this->plugin->getPath() . 'actions/db_explorer/';
 

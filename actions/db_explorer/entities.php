@@ -34,18 +34,17 @@ if ($searchField && $searchString && $searchOper) {
 $search_query = '';
 
 if (is_array($filters['rules'])) {
-
 	$search_queries = [];
 	$groupOp = elgg_extract('groupOp', $filters, 'AND');
 
 	foreach ($filters['rules'] as $rule) {
-
 		// Validate field name against whitelist of known entity columns
 		$valid_fields = ['e.guid', 'e.type', 'e.subtype', 'e.owner_guid', 'e.container_guid', 'e.access_id', 'e.time_created', 'e.time_updated', 'e.last_action', 'e.enabled'];
 		$searchField = $rule['field'];
 		if (!in_array($searchField, $valid_fields)) {
 			continue;
 		}
+
 		$searchString = addslashes($rule['data']);
 
 		list($searchFieldTable, $searchFieldName) = explode('.', $searchField);
@@ -57,55 +56,56 @@ if (is_array($filters['rules'])) {
 		}
 
 		switch ($searchOper) {
-
-			case 'eq' :
+			case 'eq':
 				$search_queries[] = "$searchField = '$searchString'";
 				break;
 
-			case 'ne' :
+			case 'ne':
 				$search_queries[] = "$searchField != '$searchString'";
 				break;
 
-			case 'bw' :
+			case 'bw':
 				$search_queries[] = "$searchField LIKE '$searchString%'";
 				break;
 
-			case 'bn' :
+			case 'bn':
 				$search_queries[] = "$searchField NOT LIKE '$searchString%'";
 				break;
 
-			case 'ew' :
+			case 'ew':
 				$search_queries[] = "$searchField LIKE '%$searchString'";
 				break;
 
-			case 'en' :
+			case 'en':
 				$search_queries[] = "$searchField NOT LIKE '%$searchString'";
 				break;
 
-			case 'cn' :
+			case 'cn':
 				$search_queries[] = "$searchField LIKE '%$searchString%'";
 				break;
 
-			case 'nc' :
+			case 'nc':
 				$search_queries[] = "$searchField NOT LIKE '%$searchString%'";
 				break;
 
-			case 'in' :
+			case 'in':
 				$in = explode(',', $searchString);
 				$in_str_parts = [];
 				foreach ($in as $in_l) {
 					$in_str_parts[] = "'" . trim($in_l) . "'";
 				}
+
 				$in_str = implode(',', $in_str_parts);
 				$search_queries[] = "$searchField IN ($in_str)";
 				break;
 
-			case 'ni' :
+			case 'ni':
 				$in = explode(',', $searchString);
 				$in_str_parts = [];
 				foreach ($in as $in_l) {
 					$in_str_parts[] = "'" . trim($in_l) . "'";
 				}
+
 				$in_str = implode(',', $in_str_parts);
 				$search_queries[] = "$searchField NOT IN ($in_str)";
 				break;
@@ -160,7 +160,6 @@ $query .= " ORDER BY $sidx $sord LIMIT $limit OFFSET $offset";
 $row_data = get_data($query);
 
 if (!empty($row_data)) {
-
 	$i = 0;
 
 	// In Elgg 3.x, all entity types share the same columns in the entities table.
@@ -180,7 +179,6 @@ if (!empty($row_data)) {
 	];
 
 	foreach ($row_data as $r) {
-
 		$results['rows'][$i]['id'] = $r->guid;
 		$r_vars = get_object_vars($r);
 
@@ -205,9 +203,9 @@ $results['total'] = $total_pages;
 $results['records'] = $count;
 
 header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
 header('Cache-Control: no-cache, must-revalidate');
-header("Pragma: no-cache");
+header('Pragma: no-cache');
 header('Content-type: application/json; charset=UTF-8');
 
 print json_encode($results);

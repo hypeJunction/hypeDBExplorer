@@ -35,7 +35,6 @@ $row_data = get_data("SELECT * FROM {$dbprefix}entity_relationships r
 );
 
 if (!empty($row_data)) {
-
 	$i = 0;
 
 	$ordered_cols = [
@@ -46,7 +45,6 @@ if (!empty($row_data)) {
 	];
 
 	foreach ($row_data as $r) {
-
 		$results['rows'][$i]['id'] = $r->id;
 		$r_vars = get_object_vars($r);
 
@@ -72,9 +70,9 @@ $results['records'] = $count;
 
 
 header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
 header('Cache-Control: no-cache, must-revalidate');
-header("Pragma: no-cache");
+header('Pragma: no-cache');
 header('Content-type: application/json; charset=UTF-8');
 
 print json_encode($results);

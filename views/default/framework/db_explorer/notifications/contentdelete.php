@@ -20,7 +20,7 @@ $head = elgg_echo('db_explorer:content:delete:email:head', [
 
 if ($note) {
 	$body = elgg_echo('db_explorer:content:delete:email:note');
-	$body .= "<blockquote>" . $note . "</blockquote>";
+	$body .= '<blockquote>' . $note . '</blockquote>';
 }
 
 $footer = elgg_echo('db_explorer:content:delete:email:footer', [

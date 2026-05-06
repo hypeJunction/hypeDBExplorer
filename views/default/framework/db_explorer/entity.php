@@ -22,5 +22,5 @@ $guid_escaped = (int) $guid;
 
 echo '<div class="jqgrid-wrapper">';
 echo "<table id=\"{$id_escaped}\" class=\"dbexplorer-grid\" data-type=\"{$entity_type}\" data-guid=\"{$guid_escaped}\" data-pager-id=\"pager-entity\"><tr><td></td></tr></table>";
-echo "<div id=\"pager-entity\"></div>";
+echo '<div id="pager-entity"></div>';
 echo '</div>';

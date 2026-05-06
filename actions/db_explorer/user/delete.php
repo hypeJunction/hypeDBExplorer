@@ -8,7 +8,10 @@ $guids = get_input('user_guids');
 
 if ($guids) {
 	$count = count($guids);
-	$error_nouser = $error_canedit = $error = $success = 0;
+	$error_nouser = 0;
+	$error_canedit = 0;
+	$error = 0;
+	$success = 0;
 
 	foreach ($guids as $guid) {
 		$user = get_entity($guid);
@@ -28,7 +31,7 @@ if ($guids) {
 		}
 
 		$email = $user->email;
-		$subject = elgg_echo("db_explorer:delete:email:subject");
+		$subject = elgg_echo('db_explorer:delete:email:subject');
 		$body = elgg_view('framework/db_explorer/notifications/delete', [
 			'entity' => $user,
 			'setter' => elgg_get_logged_in_user_entity(),
@@ -42,6 +45,7 @@ if ($guids) {
 					elgg_register_error_message($e->getMessage());
 				}
 			}
+
 			$success++;
 		} else {
 			$error++;
@@ -52,9 +56,11 @@ if ($guids) {
 	if ($error_nouser > 0) {
 		$msg[] = elgg_echo('db_explorer:error:nouser', [$error_nouser]);
 	}
+
 	if ($error_canedit > 0) {
 		$msg[] = elgg_echo('db_explorer:error:canedit', [$error_canedit]);
 	}
+
 	if ($error > 0) {
 		$msg[] = elgg_echo('db_explorer:error:unknown', [$error]);
 	}

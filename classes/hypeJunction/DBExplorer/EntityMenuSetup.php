@@ -4,8 +4,16 @@ namespace hypeJunction\DBExplorer;
 
 use Elgg\Event;
 
+/**
+ * Adds DB explorer link to entity menus.
+ */
 class EntityMenuSetup {
 
+	/**
+	 * @param Event $event Event
+	 *
+	 * @return array|null
+	 */
 	public function __invoke(Event $event) {
 		$entity = $event->getParam('entity');
 

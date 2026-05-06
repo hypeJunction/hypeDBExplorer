@@ -26,7 +26,7 @@ $head = elgg_echo('db_explorer:content:enable:email:head', [
 
 if ($note) {
 	$body = elgg_echo('db_explorer:content:enable:email:note');
-	$body .= "<blockquote>" . $note . "</blockquote>";
+	$body .= '<blockquote>' . $note . '</blockquote>';
 }
 
 $footer = elgg_echo('db_explorer:content:enable:email:footer', [

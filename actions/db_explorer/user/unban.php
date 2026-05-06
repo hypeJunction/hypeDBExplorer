@@ -6,7 +6,11 @@ $guids = get_input('user_guids');
 
 if ($guids) {
 	$count = count($guids);
-	$error_nouser = $error_canedit = $error = $success = $notbanned = 0;
+	$error_nouser = 0;
+	$error_canedit = 0;
+	$error = 0;
+	$success = 0;
+	$notbanned = 0;
 
 	foreach ($guids as $guid) {
 		$user = get_entity($guid);
@@ -33,7 +37,8 @@ if ($guids) {
 				if (get_input('approval_message')) {
 					$user->annotate('approval_message', get_input('approval_message'), ACCESS_PUBLIC, elgg_get_logged_in_user_guid());
 				}
-				$subject = elgg_echo("db_explorer:unban:email:subject");
+
+				$subject = elgg_echo('db_explorer:unban:email:subject');
 				if (get_input('notify_users', false)) {
 					$body = elgg_view('framework/db_explorer/notifications/unban', [
 						'entity' => $user,
@@ -47,6 +52,7 @@ if ($guids) {
 						elgg_register_error_message($e->getMessage());
 					}
 				}
+
 				$success++;
 			} else {
 				$error++;
@@ -58,12 +64,15 @@ if ($guids) {
 	if ($notbanned > 0) {
 		$msg[] = elgg_echo('db_explorer:error:notbanned', [$notbanned]);
 	}
+
 	if ($error_nouser > 0) {
 		$msg[] = elgg_echo('db_explorer:error:nouser', [$error_nouser]);
 	}
+
 	if ($error_canedit > 0) {
 		$msg[] = elgg_echo('db_explorer:error:canedit', [$error_canedit]);
 	}
+
 	if ($error > 0) {
 		$msg[] = elgg_echo('db_explorer:error:unknown', [$error]);
 	}

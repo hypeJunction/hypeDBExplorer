@@ -37,7 +37,6 @@ $row_data = get_data("SELECT md.id, md.entity_guid, md.name, md.value, md.value_
 );
 
 if (!empty($row_data)) {
-
 	$i = 0;
 
 	// In Elgg 3.x, annotations no longer use metastrings or have enabled column
@@ -53,7 +52,6 @@ if (!empty($row_data)) {
 	];
 
 	foreach ($row_data as $r) {
-
 		$results['rows'][$i]['id'] = $r->id;
 		$r_vars = get_object_vars($r);
 
@@ -63,7 +61,7 @@ if (!empty($row_data)) {
 			if (elgg_view_exists("framework/db_explorer/db_column/$col")) {
 				$results['rows'][$i]['cell'][] = elgg_view("framework/db_explorer/db_column/$col", [
 					'data' => $r
-						]);
+				]);
 			} else {
 				$results['rows'][$i]['cell'][] = $value;
 			}
@@ -79,9 +77,9 @@ $results['records'] = $count;
 
 
 header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
 header('Cache-Control: no-cache, must-revalidate');
-header("Pragma: no-cache");
+header('Pragma: no-cache');
 header('Content-type: application/json; charset=UTF-8');
 
 print json_encode($results);

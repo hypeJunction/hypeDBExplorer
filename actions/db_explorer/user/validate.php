@@ -6,7 +6,11 @@ $guids = get_input('user_guids');
 
 if ($guids) {
 	$count = count($guids);
-	$error_nouser = $error_canedit = $error = $success = $validated = 0;
+	$error_nouser = 0;
+	$error_canedit = 0;
+	$error = 0;
+	$success = 0;
+	$validated = 0;
 
 	foreach ($guids as $guid) {
 		$user = get_entity($guid);
@@ -36,12 +40,15 @@ if ($guids) {
 	if ($validated > 0) {
 		$msg[] = elgg_echo('db_explorer:error:already_validated', [$validated]);
 	}
+
 	if ($error_nouser > 0) {
 		$msg[] = elgg_echo('db_explorer:error:nouser', [$error_nouser]);
 	}
+
 	if ($error_canedit > 0) {
 		$msg[] = elgg_echo('db_explorer:error:canedit', [$error_canedit]);
 	}
+
 	if ($error > 0) {
 		$msg[] = elgg_echo('db_explorer:error:unknown', [$error]);
 	}

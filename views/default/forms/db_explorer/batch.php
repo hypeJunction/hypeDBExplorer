@@ -1,6 +1,7 @@
 <?php
 
 namespace hypeJunction\DBExplorer;
+
 ?>
 
 <div class="dbexplorer-form-row">
