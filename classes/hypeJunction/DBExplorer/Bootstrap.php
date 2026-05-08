@@ -12,7 +12,7 @@ class Bootstrap extends DefaultPluginBootstrap {
 	/**
 	 * {@inheritdoc}
 	 */
-	public function init() {
+	public function init(): void {
 		$actions_path = $this->plugin->getPath() . 'actions/db_explorer/';
 
 		elgg_register_action('db_explorer/entities', $actions_path . 'entities.php', 'admin');
