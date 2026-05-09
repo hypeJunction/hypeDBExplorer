@@ -5,7 +5,7 @@ return [
 	'plugin' => [
 		'id' => 'hypedbexplorer',
 		'name' => 'hypeDBExplorer',
-		'version' => '5.0.0',
+		'version' => '6.0.0',
 		'description' => 'Database explorer tool for Elgg admins.',
 		'author' => 'Ismayil Khayredinov',
 		'category' => 'admin',

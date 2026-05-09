@@ -1,6 +1,6 @@
 {
 	"name": "hypejunction/hypedbexplorer",
-	"version": "5.0.0",
+	"version": "6.0.0",
 	"type": "elgg-plugin",
 	"description": "Database explorer tool for Elgg",
 	"homepage": "https://github.com/hypeJunction/hypeDBExplorer",
@@ -20,7 +20,7 @@
 	],
 	"require": {
 		"php": ">=8.2",
-		"elgg/elgg": "^5.0",
+		"elgg/elgg": "^6.0",
 		"composer/installers": "^2.0"
 	},
 	"autoload": {

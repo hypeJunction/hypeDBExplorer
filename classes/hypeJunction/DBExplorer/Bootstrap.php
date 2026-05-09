@@ -38,15 +38,9 @@ class Bootstrap extends DefaultPluginBootstrap {
 		elgg_register_action('db_explorer/content/disable', $actions_path . 'content/disable.php');
 		elgg_register_action('db_explorer/content/delete', $actions_path . 'content/delete.php');
 
-		elgg_define_js('jqgrid', [
-			'src' => elgg_get_simplecache_url('framework/db_explorer/jqgrid.js'),
-			'deps' => ['jquery', 'jqgrid.locale'],
-		]);
 		$locale = elgg_get_current_language();
-		elgg_define_js('jqgrid.locale', [
-			'src' => elgg_get_simplecache_url("framework/db_explorer/jqgrid.locale.{$locale}.js"),
-			'deps' => ['jquery'],
-		]);
+		elgg_register_esm('jqgrid.locale', elgg_get_simplecache_url("framework/db_explorer/jqgrid.locale.{$locale}.js"));
+		elgg_register_esm('jqgrid', elgg_get_simplecache_url('framework/db_explorer/jqgrid.js'));
 
 		elgg_register_external_file('css', 'db_explorer.jquery-ui', elgg_get_simplecache_url('framework/db_explorer/jquery-ui.css'));
 		elgg_register_external_file('css', 'db_explorer.stylesheet', elgg_get_simplecache_url('framework/db_explorer/stylesheet.css'));

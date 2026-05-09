@@ -1,5 +1,16 @@
 # Changelog
 
+## [6.0.0] — Elgg 6.x migration (2026-05-09)
+
+- Migrated to Elgg 6.x (5.x → 6.x). Requires PHP 8.2+.
+- Bumped `elgg/elgg` constraint to `^6.0`.
+- AMD JS removed: `views/default/js/framework/db_explorer.js` converted from AMD `define()` to ES module (`import/export`).
+- `elgg_require_js('framework/db_explorer')` → `elgg_import_esm('js/framework/db_explorer')` in admin view.
+- `elgg_define_js('jqgrid', ...)` and `elgg_define_js('jqgrid.locale', ...)` → `elgg_register_esm()` in `Bootstrap::init()`.
+- `elgg.echo()` → `i18n.echo()` from `elgg/i18n`; `elgg.security.addToken()` → `security.addToken()` from `elgg/security`.
+- `.live()` jQuery calls (removed in jQuery 3) replaced with `$(document).on()`.
+- Docker stack upgraded to Elgg 6.x, PHPUnit ~10.5.
+
 ## [5.0.0] — Elgg 5.x migration
 
 ### Breaking changes

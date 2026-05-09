@@ -1,4 +1,4 @@
-# hypeDBExplorer — Architecture (Elgg 5.x)
+# hypeDBExplorer — Architecture (Elgg 6.x)
 
 ## What it does
 
@@ -41,7 +41,7 @@ hypedbexplorer/
 `hypeJunction\DBExplorer\Bootstrap` (extends `Elgg\DefaultPluginBootstrap`) registers everything in its `init()` method:
 
 - **Actions** — 12 admin-only listing actions + 10 mutation actions via `elgg_register_action()`
-- **JS** — `jqgrid` and locale-aware `jqgrid.locale` modules via `elgg_define_js()`
+- **JS** — `jqgrid` and locale-aware `jqgrid.locale` modules via `elgg_register_esm()`
 - **CSS** — `db_explorer.jquery-ui` and `db_explorer.stylesheet` via `elgg_register_external_file()`
 - **Menus** — page menu item `admin/developers/db_explorer` (admin + debug mode only)
 - **Hook handlers** — `menu:user_hover` and `menu:entity` hooks (admin + debug mode only)
@@ -87,7 +87,17 @@ None. This plugin has no custom database tables and requires no data migration.
 
 ## Dependencies
 
-No Elgg plugin dependencies. Requires Elgg ≥ 5.0, PHP ≥ 8.2.
+No Elgg plugin dependencies. Requires Elgg ≥ 6.0, PHP ≥ 8.2.
+
+## Migration notes (5.x → 6.x)
+
+- AMD JS removed: `db_explorer.js` converted from `define([...], function(){...})` to ES module.
+- `elgg_require_js()` → `elgg_import_esm()` in admin view.
+- `elgg_define_js()` → `elgg_register_esm()` in Bootstrap.
+- `elgg.echo()` → `i18n.echo()` (imported from `elgg/i18n`).
+- `elgg.security.addToken()` → `security.addToken()` (imported from `elgg/security`).
+- Deprecated `.live()` jQuery calls replaced with `$(document).on()`.
+- Docker stack: Elgg ~5.1.x → ^6.0, PHPUnit ~9.5 → ~10.5.
 
 ## Migration notes (4.x → 5.x)
 

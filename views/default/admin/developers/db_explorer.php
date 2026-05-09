@@ -1,6 +1,6 @@
 <?php
 
-elgg_require_js('framework/db_explorer');
+elgg_import_esm('js/framework/db_explorer');
 elgg_load_external_file('css', 'db_explorer.jquery-ui');
 elgg_load_external_file('css', 'db_explorer.stylesheet');
 
