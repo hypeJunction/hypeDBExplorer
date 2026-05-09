@@ -1,5 +1,6 @@
 hypeDBExplorer
 ==============
+![Elgg 5.x](https://img.shields.io/badge/Elgg-5.x-orange.svg?style=flat-square)
 
 Database explorer tool for Elgg.
 hypeDBExplorer collects Elgg entity information spread across multiple tables, and presents it in a human-readable format.
@@ -44,7 +45,6 @@ Install bower dependencies:
 * Subgrid: entity relationships
 * Popup grid view on any entity guid
 * Multiple popups with highlighting
-
 
 ## Credits / Acknolwedgements ##
 

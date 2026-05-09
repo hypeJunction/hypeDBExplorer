@@ -3,7 +3,7 @@
 	"version": "5.0.0",
 	"type": "elgg-plugin",
 	"description": "Database explorer tool for Elgg",
-	"homepage": "http://hypejunction.com",
+	"homepage": "https://github.com/hypeJunction/hypeDBExplorer",
 	"keywords": [
 		"elgg",
 		"plugin",
@@ -15,7 +15,7 @@
 	"authors": [
 		{
 			"name": "Ismayil Khayredinov",
-			"email": "ismayil@hypejunction.com"
+			"email": "ismayil.khayredinov@gmail.com"
 		}
 	],
 	"require": {
