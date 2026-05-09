@@ -10,14 +10,20 @@ use Elgg\IntegrationTestCase;
  */
 class ViewsTest extends IntegrationTestCase {
 
-	public function getPluginID(): string {
+	/**
+     * @return string
+     */
+    public function getPluginID(): string {
 		return 'hypedbexplorer';
 	}
 
 	public function up() {}
 	public function down() {}
 
-	public function criticalViews(): array {
+	/**
+     * @return array
+     */
+    public function criticalViews(): array {
 		return [
 			['admin/developers/db_explorer'],
 			['forms/db_explorer/batch'],
@@ -47,7 +53,10 @@ class ViewsTest extends IntegrationTestCase {
 		);
 	}
 
-	public function testAdminPageRenders(): void {
+	/**
+     * @return void
+     */
+    public function testAdminPageRenders(): void {
 		$admin = $this->createUser();
 		$admin->makeAdmin();
 		_elgg_services()->session_manager->setLoggedInUser($admin);
@@ -61,12 +70,18 @@ class ViewsTest extends IntegrationTestCase {
 		}
 	}
 
-	public function testFilterViewRendersWithEntityType(): void {
+	/**
+     * @return void
+     */
+    public function testFilterViewRendersWithEntityType(): void {
 		$output = elgg_view('framework/db_explorer/filter', ['entity_type' => 'object']);
 		$this->assertIsString($output);
 	}
 
-	public function testGuidColumnRendersWithEntityData(): void {
+	/**
+     * @return void
+     */
+    public function testGuidColumnRendersWithEntityData(): void {
 		$user = $this->createUser();
 		$row = (object) [
 			'guid' => $user->guid,

@@ -14,14 +14,20 @@ use Elgg\IntegrationTestCase;
  */
 class UserMutationBehaviorTest extends IntegrationTestCase {
 
-	public function getPluginID(): string {
+	/**
+     * @return string
+     */
+    public function getPluginID(): string {
 		return 'hypedbexplorer';
 	}
 
 	public function up() {}
 	public function down() {}
 
-	public function testBanUnbanLifecycle(): void {
+	/**
+     * @return void
+     */
+    public function testBanUnbanLifecycle(): void {
 		$admin = $this->createUser();
 		$admin->makeAdmin();
 		$user = $this->createUser();
@@ -39,7 +45,10 @@ class UserMutationBehaviorTest extends IntegrationTestCase {
 		}
 	}
 
-	public function testDisableEnableLifecycle(): void {
+	/**
+     * @return void
+     */
+    public function testDisableEnableLifecycle(): void {
 		$admin = $this->createUser();
 		$admin->makeAdmin();
 		$user = $this->createUser();
@@ -66,7 +75,10 @@ class UserMutationBehaviorTest extends IntegrationTestCase {
 		}
 	}
 
-	public function testAdminCanEditNonAdminUser(): void {
+	/**
+     * @return void
+     */
+    public function testAdminCanEditNonAdminUser(): void {
 		$admin = $this->createUser();
 		$admin->makeAdmin();
 		$target = $this->createUser();
@@ -79,7 +91,10 @@ class UserMutationBehaviorTest extends IntegrationTestCase {
 		}
 	}
 
-	public function testNonAdminCannotEditOtherUser(): void {
+	/**
+     * @return void
+     */
+    public function testNonAdminCannotEditOtherUser(): void {
 		$attacker = $this->createUser();
 		$victim = $this->createUser();
 
@@ -91,7 +106,10 @@ class UserMutationBehaviorTest extends IntegrationTestCase {
 		}
 	}
 
-	public function testValidationStatusToggle(): void {
+	/**
+     * @return void
+     */
+    public function testValidationStatusToggle(): void {
 		$user = $this->createUser();
 		$user->setValidationStatus(true, 'test');
 		$this->assertTrue($user->isValidated());

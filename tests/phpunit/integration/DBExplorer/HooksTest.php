@@ -9,7 +9,10 @@ use Elgg\Menu\MenuItems;
 
 class HooksTest extends IntegrationTestCase {
 
-	public function getPluginID(): string {
+	/**
+     * @return string
+     */
+    public function getPluginID(): string {
 		return 'hypedbexplorer';
 	}
 
@@ -17,7 +20,10 @@ class HooksTest extends IntegrationTestCase {
 
 	public function down() {}
 
-	public function testUserHoverMenuAppendsDbExplorerItemForEntity(): void {
+	/**
+     * @return void
+     */
+    public function testUserHoverMenuAppendsDbExplorerItemForEntity(): void {
 		$user = $this->createUser();
 		$menu = new MenuItems();
 
@@ -36,7 +42,10 @@ class HooksTest extends IntegrationTestCase {
 		);
 	}
 
-	public function testUserHoverMenuIgnoresNonEntity(): void {
+	/**
+     * @return void
+     */
+    public function testUserHoverMenuIgnoresNonEntity(): void {
 		$menu = new MenuItems();
 		$event = new Event(elgg(), 'register', 'menu:user_hover', $menu, ['entity' => null]);
 		$handler = new UserHoverMenuSetup();
@@ -45,7 +54,10 @@ class HooksTest extends IntegrationTestCase {
 		$this->assertCount(0, $menu->all());
 	}
 
-	public function testEntityMenuAppendsDbExplorerItemForEntity(): void {
+	/**
+     * @return void
+     */
+    public function testEntityMenuAppendsDbExplorerItemForEntity(): void {
 		$obj = $this->createObject(['subtype' => 'test_db_explorer_obj']);
 		$menu = new MenuItems();
 
@@ -64,7 +76,10 @@ class HooksTest extends IntegrationTestCase {
 		);
 	}
 
-	public function testEntityMenuIgnoresNonEntity(): void {
+	/**
+     * @return void
+     */
+    public function testEntityMenuIgnoresNonEntity(): void {
 		$menu = new MenuItems();
 		$event = new Event(elgg(), 'register', 'menu:entity', $menu, ['entity' => 'not an entity']);
 		$handler = new EntityMenuSetup();
