@@ -1,6 +1,6 @@
 hypeDBExplorer
 ==============
-![Elgg 5.x](https://img.shields.io/badge/Elgg-5.x-orange.svg?style=flat-square)
+![Elgg 7.x](https://img.shields.io/badge/Elgg-7.x-orange.svg?style=flat-square)
 
 Database explorer tool for Elgg.
 hypeDBExplorer collects Elgg entity information spread across multiple tables, and presents it in a human-readable format.
@@ -49,3 +49,9 @@ Install bower dependencies:
 ## Credits / Acknolwedgements ##
 
 * Uses the URL sniffer class by Steve Clay (ufcoe) - https://github.com/mrclay
+
+## Compatibility
+
+| Plugin version | Elgg version |
+|---|---|
+| current | 7.x |
