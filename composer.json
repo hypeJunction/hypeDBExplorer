@@ -22,7 +22,8 @@
 		"installer-name": "hypeDBExplorer"
 	},
 	"require-dev": {
-		"composer/installers": ">=1.0.8"
+		"composer/installers": ">=1.0.8",
+		"phpunit/phpunit": "^9.6"
 	},
 	"require": {
 		"php": ">=7.2",
