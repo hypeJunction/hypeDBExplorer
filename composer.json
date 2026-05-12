@@ -5,7 +5,11 @@
 	"description": "DB explorer tool for Elgg",
 	"homepage": "http://hypejunction.com",
 	"keywords": [
-		"elgg", "plugin", "database", "developers", "bulk actions"
+		"elgg",
+		"plugin",
+		"database",
+		"developers",
+		"bulk actions"
 	],
 	"license": "GPL-2.0",
 	"authors": [
@@ -19,6 +23,9 @@
 	},
 	"require-dev": {
 		"composer/installers": ">=1.0.8"
+	},
+	"require": {
+		"php": ">=7.2",
+		"elgg/elgg": "^3.0"
 	}
 }
-

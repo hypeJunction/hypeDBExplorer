@@ -1,4 +1,6 @@
 hypeDBExplorer
+
+![Elgg 3.x](https://img.shields.io/badge/Elgg-3.x-orange.svg?style=flat-square)
 ==============
 
 Database explorer tool for Elgg.
