@@ -1,42 +1,45 @@
 {
-	"name": "hypejunction/hypedbexplorer",
-	"version": "4.0.0",
-	"type": "elgg-plugin",
-	"description": "Database explorer tool for Elgg",
-	"homepage": "http://hypejunction.com",
-	"keywords": [
-		"elgg",
-		"plugin",
-		"database",
-		"developers",
-		"bulk actions"
-	],
-	"license": "GPL-2.0",
-	"authors": [
-		{
-			"name": "Ismayil Khayredinov",
-			"email": "ismayil@hypejunction.com"
-		}
-	],
-	"require": {
-		"php": ">=7.4",
-		"elgg/elgg": "^4.0",
-		"composer/installers": "^2.0"
-	},
-	"autoload": {
-		"psr-4": {
-			"hypeJunction\\DBExplorer\\": "classes/hypeJunction/DBExplorer/"
-		}
-	},
-	"config": {
-		"allow-plugins": {
-			"composer/installers": true
-		}
-	},
-	"extra": {
-		"installer-name": "hypedbexplorer",
-		"elgg-plugin": {
-			"id": "hypedbexplorer"
-		}
-	}
+    "name": "hypejunction/hypedbexplorer",
+    "version": "4.0.0",
+    "type": "elgg-plugin",
+    "description": "Database explorer tool for Elgg",
+    "homepage": "http://hypejunction.com",
+    "keywords": [
+        "elgg",
+        "plugin",
+        "database",
+        "developers",
+        "bulk actions"
+    ],
+    "license": "GPL-2.0",
+    "authors": [
+        {
+            "name": "Ismayil Khayredinov",
+            "email": "ismayil@hypejunction.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "elgg/elgg": "^4.0",
+        "composer/installers": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "hypeJunction\\DBExplorer\\": "classes/hypeJunction/DBExplorer/"
+        },
+        "files": [
+            "lib/functions.php"
+        ]
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    },
+    "extra": {
+        "installer-name": "hypedbexplorer",
+        "elgg-plugin": {
+            "id": "hypedbexplorer"
+        }
+    }
 }
