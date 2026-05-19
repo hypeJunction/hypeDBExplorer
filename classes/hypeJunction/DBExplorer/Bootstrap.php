@@ -38,7 +38,7 @@ class Bootstrap extends DefaultPluginBootstrap {
 		elgg_register_action('db_explorer/content/disable', $actions_path . 'content/disable.php');
 		elgg_register_action('db_explorer/content/delete', $actions_path . 'content/delete.php');
 
-		$locale = elgg_elgg_get_language();
+		$locale = elgg_get_language();
 		elgg_register_esm('jqgrid.locale', elgg_get_simplecache_url("framework/db_explorer/jqgrid.locale.{$locale}.js"));
 		elgg_register_esm('jqgrid', elgg_get_simplecache_url('framework/db_explorer/jqgrid.js'));
 
