@@ -4,13 +4,19 @@ namespace hypeJunction\DBExplorer;
 
 use Elgg\Event;
 
+/**
+ * Adds a "DB Explorer" item to the user hover menu for admins.
+ */
 class UserHoverMenuSetup {
 
 	/**
-     * @param Event $event
-     * @return void
-     */
-    public function __invoke(Event $event): void {
+	 * Append the DB explorer link to the user hover menu.
+	 *
+	 * @param Event $event "register", "menu:user_hover" event
+	 *
+	 * @return void
+	 */
+	public function __invoke(Event $event): void {
 		$entity = $event->getParam('entity');
 
 		if (!$entity instanceof \ElggEntity) {

@@ -4,13 +4,19 @@ namespace hypeJunction\DBExplorer;
 
 use Elgg\Event;
 
+/**
+ * Adds a "DB Explorer" item to the entity menu for admins.
+ */
 class EntityMenuSetup {
 
 	/**
-     * @param Event $event
-     * @return void
-     */
-    public function __invoke(Event $event): void {
+	 * Append the DB explorer link to the entity menu.
+	 *
+	 * @param Event $event "register", "menu:entity" event
+	 *
+	 * @return void
+	 */
+	public function __invoke(Event $event): void {
 		$entity = $event->getParam('entity');
 
 		if (!$entity instanceof \ElggEntity) {
