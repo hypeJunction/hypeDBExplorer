@@ -16,7 +16,7 @@ class EntityMenuSetup {
 		$items = $hook->getValue();
 		$items[] = \ElggMenuItem::factory([
 			'name' => 'db_explorer',
-			'text' => elgg_echo('db_explorer:inspect'),
+			'text' => \elgg_echo('db_explorer:inspect'),
 			'href' => 'admin/developers/db_explorer?guid=' . $entity->guid,
 		]);
 

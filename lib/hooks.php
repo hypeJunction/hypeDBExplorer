@@ -4,7 +4,7 @@ namespace hypeJunction\DBExplorer;
 
 function user_hover_menu_setup($hook, $type, $menu, $params) {
 
-	$entity = elgg_extract('entity', $params);
+	$entity = \elgg_extract('entity', $params);
 
 	if (!$entity instanceof \ElggEntity) {
 		return $menu;
@@ -12,7 +12,7 @@ function user_hover_menu_setup($hook, $type, $menu, $params) {
 
 	$menu[] = \ElggMenuItem::factory([
 		'name' => 'db_explorer',
-		'text' => elgg_echo('db_explorer:inspect'),
+		'text' => \elgg_echo('db_explorer:inspect'),
 		'href' => 'admin/developers/db_explorer?guid=' . $entity->guid,
 		'section' => 'admin',
 	]);
@@ -22,7 +22,7 @@ function user_hover_menu_setup($hook, $type, $menu, $params) {
 
 function entity_menu_setup($hook, $type, $menu, $params) {
 
-	$entity = elgg_extract('entity', $params);
+	$entity = \elgg_extract('entity', $params);
 
 	if (!$entity instanceof \ElggEntity) {
 		return $menu;
@@ -30,7 +30,7 @@ function entity_menu_setup($hook, $type, $menu, $params) {
 
 	$menu[] = \ElggMenuItem::factory([
 		'name' => 'db_explorer',
-		'text' => elgg_echo('db_explorer:inspect'),
+		'text' => \elgg_echo('db_explorer:inspect'),
 		'href' => 'admin/developers/db_explorer?guid=' . $entity->guid,
 	]);
 

@@ -22,18 +22,18 @@ class ContentMutationBehaviorTest extends IntegrationTestCase {
 		$obj = $this->createObject(['subtype' => 'test_db_explorer_obj']);
 		$this->assertTrue($obj->isEnabled());
 
-		elgg_get_session()->setLoggedInUser($admin);
+		\elgg_get_session()->setLoggedInUser($admin);
 		try {
 			$obj->disable('test');
 			$this->assertFalse($obj->isEnabled());
 
-			elgg_call(ELGG_SHOW_DISABLED_ENTITIES, function () use ($obj) {
+			\elgg_call(ELGG_SHOW_DISABLED_ENTITIES, function () use ($obj) {
 				$reloaded = get_entity($obj->guid);
 				$reloaded->enable();
 				$this->assertTrue($reloaded->isEnabled());
 			});
 		} finally {
-			elgg_get_session()->removeLoggedInUser();
+			\elgg_get_session()->removeLoggedInUser();
 		}
 	}
 
@@ -43,12 +43,12 @@ class ContentMutationBehaviorTest extends IntegrationTestCase {
 		$obj = $this->createObject(['subtype' => 'test_db_explorer_obj']);
 		$guid = $obj->guid;
 
-		elgg_get_session()->setLoggedInUser($admin);
+		\elgg_get_session()->setLoggedInUser($admin);
 		try {
 			$this->assertTrue($obj->delete(true));
 			$this->assertFalse(get_entity($guid));
 		} finally {
-			elgg_get_session()->removeLoggedInUser();
+			\elgg_get_session()->removeLoggedInUser();
 		}
 	}
 
@@ -66,11 +66,11 @@ class ContentMutationBehaviorTest extends IntegrationTestCase {
 			'owner_guid' => $owner->guid,
 		]);
 
-		elgg_get_session()->setLoggedInUser($owner);
+		\elgg_get_session()->setLoggedInUser($owner);
 		try {
 			$this->assertTrue($obj->canEdit());
 		} finally {
-			elgg_get_session()->removeLoggedInUser();
+			\elgg_get_session()->removeLoggedInUser();
 		}
 	}
 
@@ -83,11 +83,11 @@ class ContentMutationBehaviorTest extends IntegrationTestCase {
 			'access_id' => ACCESS_PUBLIC,
 		]);
 
-		elgg_get_session()->setLoggedInUser($other);
+		\elgg_get_session()->setLoggedInUser($other);
 		try {
 			$this->assertFalse($obj->canEdit());
 		} finally {
-			elgg_get_session()->removeLoggedInUser();
+			\elgg_get_session()->removeLoggedInUser();
 		}
 	}
 }

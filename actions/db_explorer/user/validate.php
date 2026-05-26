@@ -24,7 +24,7 @@ if ($guids) {
 			$validated++;
 		} else {
 			if ($user->setValidationStatus(true, 'manual')) {
-				$user->annotate('validate', true, ACCESS_PUBLIC, elgg_get_logged_in_user_guid());
+				$user->annotate('validate', true, ACCESS_PUBLIC, \elgg_get_logged_in_user_guid());
 				$success++;
 			} else {
 				$error++;
@@ -32,19 +32,19 @@ if ($guids) {
 		}
 	}
 
-	$msg[] = elgg_echo('db_explorer:success:validate', [(int) $success, $count]);
+	$msg[] = \elgg_echo('db_explorer:success:validate', [(int) $success, $count]);
 	if ($validated > 0) {
-		$msg[] = elgg_echo('db_explorer:error:already_validated', [$validated]);
+		$msg[] = \elgg_echo('db_explorer:error:already_validated', [$validated]);
 	}
 	if ($error_nouser > 0) {
-		$msg[] = elgg_echo('db_explorer:error:nouser', [$error_nouser]);
+		$msg[] = \elgg_echo('db_explorer:error:nouser', [$error_nouser]);
 	}
 	if ($error_canedit > 0) {
-		$msg[] = elgg_echo('db_explorer:error:canedit', [$error_canedit]);
+		$msg[] = \elgg_echo('db_explorer:error:canedit', [$error_canedit]);
 	}
 	if ($error > 0) {
-		$msg[] = elgg_echo('db_explorer:error:unknown', [$error]);
+		$msg[] = \elgg_echo('db_explorer:error:unknown', [$error]);
 	}
 
-	elgg_register_success_message(implode('<br />', $msg));
+	\elgg_register_success_message(implode('<br />', $msg));
 }
