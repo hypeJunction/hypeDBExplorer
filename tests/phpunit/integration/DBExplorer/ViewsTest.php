@@ -42,7 +42,7 @@ class ViewsTest extends IntegrationTestCase {
 	 */
 	public function testViewExists(string $view): void {
 		$this->assertTrue(
-			elgg_view_exists($view),
+			\elgg_view_exists($view),
 			"View {$view} should exist"
 		);
 	}
@@ -50,19 +50,19 @@ class ViewsTest extends IntegrationTestCase {
 	public function testAdminPageRenders(): void {
 		$admin = $this->createUser();
 		$admin->makeAdmin();
-		_elgg_services()->session_manager->setLoggedInUser($admin);
+		\_elgg_services()->session_manager->setLoggedInUser($admin);
 
 		try {
-			$output = elgg_view('admin/developers/db_explorer', []);
+			$output = \elgg_view('admin/developers/db_explorer', []);
 			$this->assertIsString($output);
 			$this->assertNotEmpty($output);
 		} finally {
-			_elgg_services()->session_manager->removeLoggedInUser();
+			\_elgg_services()->session_manager->removeLoggedInUser();
 		}
 	}
 
 	public function testFilterViewRendersWithEntityType(): void {
-		$output = elgg_view('framework/db_explorer/filter', ['entity_type' => 'object']);
+		$output = \elgg_view('framework/db_explorer/filter', ['entity_type' => 'object']);
 		$this->assertIsString($output);
 	}
 
@@ -73,7 +73,7 @@ class ViewsTest extends IntegrationTestCase {
 			'type' => 'user',
 			'subtype' => null,
 		];
-		$output = elgg_view('framework/db_explorer/db_column/guid', ['data' => $row]);
+		$output = \elgg_view('framework/db_explorer/db_column/guid', ['data' => $row]);
 		$this->assertIsString($output);
 		$this->assertStringContainsString((string) $user->guid, $output);
 	}
