@@ -26,7 +26,7 @@ if ($guids) {
 			continue;
 		}
 
-		if ($user->guid == elgg_get_logged_in_user_guid()) {
+		if ($user->guid == \elgg_get_logged_in_user_guid()) {
 			$error++;
 			continue;
 		}
@@ -35,19 +35,19 @@ if ($guids) {
 			$banned++;
 		} else {
 			if ($user->ban(get_input('approval_message', 'admin decision'))) {
-				$user->annotate('ban', get_input('approval_message', true), ACCESS_PUBLIC, elgg_get_logged_in_user_guid());
-				$subject = elgg_echo('db_explorer:ban:email:subject');
+				$user->annotate('ban', get_input('approval_message', true), ACCESS_PUBLIC, \elgg_get_logged_in_user_guid());
+				$subject = \elgg_echo('db_explorer:ban:email:subject');
 				if (get_input('notify_users', false)) {
-					$body = elgg_view('framework/db_explorer/notifications/ban', [
+					$body = \elgg_view('framework/db_explorer/notifications/ban', [
 						'entity' => $user,
-						'setter' => elgg_get_logged_in_user_entity(),
+						'setter' => \elgg_get_logged_in_user_entity(),
 						'note' => get_input('notify_users_message')
 					]);
 
 					try {
-						elgg_send_email(elgg_get_site_entity()->email, $user->email, $subject, $body);
+						\elgg_send_email(\elgg_get_site_entity()->email, $user->email, $subject, $body);
 					} catch (Exception $e) {
-						elgg_register_error_message($e->getMessage());
+						\elgg_register_error_message($e->getMessage());
 					}
 				}
 
@@ -58,22 +58,22 @@ if ($guids) {
 		}
 	}
 
-	$msg[] = elgg_echo('db_explorer:success:ban', [(int) $success, $count]);
+	$msg[] = \elgg_echo('db_explorer:success:ban', [(int) $success, $count]);
 	if ($banned > 0) {
-		$msg[] = elgg_echo('db_explorer:error:already_banned', [$banned]);
+		$msg[] = \elgg_echo('db_explorer:error:already_banned', [$banned]);
 	}
 
 	if ($error_nouser > 0) {
-		$msg[] = elgg_echo('db_explorer:error:nouser', [$error_nouser]);
+		$msg[] = \elgg_echo('db_explorer:error:nouser', [$error_nouser]);
 	}
 
 	if ($error_canedit > 0) {
-		$msg[] = elgg_echo('db_explorer:error:canedit', [$error_canedit]);
+		$msg[] = \elgg_echo('db_explorer:error:canedit', [$error_canedit]);
 	}
 
 	if ($error > 0) {
-		$msg[] = elgg_echo('db_explorer:error:unknown', [$error]);
+		$msg[] = \elgg_echo('db_explorer:error:unknown', [$error]);
 	}
 
-	elgg_register_success_message(implode('<br />', $msg));
+	\elgg_register_success_message(implode('<br />', $msg));
 }

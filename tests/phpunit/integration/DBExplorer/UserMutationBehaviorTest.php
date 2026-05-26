@@ -27,7 +27,7 @@ class UserMutationBehaviorTest extends IntegrationTestCase {
 		$user = $this->createUser();
 		$this->assertFalse($user->isBanned());
 
-		_elgg_services()->session_manager->setLoggedInUser($admin);
+		\_elgg_services()->session_manager->setLoggedInUser($admin);
 		try {
 			$user->ban('test reason');
 			$this->assertTrue($user->isBanned());
@@ -35,7 +35,7 @@ class UserMutationBehaviorTest extends IntegrationTestCase {
 			$user->unban();
 			$this->assertFalse($user->isBanned());
 		} finally {
-			_elgg_services()->session_manager->removeLoggedInUser();
+			\_elgg_services()->session_manager->removeLoggedInUser();
 		}
 	}
 
@@ -45,24 +45,24 @@ class UserMutationBehaviorTest extends IntegrationTestCase {
 		$user = $this->createUser();
 		$this->assertTrue($user->isEnabled());
 
-		_elgg_services()->session_manager->setLoggedInUser($admin);
+		\_elgg_services()->session_manager->setLoggedInUser($admin);
 		try {
 			$user->disable('test reason');
 			$this->assertFalse($user->isEnabled());
 
 			// Re-enable requires SHOW_DISABLED context, matching the batch.php action
-			elgg_call(ELGG_SHOW_DISABLED_ENTITIES, function () use ($user) {
+			\elgg_call(ELGG_SHOW_DISABLED_ENTITIES, function () use ($user) {
 				$reloaded = get_entity($user->guid);
 				$this->assertInstanceOf(\ElggUser::class, $reloaded);
 				$reloaded->enable();
 			});
 
-			elgg_call(ELGG_SHOW_DISABLED_ENTITIES, function () use ($user) {
+			\elgg_call(ELGG_SHOW_DISABLED_ENTITIES, function () use ($user) {
 				$reloaded = get_entity($user->guid);
 				$this->assertTrue($reloaded->isEnabled());
 			});
 		} finally {
-			_elgg_services()->session_manager->removeLoggedInUser();
+			\_elgg_services()->session_manager->removeLoggedInUser();
 		}
 	}
 
@@ -71,11 +71,11 @@ class UserMutationBehaviorTest extends IntegrationTestCase {
 		$admin->makeAdmin();
 		$target = $this->createUser();
 
-		_elgg_services()->session_manager->setLoggedInUser($admin);
+		\_elgg_services()->session_manager->setLoggedInUser($admin);
 		try {
 			$this->assertTrue($target->canEdit());
 		} finally {
-			_elgg_services()->session_manager->removeLoggedInUser();
+			\_elgg_services()->session_manager->removeLoggedInUser();
 		}
 	}
 
@@ -83,11 +83,11 @@ class UserMutationBehaviorTest extends IntegrationTestCase {
 		$attacker = $this->createUser();
 		$victim = $this->createUser();
 
-		_elgg_services()->session_manager->setLoggedInUser($attacker);
+		\_elgg_services()->session_manager->setLoggedInUser($attacker);
 		try {
 			$this->assertFalse($victim->canEdit());
 		} finally {
-			_elgg_services()->session_manager->removeLoggedInUser();
+			\_elgg_services()->session_manager->removeLoggedInUser();
 		}
 	}
 

@@ -50,11 +50,11 @@ class ActionRegistrationTest extends IntegrationTestCase {
 	 */
 	public function testAdminListingActionIsRegisteredWithAdminAccess(string $action): void {
 		$this->assertTrue(
-			elgg_action_exists($action),
+			\elgg_action_exists($action),
 			"Action {$action} should be registered"
 		);
 
-		$actions_service = _elgg_services()->actions;
+		$actions_service = \_elgg_services()->actions;
 		$all = $actions_service->getAllActions();
 		$this->assertArrayHasKey($action, $all, "Action {$action} missing from registry");
 		$this->assertSame(
@@ -89,7 +89,7 @@ class ActionRegistrationTest extends IntegrationTestCase {
 	 */
 	public function testMutationActionIsRegistered(string $action): void {
 		$this->assertTrue(
-			elgg_action_exists($action),
+			\elgg_action_exists($action),
 			"Mutation action {$action} should be registered"
 		);
 	}

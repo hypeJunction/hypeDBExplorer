@@ -28,20 +28,20 @@ if ($guids) {
 			$enabled++;
 		} else {
 			if ($entity->enable()) {
-				$entity->annotate('disable', false, ACCESS_PUBLIC, elgg_get_logged_in_user_guid());
+				$entity->annotate('disable', false, ACCESS_PUBLIC, \elgg_get_logged_in_user_guid());
 				if (get_input('content_approval_message')) {
-					$entity->annotate('approval_message', get_input('content_approval_message'), ACCESS_PUBLIC, elgg_get_logged_in_user_guid());
+					$entity->annotate('approval_message', get_input('content_approval_message'), ACCESS_PUBLIC, \elgg_get_logged_in_user_guid());
 				}
 
-				$subject = elgg_echo('db_explorer:content:enable:email:subject');
+				$subject = \elgg_echo('db_explorer:content:enable:email:subject');
 				if (get_input('notify_owners', false)) {
-					$body = elgg_view('framework/db_explorer/notifications/contentenable', [
+					$body = \elgg_view('framework/db_explorer/notifications/contentenable', [
 						'entity' => $entity,
-						'setter' => elgg_get_logged_in_user_entity(),
+						'setter' => \elgg_get_logged_in_user_entity(),
 						'note' => get_input('notify_owners_message')
 					]);
 
-					notify_user($entity->owner_guid, elgg_get_logged_in_user_guid(), $subject, $body);
+					notify_user($entity->owner_guid, \elgg_get_logged_in_user_guid(), $subject, $body);
 				}
 
 				$success++;
@@ -52,21 +52,21 @@ if ($guids) {
 	}
 }
 
-$msg[] = elgg_echo('db_explorer:success:content:enable', [(int) $success, $count]);
+$msg[] = \elgg_echo('db_explorer:success:content:enable', [(int) $success, $count]);
 if ($enabled > 0) {
-	$msg[] = elgg_echo('db_explorer:error:content:notdisabled', [$enabled]);
+	$msg[] = \elgg_echo('db_explorer:error:content:notdisabled', [$enabled]);
 }
 
 if ($error_noentity > 0) {
-	$msg[] = elgg_echo('db_explorer:error:noentity', [$error_noentity]);
+	$msg[] = \elgg_echo('db_explorer:error:noentity', [$error_noentity]);
 }
 
 if ($error_canedit > 0) {
-	$msg[] = elgg_echo('db_explorer:error:canedit', [$error_canedit]);
+	$msg[] = \elgg_echo('db_explorer:error:canedit', [$error_canedit]);
 }
 
 if ($error > 0) {
-	$msg[] = elgg_echo('db_explorer:error:unknown', [$error]);
+	$msg[] = \elgg_echo('db_explorer:error:unknown', [$error]);
 }
 
-elgg_register_success_message(implode('<br />', $msg));
+\elgg_register_success_message(implode('<br />', $msg));
