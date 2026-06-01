@@ -49,5 +49,5 @@ if ($error > 0) {
 	$msg[] = elgg_echo('db_explorer:error:unknown', [$error]);
 }
 
-elgg_register_success_message(implode('<br />', $msg));
+system_message(implode('<br />', $msg));
 

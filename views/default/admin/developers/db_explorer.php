@@ -11,7 +11,7 @@ $url = urldecode(get_input('referrer_url', ''));
 if (!$guid && filter_var($url, FILTER_VALIDATE_URL)) {
 	$guid = \hypeJunction\DBExplorer\get_guid_from_url($url);
 	if (!$guid) {
-		elgg_register_error_message(elgg_echo('db_explorer:url_sniffer_no_guid', [$url]));
+		register_error(elgg_echo('db_explorer:url_sniffer_no_guid', [$url]));
 	}
 }
 

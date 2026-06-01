@@ -43,7 +43,7 @@ if ($guids) {
 					try {
 						elgg_send_email(elgg_get_site_entity()->email, $user->email, $subject, $body);
 					} catch (Exception $e) {
-						elgg_register_error_message($e->getMessage());
+						register_error($e->getMessage());
 					}
 				}
 				$success++;
@@ -67,5 +67,5 @@ if ($guids) {
 		$msg[] = elgg_echo('db_explorer:error:unknown', [$error]);
 	}
 
-	elgg_register_success_message(implode('<br />', $msg));
+	system_message(implode('<br />', $msg));
 }
