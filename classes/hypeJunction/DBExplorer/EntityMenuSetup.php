@@ -6,7 +6,11 @@ use Elgg\Event;
 
 class EntityMenuSetup {
 
-	public function __invoke(Event $event): void {
+	/**
+     * @param Event $event
+     * @return void
+     */
+    public function __invoke(Event $event): void {
 		$entity = $event->getParam('entity');
 
 		if (!$entity instanceof \ElggEntity) {

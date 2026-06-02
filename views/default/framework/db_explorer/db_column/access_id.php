@@ -15,7 +15,7 @@ if (array_key_exists($access_id, $access_array)) {
 	return;
 }
 
-$collection = get_access_collection($access_id);
+$collection = elgg_get_access_collection((int) $access_id);
 
 if ($collection) {
 	echo elgg_view('output/url', [

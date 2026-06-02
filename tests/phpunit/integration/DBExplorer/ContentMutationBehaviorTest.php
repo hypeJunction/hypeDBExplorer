@@ -9,14 +9,20 @@ use Elgg\IntegrationTestCase;
  */
 class ContentMutationBehaviorTest extends IntegrationTestCase {
 
-	public function getPluginID(): string {
+	/**
+     * @return string
+     */
+    public function getPluginID(): string {
 		return 'hypedbexplorer';
 	}
 
 	public function up() {}
 	public function down() {}
 
-	public function testObjectDisableEnable(): void {
+	/**
+     * @return void
+     */
+    public function testObjectDisableEnable(): void {
 		$admin = $this->createUser();
 		$admin->makeAdmin();
 		$obj = $this->createObject(['subtype' => 'test_db_explorer_obj']);
@@ -37,7 +43,10 @@ class ContentMutationBehaviorTest extends IntegrationTestCase {
 		}
 	}
 
-	public function testObjectDeleteRemovesEntity(): void {
+	/**
+     * @return void
+     */
+    public function testObjectDeleteRemovesEntity(): void {
 		$admin = $this->createUser();
 		$admin->makeAdmin();
 		$obj = $this->createObject(['subtype' => 'test_db_explorer_obj']);
@@ -52,14 +61,20 @@ class ContentMutationBehaviorTest extends IntegrationTestCase {
 		}
 	}
 
-	public function testGroupIsAcceptedByContentActions(): void {
+	/**
+     * @return void
+     */
+    public function testGroupIsAcceptedByContentActions(): void {
 		// content/* actions accept ElggObject OR ElggGroup
 		$group = $this->createGroup();
 		$this->assertInstanceOf(\ElggGroup::class, $group);
 		$this->assertTrue($group instanceof \ElggObject || $group instanceof \ElggGroup);
 	}
 
-	public function testOwnerCanEditTheirObject(): void {
+	/**
+     * @return void
+     */
+    public function testOwnerCanEditTheirObject(): void {
 		$owner = $this->createUser();
 		$obj = $this->createObject([
 			'subtype' => 'test_db_explorer_obj',
@@ -74,7 +89,10 @@ class ContentMutationBehaviorTest extends IntegrationTestCase {
 		}
 	}
 
-	public function testNonOwnerNonAdminCannotEditObject(): void {
+	/**
+     * @return void
+     */
+    public function testNonOwnerNonAdminCannotEditObject(): void {
 		$owner = $this->createUser();
 		$other = $this->createUser();
 		$obj = $this->createObject([

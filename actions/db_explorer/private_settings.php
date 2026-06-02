@@ -10,7 +10,7 @@ $sord = get_input('sord', 'asc');
 $guid = get_input('guid', 0);
 
 $dbprefix = elgg_get_config('dbprefix');
-$row_count = get_data("SELECT COUNT(*) AS count FROM {$dbprefix}private_settings WHERE entity_guid = $guid");
+$row_count = \hypeJunction\DBExplorer\query("SELECT COUNT(*) AS count FROM {$dbprefix}private_settings WHERE entity_guid = $guid");
 $count = $row_count[0]->count;
 
 if ($count > 0) {
@@ -27,7 +27,7 @@ $offset = $limit * $page - $limit;
 
 $offset = ($offset < 0) ? 0 : $offset;
 
-$row_data = get_data("SELECT * FROM {$dbprefix}private_settings ps
+$row_data = \hypeJunction\DBExplorer\query("SELECT * FROM {$dbprefix}private_settings ps
 						WHERE ps.entity_guid = $guid
 						ORDER BY $sidx $sord
 						LIMIT $limit 

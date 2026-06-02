@@ -10,7 +10,7 @@ $sord = get_input('sord', 'asc');
 $guid = get_input('guid', 0);
 
 $dbprefix = elgg_get_config('dbprefix');
-$row_count = get_data("SELECT COUNT(*) AS count FROM {$dbprefix}access_collection_membership WHERE user_guid = $guid");
+$row_count = \hypeJunction\DBExplorer\query("SELECT COUNT(*) AS count FROM {$dbprefix}access_collection_membership WHERE user_guid = $guid");
 $count = $row_count[0]->count;
 
 if ($count > 0) {
@@ -27,7 +27,7 @@ $offset = $limit * $page - $limit;
 
 $offset = ($offset < 0) ? 0 : $offset;
 
-$row_data = get_data("SELECT * FROM {$dbprefix}access_collections acl
+$row_data = \hypeJunction\DBExplorer\query("SELECT * FROM {$dbprefix}access_collections acl
 						JOIN {$dbprefix}access_collection_membership aclm on acl.id = aclm.access_collection_id
 						WHERE aclm.user_guid = $guid
 						ORDER BY $sidx $sord

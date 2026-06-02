@@ -10,7 +10,7 @@ $sord = get_input('sord', 'asc');
 $guid = get_input('guid', 0);
 
 $dbprefix = elgg_get_config('dbprefix');
-$row_count = get_data("SELECT COUNT(*) AS count FROM {$dbprefix}river WHERE subject_guid = $guid OR object_guid = $guid");
+$row_count = \hypeJunction\DBExplorer\query("SELECT COUNT(*) AS count FROM {$dbprefix}river WHERE subject_guid = $guid OR object_guid = $guid");
 $count = $row_count[0]->count;
 
 if ($count > 0) {
@@ -27,7 +27,7 @@ $offset = $limit * $page - $limit;
 
 $offset = ($offset < 0) ? 0 : $offset;
 
-$row_data = get_data("SELECT * FROM {$dbprefix}river r
+$row_data = \hypeJunction\DBExplorer\query("SELECT * FROM {$dbprefix}river r
 						WHERE r.subject_guid = $guid OR r.object_guid = $guid
 						ORDER BY $sidx $sord
 						LIMIT $limit 

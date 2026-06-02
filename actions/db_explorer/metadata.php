@@ -10,7 +10,7 @@ $sord = get_input('sord', 'asc');
 $guid = get_input('guid', 0);
 
 $dbprefix = elgg_get_config('dbprefix');
-$row_count = get_data("SELECT COUNT(*) AS count FROM {$dbprefix}metadata WHERE entity_guid = $guid");
+$row_count = \hypeJunction\DBExplorer\query("SELECT COUNT(*) AS count FROM {$dbprefix}metadata WHERE entity_guid = $guid");
 $count = $row_count[0]->count;
 
 if ($count > 0) {
@@ -28,7 +28,7 @@ $offset = $limit * $page - $limit;
 $offset = ($offset < 0) ? 0 : $offset;
 
 // In Elgg 3.x, metadata table has name/value columns directly (no metastrings)
-$row_data = get_data("SELECT md.id, md.entity_guid, md.name, md.value, md.value_type, md.time_created
+$row_data = \hypeJunction\DBExplorer\query("SELECT md.id, md.entity_guid, md.name, md.value, md.value_type, md.time_created
 						FROM {$dbprefix}metadata md
 						WHERE md.entity_guid = $guid
 						ORDER BY $sidx $sord

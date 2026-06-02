@@ -19,9 +19,10 @@
         }
     ],
     "require": {
-        "php": ">=8.2",
+        "php": ">=8.1",
         "elgg/elgg": "^5.0",
-        "composer/installers": "^2.0"
+        "composer/installers": "^2.0",
+        "ext-intl": "*"
     },
     "autoload": {
         "psr-4": {
