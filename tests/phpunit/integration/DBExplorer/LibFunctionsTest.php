@@ -9,7 +9,10 @@ use Elgg\IntegrationTestCase;
  */
 class LibFunctionsTest extends IntegrationTestCase {
 
-	public function getPluginID(): string {
+	/**
+     * @return string
+     */
+    public function getPluginID(): string {
 		return 'hypedbexplorer';
 	}
 
@@ -26,13 +29,19 @@ class LibFunctionsTest extends IntegrationTestCase {
 
 	public function down() {}
 
-	public function testGetGuidFromUrlReturnsZero(): void {
+	/**
+     * @return void
+     */
+    public function testGetGuidFromUrlReturnsZero(): void {
 		// The namespaced function is deprecated — it returns 0 unconditionally.
 		$this->assertSame(0, get_guid_from_url('/anything/123'));
 		$this->assertSame(0, get_guid_from_url(''));
 	}
 
-	public function testLegacyWrapperDelegatesToNamespacedFunction(): void {
+	/**
+     * @return void
+     */
+    public function testLegacyWrapperDelegatesToNamespacedFunction(): void {
 		$this->assertSame(0, \hj_db_explorer_get_guid_from_url('/anything/123'));
 	}
 }

@@ -2,6 +2,13 @@
 
 namespace hypeJunction\DBExplorer;
 
+/**
+ * @param mixed $hook
+ * @param mixed $type
+ * @param mixed $menu
+ * @param mixed $params
+ * @return mixed
+ */
 function user_hover_menu_setup($hook, $type, $menu, $params) {
 
 	$entity = \elgg_extract('entity', $params);
@@ -20,6 +27,13 @@ function user_hover_menu_setup($hook, $type, $menu, $params) {
 	return $menu;
 }
 
+/**
+ * @param mixed $hook
+ * @param mixed $type
+ * @param mixed $menu
+ * @param mixed $params
+ * @return mixed
+ */
 function entity_menu_setup($hook, $type, $menu, $params) {
 
 	$entity = \elgg_extract('entity', $params);

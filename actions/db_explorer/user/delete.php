@@ -22,7 +22,7 @@ if ($guids) {
 			continue;
 		}
 
-		if ($user->guid == \elgg_get_logged_in_user_guid() || \elgg_is_admin_user($user->guid)) {
+		if ($user->guid == \elgg_get_logged_in_user_guid() || $user->isAdmin()) {
 			$error++;
 			continue;
 		}

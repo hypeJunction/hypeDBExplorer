@@ -6,7 +6,11 @@ use Elgg\Hook;
 
 class EntityMenuSetup {
 
-	public function __invoke(Hook $hook) {
+	/**
+     * @param Hook $hook
+     * @return mixed
+     */
+    public function __invoke(Hook $hook) {
 		$entity = $hook->getParam('entity');
 
 		if (!$entity instanceof \ElggEntity) {
