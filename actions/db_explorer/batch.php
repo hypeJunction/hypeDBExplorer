@@ -16,4 +16,4 @@ $content_action = get_input('content_action', false);
 	}
 });
 
-forward(REFERER);
+elgg_redirect_response(REFERER);
