@@ -16,4 +16,4 @@ elgg_call(ELGG_SHOW_DISABLED_ENTITIES, function() use ($content_action, $user_ac
 	}
 });
 
-forward(REFERER);
+return elgg_redirect_response(REFERER);
