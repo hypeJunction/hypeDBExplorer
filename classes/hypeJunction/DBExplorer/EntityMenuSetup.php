@@ -16,7 +16,7 @@ class EntityMenuSetup {
 	 *
 	 * @return void
 	 */
-	public function __invoke(Event $event): void {
+	public function __invoke(Event $event) {
 		$entity = $event->getParam('entity');
 
 		if (!$entity instanceof \ElggEntity) {
@@ -24,10 +24,12 @@ class EntityMenuSetup {
 		}
 
 		$menu = $event->getValue();
-		$menu->add(\ElggMenuItem::factory([
+		$menu[] = \ElggMenuItem::factory([
 			'name' => 'db_explorer',
 			'text' => elgg_echo('db_explorer:inspect'),
 			'href' => 'admin/developers/db_explorer?guid=' . $entity->guid,
-		]));
+		]);
+
+		return $menu;
 	}
 }
