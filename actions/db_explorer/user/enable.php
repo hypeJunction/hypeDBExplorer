@@ -13,7 +13,7 @@ if ($guids) {
 	$enabled = 0;
 
 	foreach ($guids as $guid) {
-		$user = get_entity($guid);
+		$user = $guid ? get_entity((int) $guid) : null;
 		if (!$user instanceof \ElggUser) {
 			$error_nouser++;
 			continue;
@@ -47,8 +47,13 @@ if ($guids) {
 					]);
 
 					try {
-						elgg_send_email(elgg_get_site_entity()->email, $user->email, $subject, $body);
-					} catch (Exception $e) {
+						elgg_send_email([
+							'from' => elgg_get_site_entity()->email,
+							'to' => $user->email,
+							'subject' => $subject,
+							'body' => $body,
+						]);
+					} catch (\Exception $e) {
 						elgg_register_error_message($e->getMessage());
 					}
 				}

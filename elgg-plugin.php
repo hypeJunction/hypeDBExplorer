@@ -1,8 +1,5 @@
 <?php
 
-require_once __DIR__ . '/lib/functions.php';
-require_once __DIR__ . '/lib/deprecated.php';
-
 return [
 
 	'plugin' => [

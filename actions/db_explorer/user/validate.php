@@ -13,7 +13,7 @@ if ($guids) {
 	$validated = 0;
 
 	foreach ($guids as $guid) {
-		$user = get_entity($guid);
+		$user = $guid ? get_entity((int) $guid) : null;
 		if (!$user instanceof \ElggUser) {
 			$error_nouser++;
 			continue;

@@ -13,7 +13,7 @@ if ($guids) {
 	$disabled = 0;
 
 	foreach ($guids as $guid) {
-		$entity = get_entity($guid);
+		$entity = $guid ? get_entity((int) $guid) : null;
 		if (!$entity instanceof \ElggObject && !$entity instanceof \ElggGroup) {
 			$error_noentity++;
 			continue;
@@ -37,7 +37,14 @@ if ($guids) {
 						'note' => get_input('notify_owners_message')
 					]);
 
-					notify_user($entity->owner_guid, elgg_get_logged_in_user_guid(), $subject, $body);
+					$owner = $entity->owner_guid ? get_entity((int) $entity->owner_guid) : null;
+					if ($owner instanceof \ElggUser) {
+						elgg_notify_user($owner, 'db_explorer:content:disable', $entity, [
+							'subject' => $subject,
+							'body' => $body,
+							'summary' => $subject,
+						], elgg_get_logged_in_user_entity());
+					}
 				}
 
 				$success++;

@@ -14,16 +14,16 @@ class UserHoverMenuSetup {
 	 *
 	 * @param Event $event "register", "menu:user_hover" event
 	 *
-	 * @return void
+	 * @return array
 	 */
-	public function __invoke(Event $event) {
-		$entity = $event->getParam('entity');
+	public function __invoke(Event $event): array {
+		$menu = $event->getValue();
 
+		$entity = $event->getParam('entity');
 		if (!$entity instanceof \ElggEntity) {
-			return;
+			return $menu;
 		}
 
-		$menu = $event->getValue();
 		$menu[] = \ElggMenuItem::factory([
 			'name' => 'db_explorer',
 			'text' => elgg_echo('db_explorer:inspect'),
