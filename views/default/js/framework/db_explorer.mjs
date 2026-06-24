@@ -1,9 +1,9 @@
 import $ from 'jquery';
 import 'jqgrid';
 import 'jqgrid.locale';
-import * as elgg from 'elgg';
-import * as i18n from 'elgg/i18n';
-import * as security from 'elgg/security';
+import elgg from 'elgg';
+import i18n from 'elgg/i18n';
+import security from 'elgg/security';
 
 elgg.db_explorer = {};
 

@@ -38,9 +38,17 @@ class Bootstrap extends DefaultPluginBootstrap {
 		elgg_register_action('db_explorer/content/disable', $actions_path . 'content/disable.php');
 		elgg_register_action('db_explorer/content/delete', $actions_path . 'content/delete.php');
 
+		// jqgrid + its locale are vendored classic jQuery plugins. Register them by
+		// absolute URL — the previous elgg_get_simplecache_url('framework/db_explorer/
+		// jqgrid*.js') pointed at views that do not exist, so the importmap entries
+		// never resolved and `import 'jqgrid'` aborted the DB-explorer module.
 		$locale = elgg_get_current_language();
-		elgg_register_esm('jqgrid.locale', elgg_get_simplecache_url("framework/db_explorer/jqgrid.locale.{$locale}.js"));
-		elgg_register_esm('jqgrid', elgg_get_simplecache_url('framework/db_explorer/jqgrid.js'));
+		$locale_file = "vendors/jqgrid/js/i18n/grid.locale-{$locale}.js";
+		if (!file_exists($this->plugin->getPath() . $locale_file)) {
+			$locale_file = 'vendors/jqgrid/js/i18n/grid.locale-en.js';
+		}
+		elgg_register_esm('jqgrid.locale', elgg_normalize_url("mod/hypedbexplorer/{$locale_file}"));
+		elgg_register_esm('jqgrid', elgg_normalize_url('mod/hypedbexplorer/vendors/jqgrid/js/minified/jquery.jqGrid.min.js'));
 
 		elgg_register_external_file('css', 'db_explorer.jquery-ui', elgg_get_simplecache_url('framework/db_explorer/jquery-ui.css'));
 		elgg_register_external_file('css', 'db_explorer.stylesheet', elgg_get_simplecache_url('framework/db_explorer/stylesheet.css'));
