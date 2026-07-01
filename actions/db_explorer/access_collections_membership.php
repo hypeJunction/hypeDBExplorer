@@ -10,7 +10,7 @@ $sord = get_input('sord', 'asc');
 $guid = get_input('guid', 0);
 
 $dbprefix = elgg_get_config('dbprefix');
-$row_count = get_data("SELECT COUNT(*) AS count FROM {$dbprefix}access_collection_membership WHERE user_guid = $guid");
+$row_count = array_map(static fn($r) => (object) $r, elgg()->db->getConnection('read')->executeQuery("SELECT COUNT(*) AS count FROM {$dbprefix}access_collection_membership WHERE user_guid = $guid")->fetchAllAssociative());
 $count = $row_count[0]->count;
 
 if ($count > 0) {
@@ -27,13 +27,13 @@ $offset = $limit * $page - $limit;
 
 $offset = ($offset < 0) ? 0 : $offset;
 
-$row_data = get_data("SELECT * FROM {$dbprefix}access_collections acl
+$row_data = array_map(static fn($r) => (object) $r, elgg()->db->getConnection('read')->executeQuery("SELECT * FROM {$dbprefix}access_collections acl
 						JOIN {$dbprefix}access_collection_membership aclm on acl.id = aclm.access_collection_id
 						WHERE aclm.user_guid = $guid
 						ORDER BY $sidx $sord
 						LIMIT $limit 
 						OFFSET $offset"
-);
+)->fetchAllAssociative());
 
 if (!empty($row_data)) {
 	$i = 0;

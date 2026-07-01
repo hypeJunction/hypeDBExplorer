@@ -127,7 +127,7 @@ if ($guid) {
 	$guid = (int) $guid;
 	$count = 1;
 } else {
-	$row_count = get_data("SELECT COUNT(*) AS count FROM {$dbprefix}entities e WHERE e.type = '$type' $search_query");
+	$row_count = array_map(static fn($r) => (object) $r, elgg()->db->getConnection('read')->executeQuery("SELECT COUNT(*) AS count FROM {$dbprefix}entities e WHERE e.type = '$type' $search_query")->fetchAllAssociative());
 	$count = $row_count[0]->count;
 }
 
@@ -157,7 +157,7 @@ $query .= $search_query;
 
 $query .= " ORDER BY $sidx $sord LIMIT $limit OFFSET $offset";
 
-$row_data = get_data($query);
+$row_data = array_map(static fn($r) => (object) $r, elgg()->db->getConnection('read')->executeQuery($query)->fetchAllAssociative());
 
 if (!empty($row_data)) {
 	$i = 0;

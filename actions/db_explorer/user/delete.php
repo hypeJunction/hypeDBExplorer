@@ -14,7 +14,7 @@ if ($guids) {
 	$success = 0;
 
 	foreach ($guids as $guid) {
-		$user = get_entity($guid);
+		$user = $guid ? get_entity((int) $guid) : null;
 		if (!$user instanceof \ElggUser) {
 			$error_nouser++;
 			continue;
@@ -25,7 +25,7 @@ if ($guids) {
 			continue;
 		}
 
-		if ($user->guid == elgg_get_logged_in_user_guid() || elgg_is_admin_user($user->guid)) {
+		if ($user->guid == elgg_get_logged_in_user_guid() || $user->isAdmin()) {
 			$error++;
 			continue;
 		}
@@ -40,8 +40,13 @@ if ($guids) {
 		if ($user->delete(true)) {
 			if (get_input('notify_users', false)) {
 				try {
-					elgg_send_email(elgg_get_site_entity()->email, $email, $subject, $body);
-				} catch (Exception $e) {
+					elgg_send_email([
+						'from' => elgg_get_site_entity()->email,
+						'to' => $email,
+						'subject' => $subject,
+						'body' => $body,
+					]);
+				} catch (\Exception $e) {
 					elgg_register_error_message($e->getMessage());
 				}
 			}

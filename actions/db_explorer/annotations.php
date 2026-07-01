@@ -10,7 +10,7 @@ $sord = get_input('sord', 'asc');
 $guid = get_input('guid', 0);
 
 $dbprefix = elgg_get_config('dbprefix');
-$row_count = get_data("SELECT COUNT(*) AS count FROM {$dbprefix}annotations WHERE entity_guid = $guid");
+$row_count = array_map(static fn($r) => (object) $r, elgg()->db->getConnection('read')->executeQuery("SELECT COUNT(*) AS count FROM {$dbprefix}annotations WHERE entity_guid = $guid")->fetchAllAssociative());
 $count = $row_count[0]->count;
 
 if ($count > 0) {
@@ -28,13 +28,13 @@ $offset = $limit * $page - $limit;
 $offset = ($offset < 0) ? 0 : $offset;
 
 // In Elgg 3.x, annotations table has name/value columns directly (no metastrings)
-$row_data = get_data("SELECT md.id, md.entity_guid, md.name, md.value, md.value_type, md.owner_guid, md.access_id, md.time_created
+$row_data = array_map(static fn($r) => (object) $r, elgg()->db->getConnection('read')->executeQuery("SELECT md.id, md.entity_guid, md.name, md.value, md.value_type, md.owner_guid, md.access_id, md.time_created
 						FROM {$dbprefix}annotations md
 						WHERE md.entity_guid = $guid
 						ORDER BY $sidx $sord
 						LIMIT $limit
 						OFFSET $offset"
-);
+)->fetchAllAssociative());
 
 if (!empty($row_data)) {
 	$i = 0;
